@@ -21,7 +21,7 @@ Customer:
 * As a Customer I want to be able to control the quantity of an item I add to cart.
 * As a Customer I want a cart that shows items added and dollar amounts.
 * As a Customer I want to be able to remove and edit quantity of items in my cart.
-* As a Customer I want to be able to view a map that shows restauarants near me.
+* As a Customer I want to be able to view a map that shows restaurants near me.
 
 Merchant:
 * As a Merchant I want to be able to register with email, password, business name, and physical address.* As a Merchant I want to be able to login with my email and password.
@@ -30,7 +30,9 @@ Merchant:
 * As a Merchant I want to be able to close pending orders.
 * As a Merchant I want to be able to filter past customer orders.
 
+## Tentative ERD
 
+![tentative erd](tentative-erd-diagram.png)
 
 
 
