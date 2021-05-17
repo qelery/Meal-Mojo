@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddressBarComponent } from './address-bar/address-bar.component';
+import { BrickComponent } from './brick/brick.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     BannerComponent,
-    AddressBarComponent
+    AddressBarComponent,
+    BrickComponent
   ],
   imports: [
     BrowserModule,
