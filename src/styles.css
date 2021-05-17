@@ -14,10 +14,9 @@ html {
   box-sizing: border-box;
 }
 
-.container {
-  width: 1200px;
-  margin: auto;
-  overflow: auto;
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
 
 a {
@@ -30,6 +29,13 @@ ul {
   margin: 0;
   list-style: none;
 }
+
+.container {
+  width: 1200px;
+  margin: auto;
+  overflow: auto;
+}
+
 
 @media screen and (max-width: 1025px) {
 

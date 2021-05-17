@@ -17,7 +17,7 @@ nav .container {
 }
 
 nav .logo {
-  /*background-image: url("");*/
+  background-image: url("src/assets/image/meal-mojo-logo.png");
   background-size: 100%;
   background-repeat: no-repeat;
   position: absolute;
@@ -87,7 +87,7 @@ nav #nav-toggle.open .fa-bars {
   display: none;
 }
 
-.nav-left.mobile {
+.nav-left.small {
   margin-left: 0;
   position: absolute;
   right: 0;
@@ -102,11 +102,11 @@ nav #nav-toggle.open .fa-bars {
   padding-top: 50px;
 }
 
-.nav-left.mobile li {
+.nav-left.small li {
   float: none;
 }
 
-.nav-left.mobile a {
+.nav-left.small a {
   font-size: 14px;
   text-align: right;
   padding: 7px 0;
@@ -150,7 +150,7 @@ ul li.active a {
     width: 72px;
   }
 
-  nav .nav-left.mobile .nav-right {
+  nav .nav-left.small .nav-right {
     display: block;
     float: none;
     padding-bottom: 6px;
