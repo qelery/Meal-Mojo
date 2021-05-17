@@ -18,11 +18,11 @@
           </div>
         </div>
         <div class="ab-address">
-          <input class="ab-input-text" type="text" placeholder="Enter delivery address" value="">
+          <input [(ngModel)]="address" class="ab-input-text" name="address" type="text" placeholder="Enter delivery address" value="">
         </div>
         <div class="ab-arrow-container">
           <div class="ab-arrow-wrapper">
-            <button class="ab-arrow">
+            <button (click)="processAddress()" class="ab-arrow">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                    aria-hidden="true" style="flex-shrink: 0;">
                 <path

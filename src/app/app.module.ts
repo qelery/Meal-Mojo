@@ -8,6 +8,7 @@ import { BannerComponent } from './banner/banner.component';
 import { AddressBarComponent } from './address-bar/address-bar.component';
 import { BrickComponent } from './brick/brick.component';
 import { HomeComponent } from './home/home.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

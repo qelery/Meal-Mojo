@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddressBarComponent implements OnInit {
 
+  address: string = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  processAddress() {
+    console.log("Clicked!!!");
+  }
 }
