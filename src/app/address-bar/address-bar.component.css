@@ -8,7 +8,6 @@
 .ab-container-inner {
   position: relative;
   margin: 0 auto;
-  /*width: 408px;*/
   width: 600px
 }
 
@@ -101,7 +100,7 @@
 .ab-arrow {
   position: relative;
   max-width: 100%;
-  margin: 0px;
+  margin: 0;
   display: inline-flex;
   min-height: 40px;
   border-radius: 100%;
@@ -112,10 +111,10 @@
   text-decoration: none;
   text-align: center;
   background: rgb(235, 24, 0);
-  box-shadow: transparent 0px 0px 0px 1px inset;
+  box-shadow: transparent 0 0 0 1px inset;
   height: 40px;
   width: 40px;
-  padding: 0px;
+  padding: 0;
   -webkit-box-align: center;
   align-items: center;
   -webkit-box-pack: center;

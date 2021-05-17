@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
-  constructor() { }
+  heroImageUrl: string;
+
+  constructor() {
+    this.heroImageUrl = "/assets/image/heroimage.jpeg";
+  }
 
   ngOnInit(): void {
   }
