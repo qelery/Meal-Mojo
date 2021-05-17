@@ -3,5 +3,6 @@
 <app-brick
   *ngFor="let brick of brickInfo; index as i"
   [brickInfo]="brick"
-  [direction]=" i % 2 === 0 ? '' : 'slant-left' "
-></app-brick>
+  [direction]=" i % 2 === 0 ? '' : 'slant-left' ">
+</app-brick>
+<app-signin-card></app-signin-card>

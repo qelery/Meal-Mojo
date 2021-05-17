@@ -9,6 +9,7 @@ import { AddressBarComponent } from './address-bar/address-bar.component';
 import { BrickComponent } from './brick/brick.component';
 import { HomeComponent } from './home/home.component';
 import {FormsModule} from "@angular/forms";
+import { SigninCardComponent } from './signin-card/signin-card.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {FormsModule} from "@angular/forms";
     BannerComponent,
     AddressBarComponent,
     BrickComponent,
-    HomeComponent
+    HomeComponent,
+    SigninCardComponent
   ],
   imports: [
     BrowserModule,
