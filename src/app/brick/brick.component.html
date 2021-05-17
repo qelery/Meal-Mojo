@@ -1,48 +1,48 @@
-<div [ngClass]="direction == 'left' ? 'slant-left' : ''">
+<div [ngClass]="direction">
   <div class="b-wrapper">
     <div class="b-text-container">
       <div class="b-text-flex">
         <div class="b-text-wrapper">
-          <h2>Your Favorites All In One Place</h2>
-          <p>Whatever you want, with the convenience you want. We partnered up with the best restaurants in your city. So you can order the food you love from all your favorite places.</p>
+          <h2>{{brickInfo.h2}}</h2>
+          <p>{{brickInfo.p}}</p>
         </div>
       </div>
     </div>
-    <div class="b-image">
+    <div class="b-image" [ngStyle]="{backgroundImage: 'url('+brickInfo.imgUrl+')'}">
       <div class="b-slanted-blocker"></div>
     </div>
   </div>
 </div>
 
 
-<div class="slant-left">
-  <div class="b-wrapper">
-    <div class="b-text-container">
-      <div class="b-text-flex">
-        <div class="b-text-wrapper">
-          <h2>Your Favorites All In One Place</h2>
-          <p>Whatever you want, with the convenience you want. We partnered up with the best restaurants in your city. So you can order the food you love from all your favorite places.</p>
-        </div>
-      </div>
-    </div>
-    <div class="b-image">
-      <div class="b-slanted-blocker"></div>
-    </div>
-  </div>
-</div>
+<!--<div class="slant-left">-->
+<!--  <div class="b-wrapper">-->
+<!--    <div class="b-text-container">-->
+<!--      <div class="b-text-flex">-->
+<!--        <div class="b-text-wrapper">-->
+<!--          <h2>Your Favorites All In One Place</h2>-->
+<!--          <p>Whatever you want, with the convenience you want. We partnered up with the best restaurants in your city. So you can order the food you love from all your favorite places.</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="b-image">-->
+<!--      <div class="b-slanted-blocker"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
-<div [ngClass]="direction == 'left' ? 'slant-left' : ''">
-  <div class="b-wrapper">
-    <div class="b-text-container">
-      <div class="b-text-flex">
-        <div class="b-text-wrapper">
-          <h2>Your Favorites All In One Place</h2>
-          <p>Whatever you want, with the convenience you want. We partnered up with the best restaurants in your city. So you can order the food you love from all your favorite places.</p>
-        </div>
-      </div>
-    </div>
-    <div class="b-image">
-      <div class="b-slanted-blocker"></div>
-    </div>
-  </div>
-</div>
+<!--<div [ngClass]="direction == 'left' ? 'slant-left' : ''">-->
+<!--  <div class="b-wrapper">-->
+<!--    <div class="b-text-container">-->
+<!--      <div class="b-text-flex">-->
+<!--        <div class="b-text-wrapper">-->
+<!--          <h2>Your Favorites All In One Place</h2>-->
+<!--          <p>Whatever you want, with the convenience you want. We partnered up with the best restaurants in your city. So you can order the food you love from all your favorite places.</p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="b-image">-->
+<!--      <div class="b-slanted-blocker"></div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BannerComponent } from './banner/banner.component';
 import { AddressBarComponent } from './address-bar/address-bar.component';
 import { BrickComponent } from './brick/brick.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BrickComponent } from './brick/brick.component';
     NavbarComponent,
     BannerComponent,
     AddressBarComponent,
-    BrickComponent
+    BrickComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

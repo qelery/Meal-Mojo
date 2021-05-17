@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<app-banner></app-banner>
+<app-brick
+  *ngFor="let brick of brickInfo; index as i"
+  [brickInfo]="brick"
+  [direction]=" i % 2 === 0 ? '' : 'slant-left' "
+></app-brick>

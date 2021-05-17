@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {BrickInfo} from "../home/home.component";
 
 @Component({
   selector: 'app-brick',
@@ -6,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./brick.component.css']
 })
 export class BrickComponent implements OnInit {
-  direction: string = 'right';
-
+  @Input() direction: any;
+  @Input() brickInfo: any;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  getUrl() {
+    return ;
+  }
 }
