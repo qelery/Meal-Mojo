@@ -8,7 +8,7 @@
         </a>
       </li>
     </ul>
-    <ul class="nav-right">
+    <ul *ngIf="!currentUser" class="nav-right">
       <li>
         <a (click)="showRegister()">
           Register
@@ -17,6 +17,13 @@
       <li>
         <a (click)="showLogIn()">
           Log In
+        </a>
+      </li>
+    </ul>
+    <ul *ngIf="currentUser" class="nav-right small">
+      <li>
+        <a  [routerLink]="['/logout']">
+          Log Out
         </a>
       </li>
     </ul>
@@ -36,7 +43,7 @@
         </a>
       </li>
       <li>
-        <ul class="nav-right small">
+        <ul *ngIf="!currentUser" class="nav-right small">
           <li>
             <a (click)="showRegister()">
               Register
@@ -45,6 +52,13 @@
           <li>
             <a (click)="showLogIn()">
               Log In
+            </a>
+          </li>
+        </ul>
+        <ul *ngIf="currentUser" class="nav-right small">
+          <li>
+            <a  [routerLink]="['/logout']">
+              Log Out
             </a>
           </li>
         </ul>

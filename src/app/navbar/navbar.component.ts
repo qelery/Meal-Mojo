@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +10,20 @@ export class NavbarComponent implements OnInit {
 
   showRegisterCard: boolean;
   showLoginCard: boolean;
+  currentUser: any;
 
-  constructor() {
+  constructor(private userService: UserService) {
     this.showRegisterCard = false;
     this.showLoginCard = false;
   }
 
   ngOnInit(): void {
+    console.log("HEREEEE")
+    this.userService.searchSubject.subscribe(currentUser => {
+      console.log("HEreee2")
+      this.currentUser = currentUser;
+      console.log(currentUser);
+    });
   }
 
   showRegister() {

@@ -12,6 +12,7 @@ import { BrickComponent } from './brick/brick.component';
 import { HomeComponent } from './home/home.component';
 
 import { SignInCard } from './signin-card/sign-in-card.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SignInCard } from './signin-card/sign-in-card.component';
     BrickComponent,
     HomeComponent,
     SignInCard,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
