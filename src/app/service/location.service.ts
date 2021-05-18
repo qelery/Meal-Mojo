@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
+import {UserService} from "./user.service";
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import {environment} from "../../environments/environment";
 export class LocationService {
   currentAddress!: CurrentAddress;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userService: UserService) {
     if (!environment.googleApiKey) {
         throw new Error("You must provide your own Google API Key for the Meal Mojo app to work." +
           "Please visit: https://developers.google.com/maps/documentation/geolocation/get-api-key to get an API key\"");
@@ -17,13 +18,12 @@ export class LocationService {
   }
 
   findAddress(userEnteredAddress: string): void {
-    console.log("HERE")
-   this.http.get(this.formatApiLink(userEnteredAddress)).toPromise().then((response: any) => {
+    console.log("Fetching address....");
+    this.http.get(this.formatGoogleApiLink(userEnteredAddress)).toPromise().then((response: any) => {
      const components = response.results[0]['address_components'];
      const geometry = response.results[0]['geometry'];
      const formattedAddress = response.results[0]['formatted_address'];
-     console.log(geometry)
-     console.log(formattedAddress)
+
      let subpremise = '';
      let streetNumber = '';
      let streetName = '';
@@ -37,7 +37,7 @@ export class LocationService {
        } else if (part.types.includes("street_number")) {
          streetNumber = part['long_name'];
        } else if (part.types.includes("route")) {
-         streetNumber = part['long_name'];
+         streetName = part['long_name'];
        } else if (part.types.includes("administrative_area_level_1")) {
          state = part['short_name'];
        } else if (part.types.includes("postal_code")) {
@@ -53,23 +53,40 @@ export class LocationService {
      const longitude = geometry.location['lng'];
      const latitude = geometry.location['lat'];
 
-     this.currentAddress = {
+     const addressDatabaseFormat = {
        street1: street1,
        street2: street2,
        city: city,
        zipcode: zipcode,
        state: state,
        latitude: latitude,
-       longitude: longitude,
-       formattedAddress: formattedAddress
+       longitude: longitude
      }
-     console.log(this.currentAddress);
+
+     this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
+     localStorage.setItem('currentAddress', `${this.currentAddress}`);
+     if (localStorage.getItem('currentUser')) {
+       this.saveAddressToDatabase(addressDatabaseFormat);
+     }
    });
   }
 
-  formatApiLink(address: string) {
+  formatGoogleApiLink(address: string): string {
     const baseUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=`;
     return `${baseUrl}${address}&key=${environment.googleApiKey}`;
+  }
+
+  private saveAddressToDatabase(addressDatabaseFormat: any): any {
+    console.log("saving to database...")
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    this.http.put(`${environment.restApiUrl}/auth/users/update`, {address: addressDatabaseFormat}, requestOptions)
+      .subscribe(data => console.log(data));
+
   }
 }
 
