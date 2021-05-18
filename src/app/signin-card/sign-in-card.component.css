@@ -96,8 +96,9 @@ h4 {
 }
 
 .s-error {
-  color: #f00;
-  font-size: smaller;
+  color: #ff0000;
+  font-size: small;
+  text-align: center;
 }
 
 h5 {

@@ -16,12 +16,15 @@ export class SignInCard implements OnInit {
   @Input() action: any;
   clickFunction: any;
   errorFeedback: any;
+  greeting: any;
 
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    [this.clickFunction, this.buttonText] = this.action === 'login' ? [this.loginUser, 'Log On'] : [this.registerUser, 'Register'];
+    [this.clickFunction, this.buttonText, this.greeting] = this.action === 'login' ?
+                                                            [this.loginUser, 'Log On', 'Welcome back!'] :
+                                                                                          [this.registerUser, 'Register', 'Ready to eat?'];
   }
 
   hideSignInComponent() {
@@ -29,17 +32,26 @@ export class SignInCard implements OnInit {
   }
 
   loginUser() {
-    console.log("LOGIN!!");
+    console.log("LOGIN");
     const user = { email: this.email, password: this.password};
-    this.userService.loginUser(user);
+    this.userService.loginUser(user).subscribe((response: any) => {
+      const token = response.jwt;
+      localStorage.setItem('currentUser', `${user.email}`);
+      localStorage.setItem('token', `${token}`);
+      console.log(response, token);
+      this.userService.setCurrentUser(user.email);
+      this.hideSignInComponent();
+    }, err => {
+      this.errorFeedback = "Incorrect username or password";
+    });
   }
 
-
   async registerUser() {
-    console.log("REGISTER!!!");
+    console.log("REGISTER");
     const user = { email: this.email, password: this.password};
     await this.userService.registerUser(user).toPromise().then(response => {
       console.log("Success");
+      this.hideSignInComponent();
     }).catch(err => {
       this.errorFeedback = err.error;
     })

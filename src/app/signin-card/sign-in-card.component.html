@@ -1,7 +1,7 @@
 <div class="s-overlay">
   <div class="s-wrapper">
       <div class="s-title">
-        <h4>Ready to eat?</h4>
+        <h4>{{greeting}}</h4>
         <div class="s-exit">
           <a (click)="hideSignInComponent()"><i class="fa fa-times"></i></a>
         </div>
@@ -12,7 +12,7 @@
           <input [(ngModel)]="email" name="email" type="text" class="s-input" placeholder="Email" value="">
           <h5>Enter your password</h5>
           <input [(ngModel)]="password" name="password" type="password" class="s-input" placeholder="Password" value="">
-          <span class="s-error">{{ errorFeedback }}</span>
+          <p class="s-error">{{ errorFeedback }}</p>
           <button (click)="clickFunction()" [disabled]="email === '' || password === ''" type="submit" class="s-btn">
             <span>{{buttonText}}</span>
           </button>
