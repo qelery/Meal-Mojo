@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {Subject} from "rxjs";
+import {Observable, Subject} from "rxjs";
 
 
 @Injectable({
@@ -18,61 +18,12 @@ export class LocationService {
     }
   }
 
-  findAddress(userEnteredAddress: string): void {
-    console.log("Fetching address....");
-    this.http.get(this.formatGoogleApiLink(userEnteredAddress)).toPromise().then((response: any) => {
-      const components = response.results[0]['address_components'];
-      const geometry = response.results[0]['geometry'];
-
-      console.log(response)
-      let subpremise = '';
-      let streetNumber = '';
-      let streetName = '';
-      let state = '';
-      let zipcode = '';
-      let city = '';
-
-      components.forEach((part: any) => {
-        if (part.types.includes("subpremise")) {
-          subpremise = part['long_name'];
-        } else if (part.types.includes("street_number")) {
-          streetNumber = part['long_name'];
-        } else if (part.types.includes("route")) {
-          streetName = part['long_name'];
-        } else if (part.types.includes("administrative_area_level_1")) {
-          state = part['short_name'];
-        } else if (part.types.includes("postal_code")) {
-          zipcode = part['long_name'];
-        } else if (part.types.includes("locality")) {
-          city = part['long_name'];
-        }
-      });
-
-      const street1 = `${streetNumber} ${streetName}`;
-      const street2 = subpremise || null;
-
-      const longitude = geometry.location['lng'];
-      const latitude = geometry.location['lat'];
-
-      const addressDatabaseFormat = {
-        street1: street1,
-        street2: street2,
-        city: city,
-        zipcode: zipcode,
-        state: state,
-        latitude: latitude,
-        longitude: longitude
-      }
-
-      const formattedAddress = `${street1}` + (street2 ? `, ${street2}` : '') + `, ${city}, ${state}`;
-
-      this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
-      localStorage.setItem('currentAddress', `${this.currentAddress}`);
-      this.searchSubject.next(this.currentAddress);
-      if (localStorage.getItem('currentUser')) {
-        this.saveAddressToDatabase(addressDatabaseFormat);
-      }
-    }, err => console.log(err));
+  findAddress(userEnteredAddress: string): Observable<any> {
+    // let validAddressFound = true;
+    return this.http.get(this.formatGoogleApiLink(userEnteredAddress));
+    //
+    // console.log(validAddressFound)
+    // return validAddressFound;
   }
 
   formatGoogleApiLink(address: string): string {
@@ -80,7 +31,16 @@ export class LocationService {
     return `${baseUrl}${address}&key=${environment.googleApiKey}`;
   }
 
-  private saveAddressToDatabase(addressDatabaseFormat: any): any {
+  setCurrentAddress(addressDatabaseFormat: any, formattedAddress: any) {
+    this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
+    this.searchSubject.next(this.currentAddress);
+    localStorage.setItem('currentAddress', `${this.currentAddress}`);
+    if (localStorage.getItem('currentUser')) {
+      this.saveAddressToDatabase(addressDatabaseFormat);
+    }
+  }
+
+  saveAddressToDatabase(addressDatabaseFormat: any): any {
     console.log("saving to database...")
     const token = localStorage.getItem('token');
     const requestOptions = {

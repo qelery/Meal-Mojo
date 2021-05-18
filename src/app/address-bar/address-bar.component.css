@@ -121,3 +121,10 @@
   justify-content: center;
 }
 
+.ab-error {
+  margin-top: 2rem;
+  font-size: larger;
+  color: #ff0000;
+  font-weight: 400;
+  text-shadow: rgba(0, 0, 0, 0.9) 0 10px 30px;
+}
