@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { LocationService} from "../service/location.service";
-import {FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-address-bar',
