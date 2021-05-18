@@ -28,7 +28,7 @@ export class UserService {
     localStorage.removeItem('token');
     this.currentUser = '';
     this.searchSubject.next(this.currentUser);
-    this.router.navigate(['/']);
+    this.router.navigate(['']);
   }
 
   setCurrentUser(email: string) {
