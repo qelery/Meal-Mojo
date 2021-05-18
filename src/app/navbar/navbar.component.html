@@ -1,4 +1,5 @@
 <nav id="nav" class="navbar">
+  <span *ngIf="currentAddress" class="nav-center">ASAP to: {{currentAddress.formattedAddress}}</span>
   <div class="container navbar">
     <a href="/" class="logo"></a>
     <ul class="nav-left">
@@ -8,7 +9,7 @@
         </a>
       </li>
     </ul>
-    <ul *ngIf="!currentUser" class="nav-right">
+    <ul *ngIf="!isUserLoggedIn" class="nav-right">
       <li>
         <a (click)="showRegister()">
           Register
@@ -20,7 +21,7 @@
         </a>
       </li>
     </ul>
-    <ul *ngIf="currentUser" class="nav-right small">
+    <ul *ngIf="isUserLoggedIn" class="nav-right small">
       <li>
         <a  [routerLink]="['/logout']">
           Log Out
@@ -34,16 +35,11 @@
     <ul class="nav-left small" style="display: none;">
       <li class="active">
         <a href="/">
-          Search
-        </a>
-      </li>
-      <li class="active">
-        <a href="/">
           Home
         </a>
       </li>
       <li>
-        <ul *ngIf="!currentUser" class="nav-right small">
+        <ul *ngIf="!isUserLoggedIn" class="nav-right small">
           <li>
             <a (click)="showRegister()">
               Register
@@ -55,7 +51,7 @@
             </a>
           </li>
         </ul>
-        <ul *ngIf="currentUser" class="nav-right small">
+        <ul *ngIf="isUserLoggedIn" class="nav-right small">
           <li>
             <a  [routerLink]="['/logout']">
               Log Out

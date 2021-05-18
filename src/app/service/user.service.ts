@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
   providedIn: 'root'
 })
 export class UserService {
-  currentUser = '';
+  currentUser!: string;
   searchSubject = new Subject();
 
   constructor(private  http: HttpClient, private router: Router) { }

@@ -51,8 +51,9 @@ export class SignInCard implements OnInit {
     await this.userService.registerUser(user).toPromise().then(response => {
       console.log("Success");
       this.hideSignInComponent();
+      this.loginUser();
     }).catch(err => {
       this.errorFeedback = err.error;
-    })
+    });
   }
 }

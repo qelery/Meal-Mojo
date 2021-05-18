@@ -1,3 +1,19 @@
+.nav-center {
+  display: block;
+  margin: 0;
+  color: #dedede;
+  text-shadow: none;
+  padding: 13px 0 13px 120px;
+  font-size: 15px;
+  font-weight: 600;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  width: 94%;
+  text-align: center;
+}
+
 nav.navbar {
   border-bottom: 0;
   z-index: 1000;
@@ -127,7 +143,6 @@ ul li.active a {
   }
 
   nav .nav-left {
-    /*margin-left: 160px;*/
   }
 
   nav.navbar ul a {
@@ -135,7 +150,6 @@ ul li.active a {
     font-size: 13px;
   }
 }
-
 
 @media screen and (max-width: 640px) {
 

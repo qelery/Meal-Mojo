@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../service/user.service";
+import {LocationService} from "../service/location.service";
 
 @Component({
   selector: 'app-navbar',
@@ -10,22 +11,32 @@ export class NavbarComponent implements OnInit {
 
   showRegisterCard: boolean;
   showLoginCard: boolean;
-  currentUser: any;
+  isUserLoggedIn: any;
+  currentAddress: any;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private  locationService: LocationService) {
     this.showRegisterCard = false;
     this.showLoginCard = false;
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('token')) {
+      this.isUserLoggedIn = true;
+      return;
+    }
     this.userService.searchSubject.subscribe(currentUser => {
-      this.currentUser = currentUser;
+      this.isUserLoggedIn = !!currentUser;
       console.log(currentUser);
     });
+    this.locationService.searchSubject.subscribe(currentAddress => {
+      this.currentAddress = currentAddress;
+      console.log(currentAddress);
+    })
   }
 
   showRegister() {
     this.showRegisterCard = true;
+    console.log(this.currentAddress);
   }
 
   showLogIn() {
