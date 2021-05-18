@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService} from "../service/location.service";
 
 @Component({
   selector: 'app-address-bar',
@@ -9,12 +10,13 @@ export class AddressBarComponent implements OnInit {
 
   address: string = '';
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
   }
 
   processAddress() {
-    console.log("Clicked!!!");
+    this.locationService.findAddress(this.address);
   }
 }
+

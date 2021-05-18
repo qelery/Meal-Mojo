@@ -15,12 +15,12 @@ export class UserService {
   constructor(private  http: HttpClient, private router: Router) { }
 
   loginUser(user: User): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/auth/users/login`, user);
+    return this.http.post(`${environment.restApiUrl}/auth/users/login`, user);
   }
 
   registerUser(user: User): Observable<any> {
     return this.http
-      .post(`${environment.apiUrl}/auth/users/register/customer`, user);
+      .post(`${environment.restApiUrl}/auth/users/register/customer`, user);
   }
 
   logoutUser(): void {

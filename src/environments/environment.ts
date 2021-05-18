@@ -4,8 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:9092'
-};
+  restApiUrl: 'http://localhost:9092',
+  googleApiKey: 'AIzaSyCzk3hYBaqn_8sDJkONWXPpdhVjBLzZUzI',
+}
+
+
+
+export default { environment }
 
 /*
  * For easier debugging in development mode, you can import the following file

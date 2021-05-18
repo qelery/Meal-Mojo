@@ -1,6 +1,6 @@
 export const brickInfo = [
   {
-    h2: `Your Favorites All In one Place`,
+    h2: `Your Favorites All In One Place`,
     p: `Whatever you want, with the convenience you want. Discover tasty meals from local restaurants. We teamed up with the best spots in your city to bring you the food you love.`,
     imgUrl: '/assets/image/burgers.jpg',
   },
