@@ -10,12 +10,12 @@
     </ul>
     <ul class="nav-right">
       <li>
-        <a [routerLink]="['/register']">
+        <a (click)="showRegister()">
           Register
         </a>
       </li>
       <li>
-        <a [routerLink]="['/login']">
+        <a (click)="showLogIn()">
           Log In
         </a>
       </li>
@@ -38,12 +38,12 @@
       <li>
         <ul class="nav-right small">
           <li>
-            <a href="/register">
+            <a (click)="showRegister()">
               Register
             </a>
           </li>
           <li>
-            <a href="/login">
+            <a (click)="showLogIn()">
               Log In
             </a>
           </li>
@@ -52,3 +52,5 @@
     </ul>
   </div>
 </nav>
+<app-sign-in-card [action]='"login"' (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-sign-in-card>
+<app-sign-in-card [action]='"register"' (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-sign-in-card>

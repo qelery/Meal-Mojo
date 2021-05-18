@@ -20,7 +20,7 @@ a {
   60% {
     transform: translateY(-10%);
   }
-  90% {
+  99% {
     background-color: rgba(0, 0, 0, 0);
   }
   100% {
@@ -53,7 +53,7 @@ a {
 .s-title {
   display: flex;
   justify-content: center;
-  padding: 50px 0 0px;
+  padding: 50px 0 0;
 }
 
 h4 {
@@ -93,7 +93,11 @@ h4 {
 
 .s-form {
   width: 100%;
-  /*padding-bottom: 400px;*/
+}
+
+.s-error {
+  color: #f00;
+  font-size: smaller;
 }
 
 h5 {
@@ -155,7 +159,6 @@ button, input {
   font-size: 14px;
   letter-spacing: initial;
   font-weight: 600;
-  text-transform: uppercase;
   line-height: normal;
   height: 55px;
   border-radius: 28px;

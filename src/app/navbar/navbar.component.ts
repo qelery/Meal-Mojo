@@ -7,9 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  showRegisterCard: boolean;
+  showLoginCard: boolean;
+
+  constructor() {
+    this.showRegisterCard = false;
+    this.showLoginCard = false;
+  }
 
   ngOnInit(): void {
   }
 
+  showRegister() {
+    this.showRegisterCard = true;
+  }
+
+  showLogIn() {
+    this.showLoginCard = true;
+  }
+
+  hideSignInComponent() {
+    this.showRegisterCard = false;
+    this.showLoginCard = false;
+  }
 }
