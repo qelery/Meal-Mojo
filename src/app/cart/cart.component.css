@@ -51,6 +51,7 @@ li {
 
 .c-order-line {
   display: flex;
+  position: relative;
   border: 1px solid rgba(186, 186, 186, 0.5);
   padding: 20px;
 }
@@ -74,3 +75,14 @@ li {
   border-radius: 28px;
   width: 100%;
 }
+
+.c-exit {
+  position: absolute;
+  top: 25%;
+  right: 7%;
+  cursor: pointer;
+  height: 24px;
+  width: 24px;
+  font-size: 15px;
+}
+

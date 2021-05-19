@@ -44,11 +44,16 @@
       <i class="fa fa-times"></i>
     </a>
     <ul class="nav-left small" style="display: none;">
-      <li class="active">
-        <a [routerLink]="['/']">
-          Home
-        </a>
-      </li>
+        <li class="active">
+          <a [routerLink]="['/']">
+            Home
+          </a>
+        </li>
+        <li *ngIf="isUserLoggedIn" class="active">
+          <a [routerLink]="['/restaurants']">
+            Restaurants
+          </a>
+        </li>
       <li>
         <ul *ngIf="!isUserLoggedIn" class="nav-right small">
           <li>

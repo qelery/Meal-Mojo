@@ -8,6 +8,7 @@ import {OrderService} from "../service/order/order.service";
 })
 export class CartComponent implements OnInit {
   @Input() restaurantName: any;
+  @Input() restaurantId: any;
   cartItems: any;
   cartTotal: any;
   constructor(private orderService: OrderService) { }
@@ -24,5 +25,9 @@ export class CartComponent implements OnInit {
             return total + (item.quantity * item.priceEach);
           },0);
       });
+  }
+
+  removeFromCart(menuItemId: number) {
+    this.orderService.removeFromCart(this.restaurantId, menuItemId);
   }
 }

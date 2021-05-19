@@ -5,7 +5,7 @@
       <span>Checkout</span><span *ngIf="cartItems">{{this.cartTotal | currency}}</span>
     </div>
   </button>
-  <ul *ngIf="cartItems">
+  <ul>
     <li *ngFor="let cartItem of this.cartItems">
       <div class="c-order-line">
         <div class="c-quantity-container">
@@ -17,8 +17,10 @@
           <span class="c-item-name">{{cartItem.menuItem.name}}</span>
           <span class="c-price">{{cartItem.quantity * cartItem.priceEach | currency}}</span>
         </div>
+          <div class="c-exit">
+            <a (click)="removeFromCart(cartItem.menuItem.id)"><i class="fa fa-times"></i></a>
+          </div>
       </div>
-
     </li>
   </ul>
 

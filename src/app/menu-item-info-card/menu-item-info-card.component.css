@@ -1,7 +1,6 @@
 :host {
   display: flex;
   flex-direction: row;
-  cursor: pointer;
   padding: 16px 0;
   border: 1px solid rgba(201, 201, 201, 0.5);
   box-sizing: content-box;
@@ -98,14 +97,13 @@ img {
   align-items: center;
   height: 30px;
   width: 30px;
+  cursor: pointer;
   background-color: #e7383f;
 }
 
 svg:not(:root) {
   overflow: hidden;
 }
-
-
 
 .m-button-cross {
   display: flex;

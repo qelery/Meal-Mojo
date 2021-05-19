@@ -55,4 +55,15 @@ export class OrderService {
     };
     return this.http.get(`${environment.restApiUrl}/api/order/cart`, requestOptions);
   }
+
+  removeFromCart(restaurantId: number, menuItemId: number) {
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    this.cartItems = this.http.delete(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines`, requestOptions)
+      .subscribe(response => console.log(response));
+  }
 }

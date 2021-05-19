@@ -4,13 +4,13 @@
   </div>
   <div class="m-lower-box">
     <span class="m-price">{{this.menuItem.price | currency}}</span>
-    <div class="m-button-wrapper">
-      <button (click)="addToCart()" class="m-button-cross">
+    <a (click)="addToCart()" class="m-button-wrapper">
+      <button class="m-button-cross">
         <svg width="12" height="12">
           <path d="M7 5h5v2H7v5H5V7H0V5h5V0h2v5z" fill="currentColor" fill-rule="evenodd"></path>
         </svg>
       </button>
-    </div>
+    </a>
   </div>
 </div>
 <div class="m-item-image-wrapper">
