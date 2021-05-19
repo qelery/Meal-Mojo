@@ -1,0 +1,44 @@
+.banner {
+  height: 400px;
+  background-repeat: no-repeat;
+  background-color: #000;
+  margin-top: -50px;
+  padding-top: 100px;
+  background-size: cover;
+  position: relative;
+}
+
+.banner .container {
+  clear: both;
+  text-align: center;
+  z-index: 100;
+  position: relative;
+}
+
+.banner h1 {
+  max-width: 500px;
+  font-size: 90px;
+  line-height: 0.95em;
+  color: #fff;
+  margin: auto;
+  margin-bottom: 3rem;
+  text-shadow: rgba(0, 0, 0, 0.52) 0 0 30px;
+  font-weight: 600;
+  font-family: "Open Sans", sans-serif;
+}
+
+.banner h2 {
+  color: #fff;
+}
+
+.banner:after {
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.58);
+}
+
+

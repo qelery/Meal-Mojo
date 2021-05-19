@@ -16,6 +16,8 @@ import { LogoutComponent } from './logout/logout.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-info-card.component';
 import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaurant-store-front.component';
+import { MenuItemInfoCardComponent } from './menu-item-info-card/menu-item-info-card.component';
+import { RestaurantStoreFrontBannerComponent } from './restaurant-store-front-banner/restaurant-store-front-banner.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaura
     RestaurantsComponent,
     RestaurantInfoCardComponent,
     RestaurantStoreFrontComponent,
+    MenuItemInfoCardComponent,
+    RestaurantStoreFrontBannerComponent,
   ],
   imports: [
     BrowserModule,

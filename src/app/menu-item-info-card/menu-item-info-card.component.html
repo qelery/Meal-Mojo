@@ -1,0 +1,18 @@
+<div class="m-info-flex">
+  <div class="m-title">
+    <h3>{{this.menuItem.name}}</h3>
+  </div>
+  <div class="m-lower-box">
+    <span class="m-price">{{this.menuItem.price | currency}}</span>
+    <div class="m-button-wrapper">
+      <button class="m-button-cross">
+        <svg width="12" height="12">
+          <path d="M7 5h5v2H7v5H5V7H0V5h5V0h2v5z" fill="currentColor" fill-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="m-item-image-wrapper">
+  <div class="m-item-image" [ngStyle]="{backgroundImage: 'url('+this.menuItem.imageUrl+')'}"></div>
+</div>

@@ -1,0 +1,173 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  padding: 16px 0;
+  border: 1px solid rgba(201, 201, 201, 0.5);
+  box-sizing: content-box;
+  height: 128px;
+  position: relative;
+}
+
+.m-info-flex {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 9px 0;
+}
+
+.m-title {
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+h3 {
+  font-family: sans-serif;
+  font-size: 16px;
+  letter-spacing: -0.3px;
+  font-weight: 500;
+  line-height: normal;
+  display: block;
+  overflow: hidden;
+  color: rgb(45, 49, 56);
+  margin: 0px 0px 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+
+
+.m-price {
+  font-family: sans-serif;
+  color: rgb(0, 169, 84);
+  font-size: 16px;
+  padding-right: 40px;
+}
+
+
+.m-item-image-wrapper {
+  position: relative;
+  background-color: transparent;
+  overflow: hidden;
+  width: 128px;
+  height: 128px;
+}
+
+
+
+img {
+  border-style: none;
+}
+
+.m-item-image {
+  position: absolute;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: opacity 0.4s linear;
+  transition: opacity 0.4s linear;
+}
+
+.m-lower-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.m-plus-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  display: flex;
+  justify-content: center;
+  width: 125px;
+  padding: 16px;
+}
+
+.m-button-wrapper {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  background: rgb(71, 151, 224);
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+
+
+.m-button-cross {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  border: none;
+  outline: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: inherit;
+  width: 100%;
+  color: rgb(255, 255, 255);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (min-width: 1060px) {
+
+  .menu-items-container {
+    padding-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 1000px;
+  }
+
+  :host {
+    width: calc(50% - 20px);
+    margin: 16px 0;
+    padding: 0;
+    border: 1px solid rgba(186, 186, 186, 0.5);
+    height: 128px;
+  }
+
+  .m-info-flex {
+    padding-right: 128px;
+  }
+
+  .m-info-flex {
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 20px 20px 15px;
+  }
+
+  .m-item-image-wrapper {
+    position: relative;
+  }
+
+
+
+
+}

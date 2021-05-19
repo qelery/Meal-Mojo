@@ -1,0 +1,16 @@
+@media screen and (min-width: 1060px) {
+
+  .flex-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-items-container {
+    padding-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 1000px;
+  }
+}
