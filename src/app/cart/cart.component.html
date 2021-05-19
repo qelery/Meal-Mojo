@@ -8,18 +8,24 @@
   <ul>
     <li *ngFor="let cartItem of this.cartItems">
       <div class="c-order-line">
+        <div class="idk">
+        <div class="m-item-image-wrapper">
+          <div class="m-item-image" [ngStyle]="{backgroundImage: 'url('+cartItem.menuItem.imageUrl+')'}"></div>
+        </div>
         <div class="c-quantity-container">
           <div class="c-quantity-wrapper">
             <span class="c-quantity">{{cartItem.quantity}}</span>
           </div>
         </div>
+        </div>
         <div class="c-info-wrapper">
           <span class="c-item-name">{{cartItem.menuItem.name}}</span>
           <span class="c-price">{{cartItem.quantity * cartItem.priceEach | currency}}</span>
         </div>
-          <div class="c-exit">
-            <a (click)="removeFromCart(cartItem.menuItem.id)"><i class="fa fa-times"></i></a>
-          </div>
+
+        <div class="c-exit">
+          <a (click)="removeFromCart(cartItem.menuItem.id)"><i class="fa fa-times"></i></a>
+        </div>
       </div>
     </li>
   </ul>
