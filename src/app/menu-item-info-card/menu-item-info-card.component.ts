@@ -15,7 +15,6 @@ export class MenuItemInfoCardComponent implements OnInit {
   }
 
   addToCart() {
-    console.log("Called addToCart")
     this.orderService.addToCart(this.restaurantId, this.menuItem.id);
   }
 }

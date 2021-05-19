@@ -7,5 +7,47 @@
   width: 340px;
   min-width: 340px;
   z-index: 1001;
+  padding: 0 20px;
   border-left: 1px solid rgb(205, 205, 205);
 }
+
+li {
+  margin-bottom: 2em;
+}
+
+.c-quantity-container {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.c-quantity-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  font-size: small;
+  width: 25px;
+  height: 25px;
+  background: #b3b7bb;
+}
+
+
+.c-quantity {
+  text-align: center;
+}
+
+
+.c-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.c-order-line {
+  display: flex;
+  border: 1px solid rgba(186, 186, 186, 0.5);
+  padding: 20px;
+}
+
+

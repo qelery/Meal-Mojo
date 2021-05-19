@@ -1,4 +1,20 @@
 <div class="c-container">
-  <h3>Cart</h3>
-  <h4>Items from [[Restaurant Name Here]]</h4>
+  <h4>Cart - {{restaurantName}}</h4>
+  <ul *ngIf="cartItems">
+    <li *ngFor="let cartItem of this.cartItems">
+      <div class="c-order-line">
+        <div class="c-quantity-container">
+          <div class="c-quantity-wrapper">
+            <span class="c-quantity">{{cartItem.quantity}}</span>
+          </div>
+        </div>
+        <div class="c-info-wrapper">
+          <span class="c-item-name">{{cartItem.menuItem.name}}</span>
+          <span class="c-price">{{cartItem.quantity * cartItem.priceEach | currency}}</span>
+        </div>
+      </div>
+
+    </li>
+  </ul>
+
 </div>

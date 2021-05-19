@@ -12,6 +12,7 @@ export class RestaurantStoreFrontComponent implements OnInit {
   restaurant: any;
   menuItems: any;
   generalAddress: any;
+  restaurantName: any;
 
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
@@ -31,6 +32,7 @@ export class RestaurantStoreFrontComponent implements OnInit {
         this.orderService.getRestaurantData(this.restaurantId).subscribe((response: any) => {
           this.restaurant = response;
           this.menuItems = response.menuItems;
+          this.restaurantName = response.businessName;
           const address = response.address;
           this.generalAddress = `${address.street1}, ${address.city}`
           console.log(this.restaurant)

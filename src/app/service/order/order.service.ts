@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 export class OrderService {
 
   nearestRestaurants: any;
+  cartItems: any;
   maxDistance = 15; // miles
   searchSubject = new Subject();
 
@@ -38,7 +39,20 @@ export class OrderService {
         Authorization: `Bearer ${token}`
       }),
     };
-    return this.http.post(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines/1`, null,  requestOptions)
+    this.cartItems = this.http.post(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines/1`, null,  requestOptions)
       .subscribe(response => console.log(response));
+    this.getCartItems();
+    this.searchSubject.next(this.cartItems);
+    return this.cartItems;
+  }
+
+  getCartItems() {
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    return this.http.get(`${environment.restApiUrl}/api/order/cart`, requestOptions);
   }
 }
