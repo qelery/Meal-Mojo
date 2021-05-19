@@ -31,7 +31,7 @@ export class LocationService {
     this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
     this.searchSubject.next(this.currentAddress);
     console.log(this.currentAddress.longitude)
-    localStorage.setItem('currentAddress', `${this.currentAddress}`);
+    localStorage.setItem('currentAddress', `${formattedAddress}`);
     localStorage.setItem('longitude', `${this.currentAddress.longitude}`);
     localStorage.setItem('latitude', `${this.currentAddress.latitude}`);
     if (localStorage.getItem('currentUser')) {

@@ -1,0 +1,5 @@
+<div *ngIf="restaurant">
+  <h4>{{restaurant.businessName}}</h4>
+  <p>{{restaurant.description}}</p>
+  <p *ngFor="let menuItem of menuItems">{{menuItem.name}}</p>
+</div>

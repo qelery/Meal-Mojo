@@ -20,7 +20,7 @@
                 <div *ngIf="restaurant.deliveryFee" class="r-info-wrapper">
                   <span>Delivery: {{restaurant.deliveryEtaMinutes}} min</span>
                   <span>Pickup: {{restaurant.pickupEtaMinutes}} min</span>
-                  <span class="r-delivery-fee">Delivery fee: ${{restaurant.deliveryFee}}</span>
+                  <span class="r-delivery-fee">Delivery fee: {{restaurant.deliveryFee | currency}}</span>
                 </div>
                 <div *ngIf="!restaurant.deliveryFee" class="r-info-wrapper">
                   <span> Pickup: {{restaurant.pickupEtaMinutes}} min</span>

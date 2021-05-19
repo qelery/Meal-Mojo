@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from "../service/order/order.service";
+import {LocationService} from "../service/location/location.service";
 
 @Component({
   selector: 'app-restaurants',
@@ -8,8 +9,9 @@ import {OrderService} from "../service/order/order.service";
 })
 export class RestaurantsComponent implements OnInit {
   nearbyRestaurants: any;
+  currentAddress: string | null = '' ;
 
-  constructor(public orderService: OrderService) { }
+  constructor(public orderService: OrderService, private locationService: LocationService) { }
 
   ngOnInit(): void {
     this.orderService.getRestaurantsNearUser().subscribe((response: any) => {
@@ -18,6 +20,7 @@ export class RestaurantsComponent implements OnInit {
         console.log(x)
       }
     }, (err: any) => console.log(err));
+    this.currentAddress = localStorage.getItem('currentAddress');
   }
 
 }

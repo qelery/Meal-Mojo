@@ -15,6 +15,7 @@ import { SignInCard } from './signin-card/sign-in-card.component';
 import { LogoutComponent } from './logout/logout.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-info-card.component';
+import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaurant-store-front.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-i
     LogoutComponent,
     RestaurantsComponent,
     RestaurantInfoCardComponent,
+    RestaurantStoreFrontComponent,
   ],
   imports: [
     BrowserModule,
