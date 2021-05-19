@@ -1,4 +1,5 @@
-<app-restaurant-store-front-banner [restaurantAddress]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl" [restaurantName]="this.restaurant.businessName" ></app-restaurant-store-front-banner>
+<app-restaurant-store-front-banner [tagline]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl"
+                                   [headline]="this.restaurant.businessName"></app-restaurant-store-front-banner>
 <div class="menu-items-container">
   <div class="menu-items-wrapper" style="">
     <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>

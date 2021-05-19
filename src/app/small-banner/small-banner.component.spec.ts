@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RestaurantStoreFrontBannerComponent } from './restaurant-store-front-banner.component';
+import { SmallBannerComponent } from './small-banner.component';
 
 describe('RestaurantStoreFrontBannerComponent', () => {
-  let component: RestaurantStoreFrontBannerComponent;
-  let fixture: ComponentFixture<RestaurantStoreFrontBannerComponent>;
+  let component: SmallBannerComponent;
+  let fixture: ComponentFixture<SmallBannerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RestaurantStoreFrontBannerComponent ]
+      declarations: [ SmallBannerComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RestaurantStoreFrontBannerComponent);
+    fixture = TestBed.createComponent(SmallBannerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

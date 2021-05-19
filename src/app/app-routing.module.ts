@@ -4,6 +4,7 @@ import { HomeComponent } from "./home/home.component";
 import {LogoutComponent} from "./logout/logout.component";
 import {RestaurantsComponent} from "./restaurants/restaurants.component";
 import {RestaurantStoreFrontComponent} from "./restaurant-store-front/restaurant-store-front.component";
+import {CheckoutComponent} from "./checkout/checkout.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'restaurants/:id',
     component: RestaurantStoreFrontComponent
+  },
+  {
+    path: 'checkout',
+    component: CheckoutComponent
   }
 ];
 

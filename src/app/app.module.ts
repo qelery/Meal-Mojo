@@ -17,8 +17,9 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-info-card.component';
 import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaurant-store-front.component';
 import { MenuItemInfoCardComponent } from './menu-item-info-card/menu-item-info-card.component';
-import { RestaurantStoreFrontBannerComponent } from './restaurant-store-front-banner/restaurant-store-front-banner.component';
 import { CartComponent } from './cart/cart.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import {SmallBannerComponent} from "./small-banner/small-banner.component";
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { CartComponent } from './cart/cart.component';
     RestaurantInfoCardComponent,
     RestaurantStoreFrontComponent,
     MenuItemInfoCardComponent,
-    RestaurantStoreFrontBannerComponent,
+    SmallBannerComponent,
     CartComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
