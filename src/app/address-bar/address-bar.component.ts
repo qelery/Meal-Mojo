@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { LocationService} from "../service/location/location.service";
+import {OrderService} from "../service/order/order.service";
 
 @Component({
   selector: 'app-address-bar',
@@ -12,7 +13,7 @@ export class AddressBarComponent implements OnInit {
   validAddressFound = true;
   addressForm: any;
 
-  constructor(private locationService: LocationService) { }
+  constructor(private locationService: LocationService, private orderService: OrderService) { }
 
   ngOnInit(): void {}
 
@@ -75,8 +76,9 @@ export class AddressBarComponent implements OnInit {
 
          this.locationService.setCurrentAddress(addressDatabaseFormat, formattedAddress);
          this.validAddressFound = true;
-
+          setTimeout(() => this.orderService.getRestaurantsNearUser(), 2000);
        }, err => console.log(err));
+
   }
 
 }
