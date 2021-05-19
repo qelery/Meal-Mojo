@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from "../service/user.service";
-import {LocationService} from "../service/location.service";
+import {Component, OnChanges, OnInit} from '@angular/core';
+import {UserService} from "../service/user/user.service";
+import {LocationService} from "../service/location/location.service";
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +24,8 @@ export class NavbarComponent implements OnInit {
       this.isUserLoggedIn = true;
       return;
     }
+    console.log("Current address is...")
+    console.log(this.currentAddress)
     this.userService.searchSubject.subscribe(currentUser => {
       this.isUserLoggedIn = !!currentUser;
       console.log(currentUser);

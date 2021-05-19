@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserService} from "../service/user.service";
+import {UserService} from "../service/user/user.service";
 
 @Component({
   selector: 'app-sign-in-card',

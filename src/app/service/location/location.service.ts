@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../environments/environment";
-import {Observable, Subject} from "rxjs";
+import {environment} from "../../../environments/environment";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
-  currentAddress!: CurrentAddress;
-  searchSubject = new Subject();
+  currentAddress: any;
+  searchSubject = new BehaviorSubject(null);
 
   constructor(private http: HttpClient) {
     if (!environment.googleApiKey) {

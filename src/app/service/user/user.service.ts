@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import { environment } from "../../environments/environment";
+import { environment } from "../../../environments/environment";
 import {Router} from "@angular/router";
+import {LocationService} from "../location/location.service";
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class UserService {
   currentUser!: string;
   searchSubject = new Subject();
 
-  constructor(private  http: HttpClient, private router: Router) { }
+  constructor(private  http: HttpClient, private router: Router, private locationService: LocationService) { }
 
   loginUser(user: User): Observable<any> {
     return this.http.post(`${environment.restApiUrl}/auth/users/login`, user);
@@ -26,7 +27,9 @@ export class UserService {
   logoutUser(): void {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
+    localStorage.removeItem('currentAddress');
     this.currentUser = '';
+    this.locationService.searchSubject.next(null);
     this.searchSubject.next(this.currentUser);
     this.router.navigate(['']);
   }
