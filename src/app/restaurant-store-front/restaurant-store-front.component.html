@@ -1,6 +1,12 @@
 <app-restaurant-store-front-banner [restaurantAddress]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl" [restaurantName]="this.restaurant.businessName" ></app-restaurant-store-front-banner>
-<div class="flex-wrapper">
-  <div class="menu-items-container">
-    <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
-  </div>
-</div>
+
+<!--<div style="display: flex;">-->
+<!--  <div class="menu-itlems-flex-container" >-->
+    <div style="max-width: calc(100vw - 350px); background-color: rgba(255, 0, 0, 0.1);">
+    <div class="menu-items-wrapper" style="margin: 0 auto;">
+      <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
+    </div>
+    </div>
+<!--  </div>-->
+  <app-cart></app-cart>
+<!--</div>-->

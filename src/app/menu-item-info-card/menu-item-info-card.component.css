@@ -136,7 +136,7 @@ svg:not(:root) {
 
 @media screen and (min-width: 1060px) {
 
-  .menu-items-container {
+  .menu-items-wrapper {
     padding-top: 16px;
     display: flex;
     flex-wrap: wrap;

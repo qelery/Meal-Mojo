@@ -1,11 +1,11 @@
 @media screen and (min-width: 1060px) {
 
-  .flex-wrapper {
+  .menu-items-flex-container {
     display: flex;
     justify-content: center;
   }
 
-  .menu-items-container {
+  .menu-items-wrapper {
     padding-top: 16px;
     display: flex;
     flex-wrap: wrap;
