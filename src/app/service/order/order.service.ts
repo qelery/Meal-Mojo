@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {LocationService} from "../location/location.service";
 import {Observable, Subject} from "rxjs";
@@ -29,5 +29,16 @@ export class OrderService {
 
   getRestaurantData(restaurantId: number): Observable<any> {
     return this.http.get(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}`);
+  }
+
+  addToCart(restaurantId: number, menuItemId: number) {
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    return this.http.post(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines/1`, null,  requestOptions)
+      .subscribe(response => console.log(response));
   }
 }

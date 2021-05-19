@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {OrderService} from "../service/order/order.service";
 
 @Component({
   selector: 'app-menu-item-info-card',
@@ -7,9 +8,14 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class MenuItemInfoCardComponent implements OnInit {
   @Input() menuItem: any;
-  constructor() { }
+  @Input() restaurantId: any;
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
   }
 
+  addToCart() {
+    console.log("Called addToCart")
+    this.orderService.addToCart(this.restaurantId, this.menuItem.id);
+  }
 }

@@ -1,6 +1,6 @@
 <app-restaurant-store-front-banner [restaurantAddress]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl" [restaurantName]="this.restaurant.businessName" ></app-restaurant-store-front-banner>
 <div class="flex-wrapper">
   <div class="menu-items-container">
-    <app-menu-item-info-card [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
+    <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
   </div>
 </div>
