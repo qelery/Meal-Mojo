@@ -11,6 +11,11 @@
   border-left: 1px solid rgb(205, 205, 205);
 }
 
+h4 {
+  text-align: center;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, serif;
+}
+
 li {
   margin-bottom: 2em;
 }
@@ -29,7 +34,7 @@ li {
   font-size: small;
   width: 25px;
   height: 25px;
-  background: #b3b7bb;
+  background: #d0d4d7;
 }
 
 
@@ -50,4 +55,22 @@ li {
   padding: 20px;
 }
 
-
+.c-btn {
+  padding: 0;
+  margin-bottom: 1.5rem;
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  text-align: center;
+  background-color: #e7383f;
+  color: #fff;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, serif;
+  font-size: 14px;
+  letter-spacing: initial;
+  font-weight: 600;
+  line-height: normal;
+  height: 45px;
+  border-radius: 28px;
+  width: 100%;
+}

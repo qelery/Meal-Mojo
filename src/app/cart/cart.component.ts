@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {OrderService} from "../service/order/order.service";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-cart',
@@ -10,16 +9,20 @@ import {HttpClient} from "@angular/common/http";
 export class CartComponent implements OnInit {
   @Input() restaurantName: any;
   cartItems: any;
+  cartTotal: any;
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.cartItems = [];
 
-
     this.orderService.getCartItems()
       .subscribe((data: any) => {
         this.cartItems = (data) ? data.slice() : [];
+        console.log(this.cartItems[0].priceEach)
+        this.cartTotal = this.cartItems.reduce(
+          (total: number, item: any) => {
+            return total + (item.quantity * item.priceEach);
+          },0);
       });
   }
-
 }

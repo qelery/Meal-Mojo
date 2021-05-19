@@ -31,7 +31,7 @@ h3 {
   display: block;
   overflow: hidden;
   color: rgb(45, 49, 56);
-  margin: 0px 0px 5px;
+  margin: 0 0 5px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -98,7 +98,7 @@ img {
   align-items: center;
   height: 30px;
   width: 30px;
-  background: rgb(71, 151, 224);
+  background-color: #e7383f;
 }
 
 svg:not(:root) {

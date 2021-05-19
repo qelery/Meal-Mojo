@@ -1,11 +1,11 @@
 @media screen and (min-width: 1060px) {
 
-  .menu-items-flex-container {
-    display: flex;
-    justify-content: center;
+  .menu-items-container {
+    max-width: calc(100vw - 350px);
   }
 
   .menu-items-wrapper {
+    margin: 0 auto;
     padding-top: 16px;
     display: flex;
     flex-wrap: wrap;

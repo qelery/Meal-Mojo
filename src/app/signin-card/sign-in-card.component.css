@@ -153,9 +153,8 @@ button, input {
   outline: none;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.2s ease-in-out 0s, color 0.2s ease-in-out 0s;
   background-color: #e7383f;
-  color: rgb(255, 255, 255);
+  color: #fff;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, serif;
   font-size: 14px;
   letter-spacing: initial;
