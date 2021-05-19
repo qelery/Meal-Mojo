@@ -19,11 +19,7 @@ export class LocationService {
   }
 
   findAddress(userEnteredAddress: string): Observable<any> {
-    // let validAddressFound = true;
     return this.http.get(this.formatGoogleApiLink(userEnteredAddress));
-    //
-    // console.log(validAddressFound)
-    // return validAddressFound;
   }
 
   formatGoogleApiLink(address: string): string {
@@ -34,7 +30,10 @@ export class LocationService {
   setCurrentAddress(addressDatabaseFormat: any, formattedAddress: any) {
     this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
     this.searchSubject.next(this.currentAddress);
+    console.log(this.currentAddress.longitude)
     localStorage.setItem('currentAddress', `${this.currentAddress}`);
+    localStorage.setItem('longitude', `${this.currentAddress.longitude}`);
+    localStorage.setItem('latitude', `${this.currentAddress.latitude}`);
     if (localStorage.getItem('currentUser')) {
       this.saveAddressToDatabase(addressDatabaseFormat);
     }

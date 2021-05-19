@@ -1,0 +1,164 @@
+.r-container {
+  max-width: 800px;
+  list-style: none;
+  margin: 50px;
+}
+
+.r-info-card-container {
+  padding: 4px;
+  margin: 0 0 15px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  border-radius: 4px;
+  -webkit-box-shadow: 1px 4px 9px 4px rgba(0,0,0,0.37);
+  box-shadow: 1px 4px 9px 4px rgba(0,0,0,0.37);
+  transition: box-shadow 0.15s linear 0s;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.r-info-card-container a {
+  outline-offset: 4px;
+}
+.r-a-wrapper {
+  text-decoration: none;
+  font-weight: unset;
+  flex: 1 1 0;
+  color: unset;
+}
+
+.r-info-card-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 5px 0;
+}
+
+.r-sample-image-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 0 1 0;
+  margin: 0 30px;
+  border: 1px solid #333;
+}
+
+.r-sample-image-wrapper {
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  width: 218px;
+  padding: 0 0 5px 5px;
+  height: 139px;
+  border-radius: 4px;
+}
+
+.r-sample-image {
+  width: 218px;
+  object-fit: cover;
+  height: 139px;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+}
+
+
+.r-branding {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  padding-left: 20px;
+}
+
+.r-logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  border: 1px solid rgb(193, 193, 193);
+  padding: 2px;
+  position: relative;
+}
+
+
+.r-logo {
+  border-radius: 8px;
+  height: auto;
+  max-height: 85px;
+  width: 80px;
+}
+
+.r-name-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 4px 0 4px 20px;
+}
+.r-name {
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  line-height: 20px;
+  padding-right: 24px;
+  font-weight: 500;
+}
+
+.r-divider {
+  width: 1px;
+  height: 105px;
+  background-color: rgb(206, 206, 206);
+  margin-right: 25px;
+}
+.r-info-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  margin-right: 25px;
+}
+.r-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  line-height: 16px;
+  align-items: flex-start;
+  color: rgb(94, 107, 119);
+  font-weight: 400;
+  padding-top: 4px;
+}
+.r-eta {
+  padding-bottom: 18px;
+}
+
+.r-eta p {
+  margin: 0;
+  padding: 0;
+}
+
+.r-delivery-fee {
+  margin-top: 1em;
+}
+
+@media screen and (max-width: 1025px) {
+
+  .r-branding {
+    flex-direction: column;
+    padding: 0;
+    flex: unset;
+  }
+
+  /*.r-info-wrapper*/
+
+  .r-info-container {
+    flex: unset;
+  }
+}

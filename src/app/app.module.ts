@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 
 import { SignInCard } from './signin-card/sign-in-card.component';
 import { LogoutComponent } from './logout/logout.component';
+import { RestaurantsComponent } from './restaurants/restaurants.component';
+import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-info-card.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { LogoutComponent } from './logout/logout.component';
     HomeComponent,
     SignInCard,
     LogoutComponent,
+    RestaurantsComponent,
+    RestaurantInfoCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -125,7 +125,6 @@ p {
 }
 
 
-
 @media screen and (min-width: 1025px) {
   .b-text-flex {
     padding: 0;
@@ -145,6 +144,12 @@ p {
 
   .b-image {
     width: 800px;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .b-text-container {
+    max-width: 920px;
   }
 }
 
@@ -169,15 +174,16 @@ p {
   transform-origin: 0 103%;
 }
 
+.slant-left .b-text-flex {
+  padding: 0 100px 0 519px;
+}
+
+
 
 @media screen and (min-width: 800px) {
 
   .slant-left .b-image {
     left: 0;
-  }
-
-  .slant-left .b-text-flex {
-    padding: 0 100px 0 519px;
   }
 
   .slant-left .b-image {
@@ -195,55 +201,8 @@ p {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*@media screen and (max-width: 1025px) and (min-width: 800px) {*/
-
-/*  !*medium*!*/
-/*  .slant-left .b-text-flex {*/
-/*    padding: 0 100px 0 519px;*/
-/*  }*/
-
-
-/*  .slant-left .b-image {*/
-/*    right: 0;*/
-/*  }*/
-/*}*/
-
-
-/*@media screen and (max-width: 640px) {*/
-
-
-/*  !*small*!*/
-/*  .slant-left .b-slanted-blocker {*/
-/*    transform: rotate(4deg);*/
-/*    transform-origin: 0 103%;*/
-/*  }*/
-/*}*/
+@media screen and (min-width: 1025px) {
+  .slant-left .b-text-flex {
+    padding: 0;
+  }
+}
