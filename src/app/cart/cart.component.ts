@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {OrderService} from "../service/order/order.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -9,9 +10,10 @@ import {OrderService} from "../service/order/order.service";
 export class CartComponent implements OnInit {
   @Input() restaurantName: any;
   @Input() restaurantId: any;
+  @Output() submitOrder = new EventEmitter<any>();
   cartItems: any;
   cartTotal: any;
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private router: Router) { }
 
   ngOnInit(): void {
     this.cartItems = [];
@@ -29,5 +31,14 @@ export class CartComponent implements OnInit {
 
   removeFromCart(menuItemId: number) {
     this.orderService.removeFromCart(this.restaurantId, menuItemId);
+  }
+
+  checkout(event: any) {
+    if (event.view.location.pathname === '/checkout') {
+      this.submitOrder.emit();
+    } else {
+      console.log("HERE!!!")
+      this.router.navigate(['/checkout']);
+    }
   }
 }

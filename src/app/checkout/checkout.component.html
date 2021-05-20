@@ -8,16 +8,16 @@
 
 <div class="c-left-container">
   <div class="c-checkout-wrapper">
-    <form>
+    <form #checkoutForm="ngForm">
 
       <div>
         <div class="c-header">
           <h3>Delivery or Pickup</h3>
         </div>
         <div class="radio-wrapper">
-          <input type="radio" name="select" value="delivery" id="delivery" checked>
-          <input type="radio" name="select" value="pickup" id="pickup">
-          <label for="delivery" class="option option-1">
+          <input [(ngModel)]="deliveryMethod" type="radio" name="deliveryMethod" value="delivery" id="delivery" checked>
+          <input [(ngModel)]="deliveryMethod" type="radio" name="deliveryMethod" value="pickup" id="pickup">
+          <label  [(ngModel)]="deliveryMethod" for="delivery" class="option option-1">
             <div class="dot"></div>
             <span>Pickup</span>
           </label>
@@ -34,9 +34,9 @@
           <h3>Payment</h3>
         </div>
         <div class="radio-wrapper radio-wrapper-long">
-          <input type="radio" name="payment-method" value="card" id="card" checked>
-          <input type="radio" name="payment-method" value="applePay" id="applePay">
-          <input type="radio" name="payment-method" value="payPal" id="paypal">
+          <input [(ngModel)]="paymentMethod" type="radio" name="paymentType" value="card" id="card" [checked]="true">
+          <input [(ngModel)]="paymentMethod" type="radio" name="paymentType" value="applePay" id="applePay">
+          <input [(ngModel)]="paymentMethod" type="radio" name="paymentType" value="payPal" id="paypal">
           <label for="card" class="option option-1">
             <div class="dot"></div>
             <span>Credit Card</span>
@@ -53,14 +53,14 @@
       </div>
 
 
-      <div >
+      <div>
         <div class="c-header">
           <h3>Include utensils</h3>
         </div>
         <div class="radio-wrapper">
-          <input type="radio" name="utensils" value="utensilsYes" id="utensilsYes" checked>
-          <input type="radio" name="utensils" value="utensilsNo" id="utensilsNo">
-          <label for="utensilsYes" class="option option-1">
+          <input [(ngModel)]="utensils" type="radio" name="utensils" value="utensilsYes" id="utensilsYes" checked>
+          <input [(ngModel)]="utensils" type="radio" name="utensils" value="utensilsNo" id="utensilsNo">
+          <label [(ngModel)]="utensils" for="utensilsYes" class="option option-1">
             <div class="dot"></div>
             <span>Yeah, sure</span>
           </label>
@@ -72,14 +72,14 @@
       </div>
 
 
-      <div >
+      <div>
         <div class="c-header">
-          <h3>Tip?</h3>
+          <h3>Tip</h3>
         </div>
         <div class="radio-wrapper radio-wrapper-long">
-          <input type="radio" name="tip" id="tip0" checked>
-          <input type="radio" name="tip" id="tip10">
-          <input type="radio" name="tip" id="tip20">
+          <input [(ngModel)]="tip" type="radio" name="tip" value="0" id="tip0" checked>
+          <input [(ngModel)]="tip"  type="radio" name="tip" value="10" id="tip10">
+          <input [(ngModel)]="tip" type="radio" name="tip" value="20" id="tip20">
           <label for="tip0" class="option option-1">
             <div class="dot"></div>
             <span class="x-small">No thanks</span>
@@ -99,4 +99,4 @@
   </div>
 </div>
 
-<app-cart></app-cart>
+<app-cart (submitOrder)="submitOrder()"></app-cart>

@@ -1,6 +1,6 @@
 <div class="c-container">
   <h4>Cart - {{restaurantName}}</h4>
-  <button [routerLink]="['/checkout']" class="c-btn">
+  <button (click)="checkout($event)" class="c-btn">
     <div style="display: flex; flex-direction: row; justify-content: space-around">
       <span>Checkout</span><span *ngIf="cartItems">{{this.cartTotal || 0 | currency}}</span>
     </div>

@@ -66,4 +66,15 @@ export class OrderService {
     this.cartItems = this.http.delete(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines`, requestOptions)
       .subscribe(response => console.log(response));
   }
+
+  submitOrder(checkoutOptions: any) {
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    this.cartItems = this.http.post(`${environment.restApiUrl}/api/order/cart/checkout`, checkoutOptions, requestOptions)
+      .subscribe(response => console.log(response));
+  }
 }
