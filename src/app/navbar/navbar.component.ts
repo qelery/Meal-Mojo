@@ -27,12 +27,7 @@ export class NavbarComponent implements OnInit {
       return;
     }
     this.userService.searchSubject.subscribe(currentUser => {
-      if (currentUser === '') {
-
-        this.isUserLoggedIn = null;
-      } else {
         this.isUserLoggedIn = !!currentUser;
-      }
     });
     this.locationService.formattedAddressSubject.subscribe(currentAddress => {
       this.currentAddress = currentAddress;

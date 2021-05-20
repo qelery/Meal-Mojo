@@ -45,7 +45,7 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     CheckoutComponent,
     OrdersComponent,
     OrderCardComponent,
-    GoogleMapComponent,
+    GoogleMapComponent
   ],
   imports: [
     BrowserModule,

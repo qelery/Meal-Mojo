@@ -1,8 +1,28 @@
 <app-banner-small [tagline]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl"
                   [headline]="this.restaurant.businessName"></app-banner-small>
+
+
 <div class="menu-items-container">
+
+  <div class="info-container">
+    <div class="info-wrapper">
+      <div class="info-top">
+        <ng-container *ngFor="let cuisine of restaurant.cuisineSet; index as i">
+          <ng-container *ngIf="i === 0">
+              <span>{{cuisine.charAt(0) + cuisine.toLowerCase().slice(1)}}</span>
+            </ng-container>
+            <ng-container *ngIf="i !== 0">
+              <span>&nbsp;•&nbsp;{{cuisine.charAt(0) + cuisine.toLowerCase().slice(1)}}</span>
+          </ng-container>
+        </ng-container>
+      </div>
+      <p class="bottom-info">Thursday Hours: Open 8 AM | Close 10 PM</p>
+    </div>
+  </div>
+
   <div class="menu-items-wrapper" style="">
-    <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
+    <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem"
+                             *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
   </div>
 </div>
 <app-cart></app-cart>

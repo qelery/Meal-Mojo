@@ -64,6 +64,9 @@ export class LocationService {
     this.findAddress(address).subscribe((response: any) => {
       const components = response.results[0]['address_components'];
       const geometry = response.results[0]['geometry'];
+      console.log(address)
+      console.log(response)
+      console.log("HERE....")
 
       let subpremise = '';
       let streetNumber = '';

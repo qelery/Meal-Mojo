@@ -14,3 +14,42 @@
     width: 1000px;
   }
 }
+
+.info-container {
+  display: flex;
+  margin: 0 auto;
+  padding: 24px 40px 0;
+  font-family: "Open Sans", sans-serif;
+  line-height: 20px;
+  font-size: 15px;
+  overflow: hidden;
+  width: 1000px;
+}
+
+
+.info-wrapper a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.info-top {
+  padding-bottom: 6px;
+}
+
+.dot {
+  display: inline-flex; /* Similar to inline block */
+  color: rgb(84, 84, 84);
+  font-size: 14px;
+  align-content: center;
+  line-height: 23px;
+}
+
+.bottom-info {
+  margin: 0;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.cuisine:not(last-child):after {
+  content: ' • ';
+}

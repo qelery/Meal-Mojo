@@ -17,7 +17,7 @@ export class AddressBarComponent implements OnInit {
   ngOnInit(): void {}
 
   processAddress() {
-    // Don't do an API call if use isn't specific
+    // Don't do an API call if user didn't give a specific address
     if (!this.address || this.address.trim().length < 10) {
           this.validAddressFound = false;
           return;

@@ -7,7 +7,7 @@
           Home
         </a>
       </li>
-      <li *ngIf="isUserLoggedIn" class="active">
+      <li *ngIf="currentAddress" class="active">
         <a [routerLink]="['/restaurants']">
           Restaurants
         </a>
@@ -47,16 +47,16 @@
       <i class="fa fa-times"></i>
     </a>
     <ul class="nav-left small" style="display: none;">
-        <li class="active">
-          <a [routerLink]="['/']">
-            Home
-          </a>
-        </li>
-        <li *ngIf="isUserLoggedIn" class="active">
-          <a [routerLink]="['/restaurants']">
-            Restaurants
-          </a>
-        </li>
+      <li class="active">
+        <a [routerLink]="['/']">
+          Home
+        </a>
+      </li>
+      <li *ngIf="currentAddress" class="active">
+        <a [routerLink]="['/restaurants']">
+          Restaurants
+        </a>
+      </li>
       <li *ngIf="isUserLoggedIn" class="active">
         <a [routerLink]="['/checkout']">
           Checkout
