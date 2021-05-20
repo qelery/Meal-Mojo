@@ -5,6 +5,7 @@ import {LogoutComponent} from "./logout/logout.component";
 import {RestaurantsComponent} from "./restaurants/restaurants.component";
 import {RestaurantStoreFrontComponent} from "./restaurant-store-front/restaurant-store-front.component";
 import {CheckoutComponent} from "./checkout/checkout.component";
+import {OrdersComponent} from "./orders/orders.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CheckoutComponent
+  },
+  {
+    path: 'orders',
+    component: OrdersComponent
   }
 ];
 

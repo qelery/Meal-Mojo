@@ -1,9 +1,9 @@
-<app-restaurant-store-front-banner [tagline]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl"
-                                   [headline]="this.restaurant.businessName"></app-restaurant-store-front-banner>
+<app-banner-small [tagline]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl"
+                  [headline]="this.restaurant.businessName"></app-banner-small>
 <div class="menu-items-container">
   <div class="menu-items-wrapper" style="">
     <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem" *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
   </div>
 </div>
-<app-cart [restaurantId]="this.restaurantId"  [restaurantName]="this.restaurantName"></app-cart>
+<app-cart></app-cart>
 

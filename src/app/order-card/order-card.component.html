@@ -1,0 +1,7 @@
+<h4>{{this.restaurantName}}</h4>
+<span>Order time: {{this.time | date:'shortTime'}}</span> • <span>Total: {{this.totalPrice | currency}}</span>
+<div>
+  <ul class="p-items-names">
+    <li *ngFor="let menuItemInfo of menuItemsInfo">{{menuItemInfo.name}}<span class="p-small-text">(x{{menuItemInfo.quantity}})</span></li>
+  </ul>
+</div>

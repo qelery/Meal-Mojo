@@ -1,16 +1,24 @@
-<app-restaurant-store-front-banner
+<app-banner-small
   [headline]="'Checkout'"
   [tagline]="'So close you can almost taste it'"
   [backgroundPositionY]="56"
   [heroImageUrl]="this.imageUrl">
-</app-restaurant-store-front-banner>
+</app-banner-small>
 
 
 <div class="c-left-container">
 
-  <agm-map [fitBounds]="true">
-    <agm-marker [iconUrl]="this.iconMarker" [latitude]="41.56040954589844" [longitude]="-87.72696685791016" [agmFitBounds]="true"></agm-marker>
-    <agm-marker [latitude]="41.6073108" [longitude]="-87.887526" [agmFitBounds]="true"></agm-marker>
+  <app-google-map #map></app-google-map>
+
+<!--  <agm-map [fitBounds]="this.fitBounds">-->
+<!--    <agm-marker [iconUrl]="this.merchantIconMarker" [latitude]="this.latitudeCustomer" [longitude]="this.longitudeCustomer" [agmFitBounds]="this.agmFitBoundsCustomer"></agm-marker>-->
+<!--    <agm-marker [latitude]="this.latitudeMerchant" [longitude]="this.longitudeMerchant" [agmFitBounds]="this.agmFitBoundsMerchant"></agm-marker>-->
+<!--  </agm-map>-->
+
+
+  <agm-map *ngIf="this.restaurantCoordinates" [fitBounds]="true">
+    <agm-marker [iconUrl]="this.iconMarker" [latitude]="this.restaurantCoordinates[0]" [longitude]="this.restaurantCoordinates[1]" [agmFitBounds]="true"></agm-marker>
+    <agm-marker [latitude]="this.customerCoordinates[1]" [longitude]="this.customerCoordinates[0]" [agmFitBounds]="true"></agm-marker>
   </agm-map>
 
 
@@ -107,4 +115,4 @@
   </div>
 </div>
 
-<app-cart (submitOrder)="submitOrder()"></app-cart>
+<app-cart (emitCoordinates)="coordinatesReceived($event)" (submitOrder)="submitOrder()"></app-cart>

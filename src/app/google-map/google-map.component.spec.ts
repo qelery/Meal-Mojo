@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SmallBannerComponent } from './small-banner.component';
+import { GoogleMapComponent } from './google-map.component';
 
-describe('RestaurantStoreFrontBannerComponent', () => {
-  let component: SmallBannerComponent;
-  let fixture: ComponentFixture<SmallBannerComponent>;
+describe('GoogleMapComponent', () => {
+  let component: GoogleMapComponent;
+  let fixture: ComponentFixture<GoogleMapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SmallBannerComponent ]
+      declarations: [ GoogleMapComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SmallBannerComponent);
+    fixture = TestBed.createComponent(GoogleMapComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

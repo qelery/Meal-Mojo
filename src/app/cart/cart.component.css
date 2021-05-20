@@ -1,5 +1,5 @@
 .c-container {
-  position: fixed;
+  position: absolute;
   overflow-y: auto;
   height: calc(100vh - 400px);
   top: 400px; /* height of top banner */

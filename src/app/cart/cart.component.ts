@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {OrderService} from "../service/order/order.service";
 import {Router} from "@angular/router";
 
@@ -8,45 +8,69 @@ import {Router} from "@angular/router";
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  @Input() restaurantName: any;
-  @Input() restaurantId: any;
   @Output() submitOrder = new EventEmitter<any>();
+  @Output() emitCoordinates = new EventEmitter<any>();
+  restaurantName: any;
   cartItems: any;
-  cartTotal: any;
+  totalPrice: any;
+  restaurantCoordinates: any;
   constructor(private orderService: OrderService, private router: Router) { }
 
   ngOnInit(): void {
     this.cartItems = [];
 
-    this.orderService.getCartItems()
-      .subscribe((data: any) => {
-        this.cartItems = (data) ? data.slice() : [];
-        console.log(this.cartItems[0])
-        this.cartTotal = this.cartItems.reduce(
-          (total: number, item: any) => {
-            return total + (item.quantity * item.priceEach);
-          },0);
-
-        if (this.cartItems.length > 0 && !this.restaurantName) {
-          this.orderService.getRestaurantData(this.cartItems[0].menuItem.restaurantId)
-            .subscribe((data: any) => {
-              this.restaurantName = data.businessName;
-            })
-        }
-      });
-
+    this.orderService.searchSubject.subscribe((response: any) => {
+      this.cartItems = response;
+      console.log(this.cartItems)
+      if (this.cartItems.length > 0) {
+        this.orderItemsByQuantity();
+        this.discoverRestaurantNameAndCoordinates();
+      } else {
+        this.restaurantName = 'Empty';
+      }
+      this.calculateTotalPrice();
+      console.log(this.cartItems)
+    });
   }
 
+
   removeFromCart(menuItemId: number) {
-    this.orderService.removeFromCart(this.restaurantId, menuItemId);
+    const restaurantId = this.cartItems[0].menuItem.restaurantId;
+    this.orderService.removeFromCart(restaurantId, menuItemId);
   }
 
   checkout(event: any) {
     if (event.view.location.pathname === '/checkout') {
       this.submitOrder.emit();
     } else {
-      console.log("HERE!!!")
       this.router.navigate(['/checkout']);
     }
+  }
+
+  discoverRestaurantNameAndCoordinates() {
+      const restaurantId = this.cartItems[0].menuItem.restaurantId;
+      this.orderService.getRestaurantData(restaurantId)
+        .subscribe((data: any) => {
+          console.log(data)
+          this.restaurantCoordinates = [data.address.latitude, data.address.longitude];
+          this.restaurantName = data.businessName;
+          this.emitCoordinates.next(this.restaurantCoordinates);
+        });
+
+  }
+
+  private orderItemsByQuantity() {
+    this.cartItems = this.cartItems.sort((a: any, b: any) => b.quantity - a.quantity);
+  }
+
+  private calculateTotalPrice() {
+    if (this.cartItems.length === 0) {
+      this.totalPrice = 0;
+    }
+    this.totalPrice = this.cartItems.reduce(
+
+      (total: any, orderLineItem: any) => (total + orderLineItem.quantity * orderLineItem.priceEach),
+      0);
+    console.log(this.totalPrice)
   }
 }

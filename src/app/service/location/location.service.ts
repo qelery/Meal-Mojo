@@ -27,16 +27,19 @@ export class LocationService {
     return `${baseUrl}${address}&key=${environment.googleApiKey}`;
   }
 
-  setCurrentAddress(addressDatabaseFormat: any, formattedAddress: any) {
+  setUserCurrentAddress(addressDatabaseFormat: any, formattedAddress: any) {
     this.currentAddress = {...addressDatabaseFormat, ...{formattedAddress: formattedAddress}};
     this.searchSubject.next(this.currentAddress);
-    console.log(this.currentAddress.longitude)
     localStorage.setItem('currentAddress', `${formattedAddress}`);
     localStorage.setItem('longitude', `${this.currentAddress.longitude}`);
     localStorage.setItem('latitude', `${this.currentAddress.latitude}`);
     if (localStorage.getItem('currentUser')) {
       this.saveAddressToDatabase(addressDatabaseFormat);
     }
+  }
+
+  getUserCurrentAddress(): any {
+    return [localStorage.getItem('longitude'), localStorage.getItem('latitude')];
   }
 
   saveAddressToDatabase(addressDatabaseFormat: any): any {

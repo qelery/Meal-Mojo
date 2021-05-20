@@ -1,0 +1,11 @@
+<app-banner-small [heroImageUrl]="this.heroImageUrl" [backgroundPositionY]="50"></app-banner-small>
+<div class="o-flex-container">
+  <div class="o-heading">
+    <h2>Orders</h2>
+    <p>Past Orders</p>
+  </div>
+  <div *ngIf="this.pastOrders" class="o-orders-container">
+    <app-order-card [pastOrder]="pastOrder" *ngFor="let pastOrder of this.pastOrders.reverse()"></app-order-card>
+  </div>
+</div>
+

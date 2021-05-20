@@ -19,9 +19,12 @@ import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaura
 import { MenuItemInfoCardComponent } from './menu-item-info-card/menu-item-info-card.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import {SmallBannerComponent} from "./small-banner/small-banner.component";
+import {BannerSmallComponent} from "./banner-small/banner-small.component";
 import {AgmCoreModule} from "@agm/core";
 import {environment} from "../environments/environment";
+import { OrdersComponent } from './orders/orders.component';
+import { OrderCardComponent } from './order-card/order-card.component';
+import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +40,12 @@ import {environment} from "../environments/environment";
     RestaurantInfoCardComponent,
     RestaurantStoreFrontComponent,
     MenuItemInfoCardComponent,
-    SmallBannerComponent,
+    BannerSmallComponent,
     CartComponent,
     CheckoutComponent,
+    OrdersComponent,
+    OrderCardComponent,
+    GoogleMapComponent,
   ],
   imports: [
     BrowserModule,

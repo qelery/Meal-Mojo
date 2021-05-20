@@ -2,7 +2,7 @@
   <h4>Cart - {{restaurantName}}</h4>
   <button (click)="checkout($event)" class="c-btn">
     <div style="display: flex; flex-direction: row; justify-content: space-around">
-      <span>Checkout</span><span *ngIf="cartItems">{{this.cartTotal || 0 | currency}}</span>
+      <span>Checkout</span><span *ngIf="cartItems">{{this.totalPrice || 0 | currency}}</span>
     </div>
   </button>
   <ul>

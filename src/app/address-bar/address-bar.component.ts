@@ -75,7 +75,7 @@ export class AddressBarComponent implements OnInit {
 
          const formattedAddress = `${street1}` + (street2 ? `, ${street2}` : '') + `, ${city}, ${state}`;
 
-         this.locationService.setCurrentAddress(addressDatabaseFormat, formattedAddress);
+         this.locationService.setUserCurrentAddress(addressDatabaseFormat, formattedAddress);
          this.validAddressFound = true;
         this.router.navigate(['/restaurants']);
        }, err => console.log(err), () => this.orderService.getRestaurantsNearUser());

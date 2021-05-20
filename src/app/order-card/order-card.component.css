@@ -1,0 +1,42 @@
+
+:host {
+  display: block;
+  border-bottom: 1px solid #b4bdc2;
+  padding: 0.75em 0.5em;
+}
+
+:host(:last-child) {
+  border-bottom: none;
+}
+
+.p-order-container {
+  padding: 0.75em 0.5em;
+}
+
+.p-order-container {
+  border-bottom: 1px solid #b4bdc2;
+}
+
+.p-order-container:last-child {
+  border-bottom: none;
+}
+
+h4 {
+  margin: 0 0 0.5em;
+}
+
+.p-small-text {
+  font-size: small;
+}
+
+ul.p-items-names li {
+  display: inline;
+}
+
+ul.p-items-names {
+  display: inline;
+}
+
+ul.p-items-names :not(:last-child):after {
+  content: ", ";
+}

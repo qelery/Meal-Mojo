@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {LocationService} from "../location/location.service";
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -12,8 +12,9 @@ export class OrderService {
 
   nearestRestaurants: any;
   cartItems: any;
+  pastOrders: any;
   maxDistance = 15; // miles
-  searchSubject = new Subject();
+  searchSubject = new BehaviorSubject([]);
 
   constructor(private http: HttpClient, private locationService: LocationService, private router: Router) { }
 
@@ -40,9 +41,8 @@ export class OrderService {
       }),
     };
     this.cartItems = this.http.post(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines/1`, null,  requestOptions)
-      .subscribe(response => console.log(response));
-    this.getCartItems();
-    this.searchSubject.next(this.cartItems);
+      .subscribe(response =>  this.getCartItems());
+
     return this.cartItems;
   }
 
@@ -53,7 +53,10 @@ export class OrderService {
         Authorization: `Bearer ${token}`
       }),
     };
-    return this.http.get(`${environment.restApiUrl}/api/order/cart`, requestOptions);
+    return this.http.get(`${environment.restApiUrl}/api/order/cart`, requestOptions).subscribe((data: any) =>{
+      this.cartItems = data;
+      this.searchSubject.next(this.cartItems);
+    });
   }
 
   removeFromCart(restaurantId: number, menuItemId: number) {
@@ -64,7 +67,8 @@ export class OrderService {
       }),
     };
     this.cartItems = this.http.delete(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines`, requestOptions)
-      .subscribe(response => console.log(response));
+      .subscribe(response => {
+        console.log("the subject"); this.getCartItems()});
   }
 
   submitOrder(checkoutOptions: any) {
@@ -76,5 +80,18 @@ export class OrderService {
     };
     this.cartItems = this.http.post(`${environment.restApiUrl}/api/order/cart/checkout`, checkoutOptions, requestOptions)
       .subscribe(response => console.log(response));
+  }
+
+  getPastOrders() {
+    const token = localStorage.getItem('token');
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    return this.http.get(`${environment.restApiUrl}/api/order/past`, requestOptions).subscribe((data: any) =>{
+      this.pastOrders = data;
+      this.searchSubject.next(this.pastOrders);
+    });
   }
 }
