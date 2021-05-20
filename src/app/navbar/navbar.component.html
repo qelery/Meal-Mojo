@@ -2,7 +2,7 @@
   <div class="container navbar">
     <a href="/" class="logo"></a>
     <ul  class="nav-left">
-      <li class="active">
+      <li *ngIf="!isUserLoggedIn" class="active">
         <a [routerLink]="['/']">
           Home
         </a>
@@ -15,6 +15,11 @@
       <li *ngIf="isUserLoggedIn" class="active">
         <a [routerLink]="['/checkout']">
           Checkout
+        </a>
+      </li>
+      <li *ngIf="isUserLoggedIn" class="active">
+        <a [routerLink]="['/orders']">
+          Orders
         </a>
       </li>
     </ul>
@@ -55,6 +60,11 @@
       <li *ngIf="isUserLoggedIn" class="active">
         <a [routerLink]="['/checkout']">
           Checkout
+        </a>
+      </li>
+      <li *ngIf="isUserLoggedIn" class="active">
+        <a [routerLink]="['/orders']">
+          Orders
         </a>
       </li>
       <li>
