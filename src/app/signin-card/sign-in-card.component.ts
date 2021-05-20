@@ -9,21 +9,23 @@ import {UserService} from "../service/user/user.service";
 export class SignInCard implements OnInit {
 
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
+  @Input() cardType: any;
   email = '';
   password = '';
   buttonText = '';
-  @Input() action: any;
   clickFunction: any;
   errorFeedback: any;
   greeting: any;
 
-
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    [this.clickFunction, this.buttonText, this.greeting] = this.action === 'login' ?
+    // [this.clickFunction, this.buttonText, this.cardType, this.greeting] = this.action === 'login' ?
+    //   [this.loginUser, 'Log On', SignInCardType.Login] :
+    //   [this.registerUser, 'Register', SignInCardType.Register];
+    [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
                                                             [this.loginUser, 'Log On', 'Welcome back!'] :
-                                                                                          [this.registerUser, 'Register', 'Ready to eat?'];
+                                                                                          [this.registerUser, 'Register', 'Ready to eat? Register Below!'];
   }
 
   hideSignInComponent() {
@@ -56,4 +58,22 @@ export class SignInCard implements OnInit {
       this.errorFeedback = err.error;
     });
   }
+
+  switchCardType() {
+    if (this.cardType === SignInCardType.Register) {
+      this.cardType = SignInCardType.Login;
+    } else {
+      this.cardType = SignInCardType.Register;
+    }
+    [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
+                                                                [this.loginUser, 'Log On', 'Welcome back!'] :
+                                                                      [this.registerUser, 'Register', 'Ready to eat?'];
+    // const registerCardElement = document.querySelector("#register") as HTMLElement;
+    // registerCardElement.click();
+  }
+}
+
+export enum SignInCardType {
+  Register,
+  Login
 }

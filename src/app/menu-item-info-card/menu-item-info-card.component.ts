@@ -16,9 +16,13 @@ export class MenuItemInfoCardComponent implements OnInit {
 
   addToCart() {
     if (!localStorage.getItem('token')) {
-      const loginCardElement = document.querySelector("#login") as HTMLElement;
-      loginCardElement.click();
+      this.promptUserToLogin();
     }
     this.orderService.addToCart(this.restaurantId, this.menuItem.id);
+  }
+
+   promptUserToLogin() {
+      const loginCardElement = document.querySelector("#login") as HTMLElement;
+      loginCardElement.click();
   }
 }

@@ -24,13 +24,13 @@
       </li>
     </ul>
     <ul *ngIf="!isUserLoggedIn" class="nav-right">
-      <li class="active">
+      <li id="register"  class="active">
         <a (click)="showRegister()">
           Register
         </a>
       </li>
       <li class="active">
-        <a (click)="showLogIn()">
+        <a id="login"  (click)="showLogIn()">
           Log In
         </a>
       </li>
@@ -75,7 +75,7 @@
             </a>
           </li>
           <li>
-            <a id="login" (click)="showLogIn()">
+            <a (click)="showLogIn()">
               Log In
             </a>
           </li>
@@ -91,5 +91,5 @@
     </ul>
   </div>
 </nav>
-<app-sign-in-card [action]='"login"' (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-sign-in-card>
-<app-sign-in-card [action]='"register"' (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-sign-in-card>
+<app-sign-in-card [cardType]="this.SignInCardType.Login" (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-sign-in-card>
+<app-sign-in-card [cardType]="this.SignInCardType.Register" (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-sign-in-card>

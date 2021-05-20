@@ -1,6 +1,7 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {UserService} from "../service/user/user.service";
 import {LocationService} from "../service/location/location.service";
+import {SignInCardType} from "../signin-card/sign-in-card.component";
 
 @Component({
   selector: 'app-navbar',
@@ -13,6 +14,7 @@ export class NavbarComponent implements OnInit {
   showLoginCard: boolean;
   isUserLoggedIn: any;
   currentAddress: any;
+  SignInCardType = SignInCardType;
 
   constructor(private userService: UserService, private  locationService: LocationService) {
     this.showRegisterCard = false;

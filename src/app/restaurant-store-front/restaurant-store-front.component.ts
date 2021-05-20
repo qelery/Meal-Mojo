@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {OrderService} from "../service/order/order.service";
 
+
 @Component({
   selector: 'app-restaurant-store-front',
   templateUrl: './restaurant-store-front.component.html',
