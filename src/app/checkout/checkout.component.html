@@ -93,20 +93,20 @@
           <h3>Tip</h3>
         </div>
         <div class="radio-wrapper radio-wrapper-long">
-          <input [(ngModel)]="tip" type="radio" name="tip" value="0" id="tip0" checked>
-          <input [(ngModel)]="tip"  type="radio" name="tip" value="10" id="tip10">
-          <input [(ngModel)]="tip" type="radio" name="tip" value="20" id="tip20">
+          <input [(ngModel)]="tip" (ngModelChange)="emitRecalculateTip()" type="radio" name="tip" value="0" id="tip0" checked>
+          <input [(ngModel)]="tip"  (ngModelChange)="emitRecalculateTip()" type="radio" name="tip" value="10" id="tip10">
+          <input [(ngModel)]="tip" (ngModelChange)="emitRecalculateTip()" type="radio" name="tip" value="20" id="tip20">
           <label for="tip0" class="option option-1">
             <div class="dot"></div>
             <span class="x-small">No thanks</span>
           </label>
           <label for="tip10" class="option option-2">
             <div class="dot"></div>
-            <span class="x-small">10% | $4.32</span>
+            <span class="x-small">10% | {{this.tipTenPercent | currency}}</span>
           </label>
           <label for="tip20" class="option option-3">
             <div class="dot"></div>
-            <span class="x-small">20% | $7.10</span>
+            <span class="x-small">20% | {{this.tipTwentyPercent | currency}}</span>
           </label>
         </div>
       </div>
@@ -115,4 +115,4 @@
   </div>
 </div>
 
-<app-cart (emitCoordinates)="coordinatesReceived($event)" (submitOrder)="submitOrder()"></app-cart>
+<app-cart [events]="tipSubject.asObservable()" (emitTotalPrice)="updateTipAmounts($event)" (emitCoordinates)="coordinatesReceived($event)" (submitOrder)="submitOrder()"></app-cart>

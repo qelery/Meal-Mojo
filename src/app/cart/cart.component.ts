@@ -1,19 +1,24 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input, OnDestroy} from '@angular/core';
 import {OrderService} from "../service/order/order.service";
 import {Router} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent implements OnInit {
+export class CartComponent implements OnInit, OnDestroy {
   @Output() submitOrder = new EventEmitter<any>();
   @Output() emitCoordinates = new EventEmitter<any>();
+  @Output() emitTotalPrice = new EventEmitter<any>();
   restaurantName: any;
   cartItems: any;
   totalPrice: any;
+  tipPercentage: any;
   restaurantCoordinates: any;
+  private eventsSubscription: any;
+  @Input() events: any;
   constructor(private orderService: OrderService, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,7 +33,17 @@ export class CartComponent implements OnInit {
         this.restaurantName = 'Empty';
       }
       this.calculateTotalPrice();
+      this.emitTotalPrice.next(this.totalPrice);
     });
+
+    this.eventsSubscription = this.events.subscribe((tipPercentage: any) => {
+      this.tipPercentage = tipPercentage;
+      this.calculateTotalPrice()
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.eventsSubscription.unsubscribe();
   }
 
 
@@ -65,9 +80,8 @@ export class CartComponent implements OnInit {
       this.totalPrice = 0;
     }
     this.totalPrice = this.cartItems.reduce(
-
       (total: any, orderLineItem: any) => (total + orderLineItem.quantity * orderLineItem.priceEach),
       0);
-    console.log(this.totalPrice)
+    this.totalPrice = this.totalPrice + ((this.tipPercentage/100) * this.totalPrice);
   }
 }

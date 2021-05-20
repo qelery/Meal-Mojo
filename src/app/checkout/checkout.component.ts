@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {OrderService} from "../service/order/order.service";
 import {Router} from "@angular/router";
 import {LocationService} from "../service/location/location.service";
+import {BehaviorSubject, Subject} from "rxjs";
 
 @Component({
   selector: 'app-checkout',
@@ -13,6 +14,9 @@ export class CheckoutComponent implements OnInit {
   map: any;
   imageUrl: any;
   iconMarker: any;
+  tipTenPercent = 0;
+  tipTwentyPercent = 0;
+  tipSubject = new BehaviorSubject(0);
   public deliveryMethod = 'delivery';
   public paymentMethod = 'card';
   public utensils = 'utensilsYes';
@@ -39,12 +43,12 @@ export class CheckoutComponent implements OnInit {
     this.restaurantCoordinates = coordinates;
   }
 
+  emitRecalculateTip() {
+    this.tipSubject.next(+this.tip);
+  }
 
-
-}
-
-export class AppComponent {
-  title = 'My first AGM project';
-  lat = 51.678418;
-  lng = 7.809007;
+  updateTipAmounts(totalPrice: number) {
+    this.tipTenPercent = 0.1 * totalPrice;
+    this.tipTwentyPercent = 0.2 * totalPrice;
+  }
 }
