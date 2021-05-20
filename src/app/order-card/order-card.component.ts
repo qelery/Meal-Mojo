@@ -30,7 +30,6 @@ export class OrderCardComponent implements OnInit {
 
   private createInfo() {
     return this.pastOrder.orderLines.map((orderLine: any) => {
-      console.log(orderLine.menuItem.name)
       return {
         name: orderLine.menuItem.name,
         quantity: orderLine.quantity

@@ -83,6 +83,7 @@ export class OrderService {
       .subscribe(response => {
         this.cartItems = [];
         this.cartSubject.next(this.cartItems);
+        this.getPastOrders();
       });
   }
 
@@ -95,14 +96,12 @@ export class OrderService {
     };
     return this.http.get(`${environment.restApiUrl}/api/order/past`, requestOptions).subscribe((data: any) =>{
       this.pastOrders = data;
-      console.log(data);
       this.pastOrdersSubject.next(this.pastOrders);
     });
   }
 
   clearCart() {
     const token = localStorage.getItem('token');
-    console.log(token)
     const requestOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`
