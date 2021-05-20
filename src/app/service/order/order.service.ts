@@ -98,4 +98,15 @@ export class OrderService {
       this.pastOrdersSubject.next(this.pastOrders);
     });
   }
+
+  clearCart() {
+    const token = localStorage.getItem('token');
+    console.log(token)
+    const requestOptions = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      }),
+    };
+    return this.http.delete(`${environment.restApiUrl}/api/order/cart/clear`, requestOptions).subscribe((data: any) => console.log(data));
+  }
 }

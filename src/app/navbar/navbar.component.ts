@@ -26,21 +26,21 @@ export class NavbarComponent implements OnInit {
       this.isUserLoggedIn = true;
       return;
     }
-    console.log("Current address is...")
-    console.log(this.currentAddress)
     this.userService.searchSubject.subscribe(currentUser => {
-      this.isUserLoggedIn = !!currentUser;
-      console.log(currentUser);
+      if (currentUser === '') {
+
+        this.isUserLoggedIn = null;
+      } else {
+        this.isUserLoggedIn = !!currentUser;
+      }
     });
     this.locationService.searchSubject.subscribe(currentAddress => {
       this.currentAddress = currentAddress;
-      console.log(currentAddress);
     })
   }
 
   showRegister() {
     this.showRegisterCard = true;
-    console.log(this.currentAddress);
   }
 
   showLogIn() {

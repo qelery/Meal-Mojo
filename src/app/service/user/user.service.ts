@@ -1,9 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import { environment } from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {LocationService} from "../location/location.service";
+import {OrderService} from "../order/order.service";
 
 
 @Injectable({
@@ -11,9 +12,10 @@ import {LocationService} from "../location/location.service";
 })
 export class UserService {
   currentUser!: string;
-  searchSubject = new Subject();
+  searchSubject = new BehaviorSubject('');
 
-  constructor(private  http: HttpClient, private router: Router, private locationService: LocationService) { }
+  constructor(private  http: HttpClient, private router: Router,
+              private locationService: LocationService, private orderService: OrderService) { }
 
   loginUser(user: User): Observable<any> {
     return this.http.post(`${environment.restApiUrl}/auth/users/login`, user);
@@ -25,13 +27,17 @@ export class UserService {
   }
 
   logoutUser(): void {
+    this.orderService.clearCart();
     localStorage.removeItem('currentUser');
     localStorage.removeItem('token');
     localStorage.removeItem('currentAddress');
+    localStorage.removeItem('latitude');
+    localStorage.removeItem('longitude');
     this.currentUser = '';
     this.locationService.searchSubject.next(null);
     this.searchSubject.next(this.currentUser);
-    this.router.navigate(['']);
+    console.log("Logging out!!")
+    this.router.navigate(['']).then(res => this.searchSubject.next(this.currentUser));
   }
 
   setCurrentUser(email: string) {
