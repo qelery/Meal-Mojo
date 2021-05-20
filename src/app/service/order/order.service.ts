@@ -14,7 +14,8 @@ export class OrderService {
   cartItems: any;
   pastOrders: any;
   maxDistance = 15; // miles
-  searchSubject = new BehaviorSubject([]);
+  cartSubject = new BehaviorSubject([]);
+  pastOrdersSubject = new BehaviorSubject([]);
 
   constructor(private http: HttpClient, private locationService: LocationService, private router: Router) { }
 
@@ -55,7 +56,7 @@ export class OrderService {
     };
     return this.http.get(`${environment.restApiUrl}/api/order/cart`, requestOptions).subscribe((data: any) =>{
       this.cartItems = data;
-      this.searchSubject.next(this.cartItems);
+      this.cartSubject.next(this.cartItems);
     });
   }
 
@@ -78,8 +79,11 @@ export class OrderService {
         Authorization: `Bearer ${token}`
       }),
     };
-    this.cartItems = this.http.post(`${environment.restApiUrl}/api/order/cart/checkout`, checkoutOptions, requestOptions)
-      .subscribe(response => console.log(response));
+    this.http.post(`${environment.restApiUrl}/api/order/cart/checkout`, checkoutOptions, requestOptions)
+      .subscribe(response => {
+        this.cartItems = [];
+        this.cartSubject.next(this.cartItems);
+      });
   }
 
   getPastOrders() {
@@ -91,7 +95,7 @@ export class OrderService {
     };
     return this.http.get(`${environment.restApiUrl}/api/order/past`, requestOptions).subscribe((data: any) =>{
       this.pastOrders = data;
-      this.searchSubject.next(this.pastOrders);
+      this.pastOrdersSubject.next(this.pastOrders);
     });
   }
 }

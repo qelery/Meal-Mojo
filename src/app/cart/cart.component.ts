@@ -19,9 +19,16 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.cartItems = [];
 
-    this.orderService.searchSubject.subscribe((response: any) => {
-      this.cartItems = response;
+    console.log("Reloaded cart")
+
+    this.orderService.cartSubject.subscribe((response: any) => {
+      console.log("HERE before");
       console.log(this.cartItems)
+      this.cartItems = response;
+      console.log("HERE before");
+      console.log("Cart items after");
+      console.log(this.cartItems)
+      console.log("Cart items after");
       if (this.cartItems.length > 0) {
         this.orderItemsByQuantity();
         this.discoverRestaurantNameAndCoordinates();
@@ -29,7 +36,9 @@ export class CartComponent implements OnInit {
         this.restaurantName = 'Empty';
       }
       this.calculateTotalPrice();
+      console.log("Cart, cartItems");
       console.log(this.cartItems)
+      console.log("Cart, cartItems");
     });
   }
 

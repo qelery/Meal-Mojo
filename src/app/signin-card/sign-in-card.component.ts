@@ -20,9 +20,6 @@ export class SignInCard implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    // [this.clickFunction, this.buttonText, this.cardType, this.greeting] = this.action === 'login' ?
-    //   [this.loginUser, 'Log On', SignInCardType.Login] :
-    //   [this.registerUser, 'Register', SignInCardType.Register];
     [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
                                                             [this.loginUser, 'Log On', 'Welcome back!'] :
                                                                                           [this.registerUser, 'Register', 'Ready to eat? Register Below!'];
@@ -48,10 +45,8 @@ export class SignInCard implements OnInit {
   }
 
   async registerUser() {
-    console.log("REGISTER");
     const user = { email: this.email, password: this.password};
     await this.userService.registerUser(user).toPromise().then(response => {
-      console.log("Success");
       this.hideSignInComponent();
       this.loginUser();
     }).catch(err => {
@@ -67,9 +62,7 @@ export class SignInCard implements OnInit {
     }
     [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
                                                                 [this.loginUser, 'Log On', 'Welcome back!'] :
-                                                                      [this.registerUser, 'Register', 'Ready to eat?'];
-    // const registerCardElement = document.querySelector("#register") as HTMLElement;
-    // registerCardElement.click();
+                                                                      [this.registerUser, 'Register', 'Ready to eat? Register Below!'];
   }
 }
 
