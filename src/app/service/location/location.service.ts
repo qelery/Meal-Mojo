@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Router} from "@angular/router";
-import {OrderService} from "../order/order.service";
 
 
 @Injectable({
@@ -33,6 +32,7 @@ export class LocationService {
 
   setUserCurrentAddress(fullAddress: any, formattedAddress: any) {
     this.formattedAddress = formattedAddress;
+    console.log("Setting address");
     this.formattedAddressSubject.next(this.formattedAddress);
     this.userCoordinates = {longitude: fullAddress.longitude, latitude: fullAddress.latitude};
     localStorage.setItem('currentAddress', `${formattedAddress}`);
@@ -56,9 +56,6 @@ export class LocationService {
     };
     this.http.put(`${environment.restApiUrl}/auth/users/update`, {address: addressDatabaseFormat}, requestOptions);
   }
-
-
-
 
   processAddress(address: string): void {
     this.findAddress(address).subscribe((response: any) => {

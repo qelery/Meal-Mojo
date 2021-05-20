@@ -36,10 +36,12 @@ export class CartComponent implements OnInit, OnDestroy {
       this.emitTotalPrice.next(this.totalPrice);
     });
 
-    this.eventsSubscription = this.events.subscribe((tipPercentage: any) => {
-      this.tipPercentage = tipPercentage;
-      this.calculateTotalPrice()
-    })
+    if (this.events) {
+      this.eventsSubscription = this.events.subscribe((tipPercentage: any) => {
+        this.tipPercentage = tipPercentage;
+        this.calculateTotalPrice()
+      })
+    }
   }
 
   ngOnDestroy(): void {

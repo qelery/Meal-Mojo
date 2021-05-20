@@ -22,16 +22,16 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.locationService.formattedAddressSubject.subscribe(currentAddress => {
+      this.currentAddress = currentAddress;
+    })
     if (localStorage.getItem('token')) {
       this.isUserLoggedIn = true;
-      return;
     }
     this.userService.searchSubject.subscribe(currentUser => {
         this.isUserLoggedIn = !!currentUser;
     });
-    this.locationService.formattedAddressSubject.subscribe(currentAddress => {
-      this.currentAddress = currentAddress;
-    })
+
   }
 
   showRegister() {

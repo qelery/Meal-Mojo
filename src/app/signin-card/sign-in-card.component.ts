@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from "../service/user/user.service";
 import {Router} from "@angular/router";
+import {LocationService} from "../service/location/location.service";
 
 @Component({
   selector: 'app-sign-in-card',
@@ -18,7 +19,7 @@ export class SignInCard implements OnInit {
   errorFeedback: any;
   greeting: any;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private locationService: LocationService, private router: Router) { }
 
   ngOnInit(): void {
     [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
@@ -40,8 +41,12 @@ export class SignInCard implements OnInit {
       this.userService.setCurrentUser(user.email);
       this.hideSignInComponent();
       if (response.address.latitude && response.address.longitude) {
-        localStorage.setItem('latitude', `${response.address.latitude}`);
-        localStorage.setItem('longitude', `${response.address.longitude}`);
+        const address = response.address;
+        localStorage.setItem('latitude', `${address.latitude}`);
+        localStorage.setItem('longitude', `${address.longitude}`);
+        this.locationService.formattedAddress = `${address.street1}` + (address.street2 ? `, ${address.street2}` : '') +
+          `, ${address.city}, ${address.state}`;
+        this.locationService.formattedAddressSubject.next(this.locationService.formattedAddress);
         this.router.navigate(['']);
       }
 
