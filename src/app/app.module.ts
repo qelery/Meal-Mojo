@@ -20,6 +20,8 @@ import { MenuItemInfoCardComponent } from './menu-item-info-card/menu-item-info-
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import {SmallBannerComponent} from "./small-banner/small-banner.component";
+import {AgmCoreModule} from "@agm/core";
+import {environment} from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -44,6 +46,9 @@ import {SmallBannerComponent} from "./small-banner/small-banner.component";
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.googleApiKey,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

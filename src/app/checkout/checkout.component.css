@@ -18,3 +18,11 @@
   align-items: center;
   font-family: "Open Sans", sans-serif;
 }
+
+agm-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 400px;
+  width: 400px;
+}
