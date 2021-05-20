@@ -14,11 +14,9 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.orderService.cartSubject.subscribe((response: any) => {
+    this.orderService.pastOrdersSubject.subscribe((response: any) => {
       this.pastOrders = response;
     });
     this.orderService.getPastOrders();
   }
-
-
 }

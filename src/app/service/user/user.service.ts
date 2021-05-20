@@ -34,7 +34,7 @@ export class UserService {
     localStorage.removeItem('latitude');
     localStorage.removeItem('longitude');
     this.currentUser = '';
-    this.locationService.searchSubject.next(null);
+    this.locationService.formattedAddressSubject.next(null);
     this.searchSubject.next(this.currentUser);
     console.log("Logging out!!")
     this.router.navigate(['']).then(res => this.searchSubject.next(this.currentUser));

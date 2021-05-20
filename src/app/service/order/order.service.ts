@@ -95,6 +95,7 @@ export class OrderService {
     };
     return this.http.get(`${environment.restApiUrl}/api/order/past`, requestOptions).subscribe((data: any) =>{
       this.pastOrders = data;
+      console.log(data);
       this.pastOrdersSubject.next(this.pastOrders);
     });
   }
@@ -107,6 +108,6 @@ export class OrderService {
         Authorization: `Bearer ${token}`
       }),
     };
-    return this.http.delete(`${environment.restApiUrl}/api/order/cart/clear`, requestOptions).subscribe((data: any) => console.log(data));
+    return this.http.delete(`${environment.restApiUrl}/api/order/cart/clear`, requestOptions).subscribe((data: any) => data);
   }
 }

@@ -21,6 +21,7 @@ export class RestaurantsComponent implements OnInit {
       }
     }, (err: any) => console.log(err));
     this.currentAddress = localStorage.getItem('currentAddress');
+    this.orderService.getRestaurantsNearUser();
   }
 
 }

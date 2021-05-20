@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {UserService} from "../service/user/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in-card',
@@ -17,7 +18,7 @@ export class SignInCard implements OnInit {
   errorFeedback: any;
   greeting: any;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     [this.clickFunction, this.buttonText, this.greeting] = this.cardType === SignInCardType.Login ?
@@ -30,7 +31,6 @@ export class SignInCard implements OnInit {
   }
 
   loginUser() {
-    console.log("LOGIN");
     const user = { email: this.email, password: this.password};
     this.userService.loginUser(user).subscribe((response: any) => {
       const token = response.jwt;
@@ -39,6 +39,12 @@ export class SignInCard implements OnInit {
       console.log(response, token);
       this.userService.setCurrentUser(user.email);
       this.hideSignInComponent();
+      if (response.address.latitude && response.address.longitude) {
+        localStorage.setItem('latitude', `${response.address.latitude}`);
+        localStorage.setItem('longitude', `${response.address.longitude}`);
+        this.router.navigate(['']);
+      }
+
     }, err => {
       this.errorFeedback = "Incorrect username or password";
     });
