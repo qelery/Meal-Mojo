@@ -21,12 +21,20 @@ export class CartComponent implements OnInit {
     this.orderService.getCartItems()
       .subscribe((data: any) => {
         this.cartItems = (data) ? data.slice() : [];
-        console.log(this.cartItems[0].priceEach)
+        console.log(this.cartItems[0])
         this.cartTotal = this.cartItems.reduce(
           (total: number, item: any) => {
             return total + (item.quantity * item.priceEach);
           },0);
+
+        if (this.cartItems.length > 0 && !this.restaurantName) {
+          this.orderService.getRestaurantData(this.cartItems[0].menuItem.restaurantId)
+            .subscribe((data: any) => {
+              this.restaurantName = data.businessName;
+            })
+        }
       });
+
   }
 
   removeFromCart(menuItemId: number) {
