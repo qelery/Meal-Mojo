@@ -92,7 +92,7 @@ li {
   font-size: 15px;
 }
 
-.m-item-image-wrapper {
+.c-item-image-wrapper {
   position: relative;
   background-color: transparent;
   overflow: hidden;
@@ -107,17 +107,14 @@ img {
   border-style: none;
 }
 
-.m-item-image {
-  /*position: absolute;*/
+.c-item-image {
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
-  /*top: 0;*/
-  /*left: 0;*/
   width: 100%;
   height: 100%;
 }
 
-.idk {
+.c-img-quantity-container {
   position: relative;
 }

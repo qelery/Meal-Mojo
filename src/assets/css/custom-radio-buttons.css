@@ -1,0 +1,117 @@
+
+/**************************************************************
+Source: https://codepen.io/Metty/pen/MWjOavR
+****************************************************************/
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+
+.radio-wrapper {
+  display: inline-flex;
+  background: #fff;
+  height: 80px;
+  width: 400px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 5px;
+  padding: 20px 15px;
+}
+
+.radio-wrapper-long {
+  width: 600px;
+}
+
+.radio-wrapper .option{
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  border-radius: 100px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.3s ease;
+}
+.radio-wrapper .option .dot{
+  height: 20px;
+  width: 20px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+}
+.radio-wrapper .option .dot::before{
+  position: absolute;
+  content: "";
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background: #e53d43;;
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(1.5);
+  transition: all 0.3s ease;
+}
+input[type="radio"]{
+  display: none;
+}
+#delivery:checked:checked ~ .option-1,
+#pickup:checked:checked ~ .option-2,
+#utensilsYes:checked:checked ~ .option-1,
+#utensilsNo:checked:checked ~ .option-2,
+#card:checked:checked ~ .option-1,
+#applePay:checked:checked ~ .option-2,
+#paypal:checked:checked ~ .option-3,
+#tip0:checked:checked ~ .option-1,
+#tip10:checked:checked ~ .option-2,
+#tip20:checked:checked ~ .option-3 {
+  border-color: #e53d43;
+  background: #e53d43;
+}
+#delivery:checked:checked ~ .option-1 .dot,
+#pickup:checked:checked ~ .option-2 .dot,
+#utensilsYes:checked:checked ~ .option-1 .dot,
+#utensilsNo:checked:checked ~ .option-2 .dot,
+#card:checked:checked ~ .option-1 .dot,
+#applePay:checked:checked ~ .option-2 .dot,
+#paypal:checked:checked ~ .option-3 .dot,
+#tip0:checked:checked ~ .option-1 .dot,
+#tip10:checked:checked ~ .option-2 .dot,
+#tip20:checked:checked ~ .option-3 .dot {
+  background: #fff;
+}
+#delivery:checked:checked ~ .option-1 .dot::before,
+#pickup:checked:checked ~ .option-2 .dot::before,
+#utensilsYes:checked:checked ~ .option-1 .dot::before,
+#utensilsNo:checked:checked ~ .option-2 .dot::before,
+#card:checked:checked ~ .option-1 .dot::before,
+#applePay:checked:checked ~ .option-2 .dot::before,
+#paypal:checked:checked ~ .option-3 .dot::before,
+#tip0:checked:checked ~ .option-1 .dot::before,
+#tip10:checked:checked ~ .option-2 .dot::before,
+#tip20:checked:checked ~ .option-3 .dot::before {
+  opacity: 1;
+  transform: scale(1);
+}
+.radio-wrapper .option span{
+  font-size: 20px;
+  color: #808080;
+}
+#delivery:checked:checked ~ .option-1 span,
+#pickup:checked:checked ~ .option-2 span,
+#utensilsYes:checked:checked ~ .option-1 span,
+#utensilsNo:checked:checked ~ .option-2 span,
+#card:checked:checked ~ .option-1 span,
+#applePay:checked:checked ~ .option-2 span,
+#paypal:checked:checked ~ .option-3 span,
+#tip0:checked:checked ~ .option-1 span,
+#tip10:checked:checked ~ .option-2 span,
+#tip20:checked:checked ~ .option-3 .span {
+  color: #fff;
+}
+
+.radio-wrapper .option span.x-small {
+  font-size: 15px;
+}

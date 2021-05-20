@@ -4,4 +4,99 @@
   [backgroundPositionY]="56"
   [heroImageUrl]="this.imageUrl">
 </app-restaurant-store-front-banner>
+
+
+<div class="c-left-container">
+  <div class="c-checkout-wrapper">
+    <form>
+
+      <div>
+        <div class="c-header">
+          <h3>Delivery or Pickup</h3>
+        </div>
+        <div class="radio-wrapper">
+          <input type="radio" name="select" value="delivery" id="delivery" checked>
+          <input type="radio" name="select" value="pickup" id="pickup">
+          <label for="delivery" class="option option-1">
+            <div class="dot"></div>
+            <span>Pickup</span>
+          </label>
+          <label for="pickup" class="option option-2">
+            <div class="dot"></div>
+            <span>Delivery</span>
+          </label>
+        </div>
+      </div>
+
+
+      <div>
+        <div class="c-header">
+          <h3>Payment</h3>
+        </div>
+        <div class="radio-wrapper radio-wrapper-long">
+          <input type="radio" name="payment-method" value="card" id="card" checked>
+          <input type="radio" name="payment-method" value="applePay" id="applePay">
+          <input type="radio" name="payment-method" value="payPal" id="paypal">
+          <label for="card" class="option option-1">
+            <div class="dot"></div>
+            <span>Credit Card</span>
+          </label>
+          <label for="applePay" class="option option-2">
+            <div class="dot"></div>
+            <span>Apple Pay</span>
+          </label>
+          <label for="paypal" class="option option-3">
+            <div class="dot"></div>
+            <span>PayPal</span>
+          </label>
+        </div>
+      </div>
+
+
+      <div >
+        <div class="c-header">
+          <h3>Include utensils</h3>
+        </div>
+        <div class="radio-wrapper">
+          <input type="radio" name="utensils" value="utensilsYes" id="utensilsYes" checked>
+          <input type="radio" name="utensils" value="utensilsNo" id="utensilsNo">
+          <label for="utensilsYes" class="option option-1">
+            <div class="dot"></div>
+            <span>Yeah, sure</span>
+          </label>
+          <label for="utensilsNo" class="option option-2">
+            <div class="dot"></div>
+            <span>No thanks</span>
+          </label>
+        </div>
+      </div>
+
+
+      <div >
+        <div class="c-header">
+          <h3>Tip?</h3>
+        </div>
+        <div class="radio-wrapper radio-wrapper-long">
+          <input type="radio" name="tip" id="tip0" checked>
+          <input type="radio" name="tip" id="tip10">
+          <input type="radio" name="tip" id="tip20">
+          <label for="tip0" class="option option-1">
+            <div class="dot"></div>
+            <span class="x-small">No thanks</span>
+          </label>
+          <label for="tip10" class="option option-2">
+            <div class="dot"></div>
+            <span class="x-small">10% | $4.32</span>
+          </label>
+          <label for="tip20" class="option option-3">
+            <div class="dot"></div>
+            <span class="x-small">20% | $7.10</span>
+          </label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
 <app-cart></app-cart>

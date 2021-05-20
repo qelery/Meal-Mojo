@@ -1,0 +1,20 @@
+.c-checkout-container {
+  max-width: calc(100vw - 350px);
+}
+
+.c-checkout-wrapper {
+  margin: 0 auto;
+  padding-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 1000px;
+}
+
+.c-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+}
