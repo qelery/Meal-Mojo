@@ -108,7 +108,7 @@ input[type="radio"]{
 #paypal:checked:checked ~ .option-3 span,
 #tip0:checked:checked ~ .option-1 span,
 #tip10:checked:checked ~ .option-2 span,
-#tip20:checked:checked ~ .option-3 .span {
+#tip20:checked:checked ~ .option-3 span {
   color: #fff;
 }
 
