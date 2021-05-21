@@ -15,11 +15,15 @@ A live demo of the website is hosted on [AWS here](http://angularmealmojo.s3-web
 * Navigate to `http://localhost:4200/` in the browser
 
 ## Screenshots
-
-![homepage](./src/assets/image/home.jpg)
-![homepage full](./src/assets/image/homepage.jpg)
-
-![restaurants](./src/assets/image/restaurants.jpg)
-![restaurantpage](./src/assets/image/restaurantpage.jpg)
-![checkout](./src/assets/checkout.jpg)
-![orders](./src/assets/orders.jpg)
+### Homepage
+![homepage](./src/assets/image/home.png)
+### Restaurants Results
+![restaurants](./src/assets/image/restaurants.png)
+### Restaurant Ordering
+![restaurantpage](./src/assets/image/restaurantpage.png)
+### Checkout
+![checkout](./src/assets/image/checkout.png)
+### Past Orders
+![orders](./src/assets/image/orders.png)
+### Homepage - full view
+![homepage full](./src/assets/image/homepage.png)
