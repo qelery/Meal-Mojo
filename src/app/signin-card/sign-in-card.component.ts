@@ -11,13 +11,13 @@ import {LocationService} from "../service/location/location.service";
 export class SignInCard implements OnInit {
 
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
-  @Input() cardType: any;
+  @Input() cardType: SignInCardType;
   email = '';
   password = '';
   buttonText = '';
-  clickFunction: any;
-  errorFeedback: any;
-  greeting: any;
+  clickFunction: () => void;
+  errorFeedback: string;
+  greeting: string;
 
   constructor(private userService: UserService, private locationService: LocationService, private router: Router) { }
 
@@ -27,17 +27,15 @@ export class SignInCard implements OnInit {
                                                                                           [this.registerUser, 'Register', 'Ready to eat? Register Below!'];
   }
 
-  hideSignInComponent() {
+  hideSignInComponent(): void {
     this.notifyParent.emit();
   }
 
-  loginUser() {
+  loginUser(): void {
     const user = { email: this.email, password: this.password};
     this.userService.loginUser(user).subscribe((response: any) => {
       const token = response.jwt;
-      localStorage.setItem('currentUser', `${user.email}`);
       localStorage.setItem('token', `${token}`);
-      console.log(response, token);
       this.userService.setCurrentUser(user.email);
       this.hideSignInComponent();
       if (response.address.latitude && response.address.longitude) {
@@ -49,13 +47,12 @@ export class SignInCard implements OnInit {
         this.locationService.formattedAddressSubject.next(this.locationService.formattedAddress);
         this.router.navigate(['']);
       }
-
     }, err => {
       this.errorFeedback = "Incorrect username or password";
     });
   }
 
-  async registerUser() {
+  async registerUser(): Promise<void> {
     const user = { email: this.email, password: this.password};
     await this.userService.registerUser(user).toPromise().then(response => {
       this.hideSignInComponent();
@@ -65,7 +62,7 @@ export class SignInCard implements OnInit {
     });
   }
 
-  switchCardType() {
+  switchCardType(): void {
     if (this.cardType === SignInCardType.Register) {
       this.cardType = SignInCardType.Login;
     } else {

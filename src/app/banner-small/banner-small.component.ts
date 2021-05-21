@@ -6,11 +6,10 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./banner-small.component.css']
 })
 export class BannerSmallComponent implements OnInit {
-  @Input() headline: any;
-  @Input() tagline: any;
-  @Input() heroImageUrl: any;
+  @Input() headline: string;
+  @Input() tagline: string;
+  @Input() heroImageUrl: string;
   @Input() backgroundPositionY = 0;
-
   constructor() {}
 
 

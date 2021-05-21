@@ -101,7 +101,13 @@ li {
   border-radius: 4px;
 }
 
-
+.c-item-name {
+  max-width: 130px;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 img {
   border-style: none;

@@ -24,7 +24,6 @@ import {AgmCoreModule} from "@agm/core";
 import {environment} from "../environments/environment";
 import { OrdersComponent } from './orders/orders.component';
 import { OrderCardComponent } from './order-card/order-card.component';
-import { GoogleMapComponent } from './google-map/google-map.component';
 
 @NgModule({
   declarations: [
@@ -44,8 +43,7 @@ import { GoogleMapComponent } from './google-map/google-map.component';
     CartComponent,
     CheckoutComponent,
     OrdersComponent,
-    OrderCardComponent,
-    GoogleMapComponent
+    OrderCardComponent
   ],
   imports: [
     BrowserModule,

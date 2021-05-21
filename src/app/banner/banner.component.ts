@@ -6,9 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-
   heroImageUrl: string;
-
   constructor() {
     this.heroImageUrl = "/assets/image/heroimage.jpeg";
   }

@@ -12,8 +12,8 @@ import {BehaviorSubject, Subject} from "rxjs";
 export class CheckoutComponent implements OnInit {
   @ViewChild('map') mapElement: any;
   map: any;
-  imageUrl: any;
-  iconMarker: any;
+  heroImageUrl: string;
+  iconMarkerImage: string;
   tipTenPercent = 0;
   tipTwentyPercent = 0;
   tipSubject = new BehaviorSubject(0);
@@ -24,8 +24,8 @@ export class CheckoutComponent implements OnInit {
   restaurantCoordinates: any;
   customerCoordinates: any;
   constructor(private orderService: OrderService, private router: Router, private locationService: LocationService) {
-    this.imageUrl = "https://www.escoffier.edu/wp-content/uploads/2021/05/Smiling-female-Barista-with-glasses-Serves-Order-to-a-Food-Delivery-Courier-Picking-Up-Paper-Bag-with-Pastries-from-a-Cafe-Restaurant.jpeg";
-    this.iconMarker = 'assets/image/food-icon-70.png'
+    this.heroImageUrl = "assets/image/checkout-hero-image.jpeg";
+    this.iconMarkerImage = 'assets/image/food-icon-70.png'
   }
 
   ngOnInit(): void {

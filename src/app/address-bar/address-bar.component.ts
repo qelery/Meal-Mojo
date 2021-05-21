@@ -7,11 +7,8 @@ import { LocationService} from "../service/location/location.service";
   styleUrls: ['./address-bar.component.css']
 })
 export class AddressBarComponent implements OnInit {
-
-  address: any;
+  address: string;
   validAddressFound = true;
-  addressForm: any;
-
   constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {}

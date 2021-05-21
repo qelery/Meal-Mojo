@@ -7,19 +7,16 @@ import {OrderService} from "../service/order/order.service";
   styleUrls: ['./orders.component.css']
 })
 export class OrdersComponent implements OnInit {
-  heroImageUrl: any;
-  pastOrders: any;
+  heroImageUrl: string;
+  pastOrders: any[] | null;
   constructor(private orderService: OrderService) {
-    this.heroImageUrl = `https://qph.fs.quoracdn.net/main-qimg-1ed2dfc9abd325a778ffb4c71e2cfa21`;
+    this.heroImageUrl = '/assets/image/past-order-hero.jpeg';
   }
 
   ngOnInit(): void {
     this.orderService.pastOrdersSubject.subscribe((response: any) => {
-      console.log("Past orders top")
-      console.log(this.pastOrders);
       this.pastOrders = response;
     });
-    console.log("Past orders bottom")
     this.orderService.getPastOrders();
   }
 }

@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {LocationService} from "../location/location.service";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {Router} from "@angular/router";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-
-  nearestRestaurants: any;
   cartItems: any;
   pastOrders: any;
   maxDistance = 15; // miles
   cartSubject = new BehaviorSubject([]);
   pastOrdersSubject = new BehaviorSubject([]);
-
-  constructor(private http: HttpClient, private locationService: LocationService, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   getRestaurantsNearUser(): Observable<any> {
     const long = localStorage.longitude;

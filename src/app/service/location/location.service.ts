@@ -11,8 +11,8 @@ import {Router} from "@angular/router";
 export class LocationService {
   formattedAddressSubject = new BehaviorSubject(null);
   userCoordinatesSubject = new BehaviorSubject(null);
-  userCoordinates: any;
-  formattedAddress: any;
+  userCoordinates: Coordinates;
+  formattedAddress: string;
 
   constructor(private http: HttpClient, private router: Router) {
     if (!environment.googleApiKey) {
@@ -38,6 +38,7 @@ export class LocationService {
     localStorage.setItem('currentAddress', `${formattedAddress}`);
     localStorage.setItem('longitude', `${fullAddress.longitude}`);
     localStorage.setItem('latitude', `${fullAddress.latitude}`);
+    console.log(`local stoage is: ${localStorage.getItem('currentUser')}`)
     if (localStorage.getItem('currentUser')) {
       this.saveToDatabase(fullAddress);
     }
@@ -54,7 +55,8 @@ export class LocationService {
         Authorization: `Bearer ${token}`
       }),
     };
-    this.http.put(`${environment.restApiUrl}/auth/users/update`, {address: addressDatabaseFormat}, requestOptions);
+    this.http.put(`${environment.restApiUrl}/auth/users/update`, {address: addressDatabaseFormat}, requestOptions)
+      .subscribe(rest => console.log(rest));
   }
 
   processAddress(address: string): void {
@@ -115,4 +117,9 @@ export class LocationService {
       this.router.navigate(['/restaurants'])
     }, err => console.log(err));
   }
+}
+
+interface Coordinates {
+  longitude: number;
+  latitude: number;
 }

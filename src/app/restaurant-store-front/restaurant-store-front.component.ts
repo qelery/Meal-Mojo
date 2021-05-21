@@ -9,42 +9,32 @@ import {OrderService} from "../service/order/order.service";
   styleUrls: ['./restaurant-store-front.component.css']
 })
 export class RestaurantStoreFrontComponent implements OnInit {
-  restaurantId: any;
+  restaurantId: number;
   restaurant: any;
   menuItems: any;
-  generalAddress: any;
-  restaurantName: any;
-  currentDayOfWeek: any;
-  openTime: any;
-  closeTime: any;
+  generalAddress: string;
+  restaurantName: string;
+  currentDayOfWeek: string;
+  openTime: string;
+  closeTime: string;
   constructor(private route: ActivatedRoute, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    /*    this.route.paramMap
-          .subscribe(params => {
-            this.restaurantId = params.get('id');
-            this.orderService.getRestaurantData(this.restaurantId).subscribe(response => {
-              this.restaurant = response;
-              this.menuItems = response.menuItems;
-              console.log(this.restaurant);
-            })
-          })*/
     this.setCurrentDay();
+
     this.route.paramMap
       .subscribe(params => {
-        this.restaurantId = params.get('id');
+        this.restaurantId = +params.get('id');
         this.orderService.getRestaurantData(this.restaurantId).subscribe((response: any) => {
           this.restaurant = response;
           this.menuItems = response.menuItems;
           this.restaurantName = response.businessName;
           const address = response.address;
           this.generalAddress = `${address.street1}, ${address.city}`
-          console.log(response)
           const hours = response.operatingHoursList
             .find((hour: any) => hour.dayOfWeek === this.currentDayOfWeek.toUpperCase());
           this.openTime = hours.openTime ? this.convertToShortTime(hours.openTime) : 'Unknown';
           this.closeTime = hours.closeTime ? this.convertToShortTime(hours.closeTime) : 'Unknown';
-          console.log(this.restaurant)
         }, (err: any) => console.log(err));
       });
   }

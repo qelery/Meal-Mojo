@@ -8,12 +8,11 @@ import {OrderService} from "../service/order/order.service";
 })
 export class OrderCardComponent implements OnInit {
   @Input() pastOrder: any;
-  restaurantName: any;
-  time: any;
-  totalPrice: any;
+  restaurantName: string;
+  time: string;
+  totalPrice: number;
   menuItemsInfo: any;
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.restaurantName = this.pastOrder.orderLines[0].restaurantName;

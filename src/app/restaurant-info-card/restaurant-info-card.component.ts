@@ -7,10 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class RestaurantInfoCardComponent implements OnInit {
   @Input() restaurant: any;
-
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }

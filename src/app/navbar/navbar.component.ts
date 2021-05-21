@@ -8,7 +8,7 @@ import {SignInCardType} from "../signin-card/sign-in-card.component";
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnChanges {
 
   showRegisterCard: boolean;
   showLoginCard: boolean;
@@ -27,11 +27,20 @@ export class NavbarComponent implements OnInit {
     })
     if (localStorage.getItem('token')) {
       this.isUserLoggedIn = true;
+      return;
     }
     this.userService.searchSubject.subscribe(currentUser => {
         this.isUserLoggedIn = !!currentUser;
     });
+  }
 
+  ngOnChanges(): void {
+    if (localStorage.getItem('token')) {
+      this.isUserLoggedIn = true;
+    }
+    if (localStorage.getItem('latitude')) {
+      this.currentAddress = true;
+    }
   }
 
   showRegister() {

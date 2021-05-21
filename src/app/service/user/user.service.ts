@@ -11,7 +11,7 @@ import {OrderService} from "../order/order.service";
   providedIn: 'root'
 })
 export class UserService {
-  currentUser!: string;
+  currentUser: string | null;
   searchSubject = new BehaviorSubject('');
 
   constructor(private  http: HttpClient, private router: Router,

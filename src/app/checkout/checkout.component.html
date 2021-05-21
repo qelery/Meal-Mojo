@@ -2,30 +2,20 @@
   [headline]="'Checkout'"
   [tagline]="'So close you can almost taste it'"
   [backgroundPositionY]="56"
-  [heroImageUrl]="this.imageUrl">
+  [heroImageUrl]="this.heroImageUrl">
 </app-banner-small>
 
 
 <div class="c-left-container">
 
-  <app-google-map #map></app-google-map>
-
-<!--  <agm-map [fitBounds]="this.fitBounds">-->
-<!--    <agm-marker [iconUrl]="this.merchantIconMarker" [latitude]="this.latitudeCustomer" [longitude]="this.longitudeCustomer" [agmFitBounds]="this.agmFitBoundsCustomer"></agm-marker>-->
-<!--    <agm-marker [latitude]="this.latitudeMerchant" [longitude]="this.longitudeMerchant" [agmFitBounds]="this.agmFitBoundsMerchant"></agm-marker>-->
-<!--  </agm-map>-->
-
-
   <agm-map *ngIf="this.restaurantCoordinates" [fitBounds]="true">
-    <agm-marker [iconUrl]="this.iconMarker" [latitude]="this.restaurantCoordinates[0]" [longitude]="this.restaurantCoordinates[1]" [agmFitBounds]="true"></agm-marker>
+    <agm-marker [iconUrl]="this.iconMarkerImage" [latitude]="this.restaurantCoordinates[0]" [longitude]="this.restaurantCoordinates[1]" [agmFitBounds]="true"></agm-marker>
     <agm-marker [latitude]="this.customerCoordinates[1]" [longitude]="this.customerCoordinates[0]" [agmFitBounds]="true"></agm-marker>
   </agm-map>
-
 
   <div class="c-checkout-wrapper" style="display: flex; flex-direction: row">
 
     <form #checkoutForm="ngForm">
-
       <div>
         <div class="c-header">
           <h3>Delivery or Pickup</h3>
@@ -43,8 +33,6 @@
           </label>
         </div>
       </div>
-
-
       <div>
         <div class="c-header">
           <h3>Payment</h3>
@@ -67,8 +55,6 @@
           </label>
         </div>
       </div>
-
-
       <div>
         <div class="c-header">
           <h3>Include utensils</h3>
@@ -86,8 +72,6 @@
           </label>
         </div>
       </div>
-
-
       <div>
         <div class="c-header">
           <h3>Tip</h3>
@@ -110,7 +94,6 @@
           </label>
         </div>
       </div>
-
     </form>
   </div>
 </div>

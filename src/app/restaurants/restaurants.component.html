@@ -1,7 +1,13 @@
-<div class="heading">
-  <h2>Restaurants nears</h2>
-  <span>{{currentAddress}}</span>
-</div>
+<app-banner-small
+  [headline]="'Places Near'"
+  [tagline]="currentAddress"
+  [backgroundPositionY]="10"
+  [heroImageUrl]="this.heroImageUrl">
+</app-banner-small>
+<!--<div class="heading">-->
+<!--  <h2>Restaurants nears</h2>-->
+<!--  <span>{{currentAddress}}</span>-->
+<!--</div>-->
 <div class="flex">
   <ul>
     <li *ngFor="let restaurant of this.nearbyRestaurants">

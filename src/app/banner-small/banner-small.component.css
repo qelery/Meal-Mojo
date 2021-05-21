@@ -18,10 +18,8 @@
 .banner h1 {
   max-width: 500px;
   font-size: 90px;
-  line-height: 0.95em;
   color: #fff;
   margin: auto;
-  margin-bottom: 3rem;
   text-shadow: rgba(0, 0, 0, 0.52) 0 0 30px;
   font-weight: 600;
   font-family: "Open Sans", sans-serif;
@@ -29,6 +27,8 @@
 
 .banner h2 {
   color: #fff;
+  text-shadow: rgb(0 0 0 / 22%) 0 0 30px;
+  font-size: 26px;
 }
 
 .banner:after {

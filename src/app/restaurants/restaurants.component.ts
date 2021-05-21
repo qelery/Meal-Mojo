@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {OrderService} from "../service/order/order.service";
-import {LocationService} from "../service/location/location.service";
 
 @Component({
   selector: 'app-restaurants',
@@ -8,13 +7,14 @@ import {LocationService} from "../service/location/location.service";
   styleUrls: ['./restaurants.component.css']
 })
 export class RestaurantsComponent implements OnInit {
-  nearbyRestaurants: any;
-  currentAddress: string | null = '' ;
-
-  constructor(public orderService: OrderService, private locationService: LocationService) { }
+  nearbyRestaurants: any[] | null;
+  currentAddress: string | null ;
+  heroImageUrl: string;
+  constructor(public orderService: OrderService) {
+    this.heroImageUrl = "assets/image/store-front-hero-image.jpg";
+  }
 
   ngOnInit(): void {
-    console.log("HERE!!!")
     this.orderService.getRestaurantsNearUser().subscribe((response: any) => {
       this.nearbyRestaurants = response;
       for (let x of this.nearbyRestaurants) {

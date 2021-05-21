@@ -12,15 +12,11 @@ export class HomeComponent implements OnInit {
   brickInfo: BrickInfo[];
   loadSignInCard: boolean;
 
-  constructor(private router: Router) {
+  constructor() {
     this.brickInfo = brickInfo;
     this.loadSignInCard = false;
   }
 
-  ngOnInit(): void {
-    // if (this.router.url === '/register' || this.router.url === '/login') {
-    //   this.loadSignInCard = true;
-    // }
-  }
+  ngOnInit(): void {}
 }
 
