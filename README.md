@@ -1,27 +1,25 @@
-# MealMojoAngularFrontend
+# Meal Mojo Angular Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+A demo food ordering website built in Angular.<br>
+A live demo of the website is hosted on [AWS here](http://angularmealmojo.s3-website.us-east-2.amazonaws.com/) 
 
-## Development server
+## Requirements
+* You must have a Google API key for this app to work
+* Place your google API key in the /src/environments file
+* Download and clone the backend repo for this project here
+* Add the link to the URL in the /src/environments file
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
+* Clone and download this repository
+* Run `ng serve` in the terminal
+* Navigate to `http://localhost:4200/` in the browser
 
-## Code scaffolding
+## Screenshots
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![homepage](./src/assets/image/home.jpg)
+![homepage full](./src/assets/image/homepage.jpg)
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![restaurants](./src/assets/image/restaurants.jpg)
+![restaurantpage](./src/assets/image/restaurantpage.jpg)
+![checkout](./src/assets/checkout.jpg)
+![orders](./src/assets/orders.jpg)
