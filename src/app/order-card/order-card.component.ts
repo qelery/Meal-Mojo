@@ -15,10 +15,13 @@ export class OrderCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    const then = new Date(this.pastOrder.dateTime);
+    this.time = new Date(this.pastOrder.dateTime).setHours(then.getHours() - 5).toString();
     this.restaurantName = this.pastOrder.orderLines[0].restaurantName;
-    this.time = this.pastOrder.dateTime;
+
     this.totalPrice = this.calculateTotalPrice();
     this.menuItemsInfo = this.createInfo();
+
   }
 
   private calculateTotalPrice() {
