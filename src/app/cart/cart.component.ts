@@ -12,7 +12,7 @@ export class CartComponent implements OnInit, OnDestroy {
   @Output() submitOrder = new EventEmitter<any>();
   @Output() emitCoordinates = new EventEmitter<any>();
   @Output() emitTotalPrice = new EventEmitter<any>();
-  restaurantName: any;
+  restaurantName: string;
   cartItems: any;
   totalPrice: any;
   tipPercentage: any;

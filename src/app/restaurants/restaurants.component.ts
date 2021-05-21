@@ -14,6 +14,7 @@ export class RestaurantsComponent implements OnInit {
   constructor(public orderService: OrderService, private locationService: LocationService) { }
 
   ngOnInit(): void {
+    console.log("HERE!!!")
     this.orderService.getRestaurantsNearUser().subscribe((response: any) => {
       this.nearbyRestaurants = response;
       for (let x of this.nearbyRestaurants) {
