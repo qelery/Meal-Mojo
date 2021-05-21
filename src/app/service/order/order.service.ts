@@ -9,7 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class OrderService {
   cartItems: any;
   pastOrders: any;
-  maxDistance = 15; // miles
+  maxDistance = 13;
   cartSubject = new BehaviorSubject([]);
   pastOrdersSubject = new BehaviorSubject([]);
   constructor(private http: HttpClient) { }
