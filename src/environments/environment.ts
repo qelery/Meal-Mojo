@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  restApiUrl: '',
+  restApiUrl: 'http://localhost:9092',
   googleApiKey: '',
 }
 

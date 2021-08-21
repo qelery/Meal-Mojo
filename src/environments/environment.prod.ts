@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
-  restApiUrl: '',
+  production: true,
+  restApiUrl: 'http://localhost:9092',
   googleApiKey: '',
 }

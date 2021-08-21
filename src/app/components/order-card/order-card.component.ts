@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {OrderService} from "../service/order/order.service";
+import {OrderService} from "../../service/order/order.service";
 
 @Component({
   selector: 'app-order-card',
@@ -15,8 +15,7 @@ export class OrderCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const then = new Date(this.pastOrder.dateTime);
-    this.time = new Date(this.pastOrder.dateTime).setHours(then.getHours() - 5).toString();
+    this.time = this.pastOrder.dateTime;
     this.restaurantName = this.pastOrder.orderLines[0].restaurantName;
 
     this.totalPrice = this.calculateTotalPrice();

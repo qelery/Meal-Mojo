@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { LocationService} from "../service/location/location.service";
+import { LocationService} from "../../service/location/location.service";
 
 @Component({
   selector: 'app-address-bar',

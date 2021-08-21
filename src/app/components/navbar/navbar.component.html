@@ -1,6 +1,6 @@
 <nav id="nav" class="navbar">
   <div class="container navbar">
-    <a href="/" class="logo"></a>
+    <a href="/src" class="logo"></a>
     <ul  class="nav-left">
       <li *ngIf="!isUserLoggedIn" class="active">
         <a [routerLink]="['/']">
@@ -91,5 +91,5 @@
     </ul>
   </div>
 </nav>
-<app-sign-in-card [cardType]="this.SignInCardType.Login" (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-sign-in-card>
-<app-sign-in-card [cardType]="this.SignInCardType.Register" (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-sign-in-card>
+<app-login-registration-modal [cardType]="this.SignInCardType.Login" (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-login-registration-modal>
+<app-login-registration-modal [cardType]="this.SignInCardType.Register" (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-login-registration-modal>

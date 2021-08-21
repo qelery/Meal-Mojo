@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter, Input, OnDestroy, OnChanges} from '@angular/core';
-import {OrderService} from "../service/order/order.service";
+import {OrderService} from "../../service/order/order.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
 

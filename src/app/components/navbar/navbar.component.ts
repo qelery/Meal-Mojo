@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
-import {UserService} from "../service/user/user.service";
-import {LocationService} from "../service/location/location.service";
-import {SignInCardType} from "../signin-card/sign-in-card.component";
+import {UserService} from "../../service/user/user.service";
+import {LocationService} from "../../service/location/location.service";
+import { SignInCardType} from "../login-registration-card/login-registration-modal.component";
 
 @Component({
   selector: 'app-navbar',

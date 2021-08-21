@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {UserService} from "../service/user/user.service";
+import {UserService} from "../../service/user/user.service";
 import {Router} from "@angular/router";
-import {LocationService} from "../service/location/location.service";
+import {LocationService} from "../../service/location/location.service";
 
 @Component({
-  selector: 'app-sign-in-card',
-  templateUrl: './sign-in-card.component.html',
-  styleUrls: ['./sign-in-card.component.css']
+  selector: 'app-login-registration-modal',
+  templateUrl: './login-registration-modal.component.html',
+  styleUrls: ['./login-registration-modal.component.css']
 })
-export class SignInCard implements OnInit {
+export class LoginRegistrationModalComponent implements OnInit {
 
   @Output() notifyParent: EventEmitter<any> = new EventEmitter();
   @Input() cardType: SignInCardType;

@@ -5,25 +5,26 @@ import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { BannerComponent } from './banner/banner.component';
-import { AddressBarComponent } from './address-bar/address-bar.component';
-import { BrickComponent } from './brick/brick.component';
-import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { AddressBarComponent } from './components/address-bar/address-bar.component';
+import { BrickComponent } from './components/brick/brick.component';
+import { HomeComponent } from './components/home/home.component';
 
-import { SignInCard } from './signin-card/sign-in-card.component';
-import { LogoutComponent } from './logout/logout.component';
-import { RestaurantsComponent } from './restaurants/restaurants.component';
-import { RestaurantInfoCardComponent } from './restaurant-info-card/restaurant-info-card.component';
-import { RestaurantStoreFrontComponent } from './restaurant-store-front/restaurant-store-front.component';
-import { MenuItemInfoCardComponent } from './menu-item-info-card/menu-item-info-card.component';
-import { CartComponent } from './cart/cart.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import {BannerSmallComponent} from "./banner-small/banner-small.component";
+
+import { LogoutComponent } from './components/logout/logout.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { RestaurantInfoCardComponent } from './components/restaurant-info-card/restaurant-info-card.component';
+import { RestaurantStoreFrontComponent } from './components/restaurant-store-front/restaurant-store-front.component';
+import { MenuItemInfoCardComponent } from './components/menu-item-info-card/menu-item-info-card.component';
+import { CartComponent } from './components/cart/cart.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import {BannerSmallComponent} from "./components/banner-small/banner-small.component";
 import {AgmCoreModule} from "@agm/core";
 import {environment} from "../environments/environment";
-import { OrdersComponent } from './orders/orders.component';
-import { OrderCardComponent } from './order-card/order-card.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { OrderCardComponent } from './components/order-card/order-card.component';
+import {LoginRegistrationModalComponent} from "./components/login-registration-card/login-registration-modal.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { OrderCardComponent } from './order-card/order-card.component';
     AddressBarComponent,
     BrickComponent,
     HomeComponent,
-    SignInCard,
+    LoginRegistrationModalComponent,
     LogoutComponent,
     RestaurantsComponent,
     RestaurantInfoCardComponent,

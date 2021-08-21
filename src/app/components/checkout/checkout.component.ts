@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {OrderService} from "../service/order/order.service";
+import {OrderService} from "../../service/order/order.service";
 import {Router} from "@angular/router";
-import {LocationService} from "../service/location/location.service";
+import {LocationService} from "../../service/location/location.service";
 import {BehaviorSubject, Subject} from "rxjs";
 
 @Component({
