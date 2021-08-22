@@ -1,0 +1,8 @@
+{
+  "viewportWidth": 1600,
+  "viewportHeight": 800,
+  "video": false,
+  "env": {
+    "BASE_URL": "http://localhost:4201"
+  }
+}

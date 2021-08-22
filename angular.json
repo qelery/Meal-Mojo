@@ -8,7 +8,7 @@
       "schematics": {
         "@schematics/angular:application": {
           "strict": true
-        }
+        },
       },
       "root": "",
       "sourceRoot": "src",
@@ -32,6 +32,22 @@
             "scripts": []
           },
           "configurations": {
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
+            },
             "production": {
               "budgets": [
                 {
@@ -72,6 +88,9 @@
             },
             "development": {
               "browserTarget": "meal-mojo-angular-frontend:build:development"
+            },
+            "test": {
+              "browserTarget": "meal-mojo-angular-frontend:build:test"
             }
           },
           "defaultConfiguration": "development"
@@ -98,9 +117,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "meal-mojo-angular-frontend"
+  "defaultProject": "meal-mojo-angular-frontend",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

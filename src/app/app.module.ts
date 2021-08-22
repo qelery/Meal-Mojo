@@ -25,6 +25,10 @@ import {environment} from "../environments/environment";
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import {LoginRegistrationModalComponent} from "./components/login-registration-card/login-registration-modal.component";
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { metaReducers, reducers } from './ngrx/state/app.state';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,10 @@ import {LoginRegistrationModalComponent} from "./components/login-registration-c
     HttpClientModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey,
-    })
+    }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]
