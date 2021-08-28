@@ -34,7 +34,7 @@ export class OrderCardComponent implements OnInit {
       return {
         name: orderLine.menuItem.name,
         quantity: orderLine.quantity
-        }
-    })
+        };
+    });
   }
 }

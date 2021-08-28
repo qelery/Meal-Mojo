@@ -91,5 +91,4 @@
     </ul>
   </div>
 </nav>
-<app-login-registration-modal [cardType]="this.SignInCardType.Login" (notifyParent)="hideSignInComponent()" *ngIf="showLoginCard"></app-login-registration-modal>
-<app-login-registration-modal [cardType]="this.SignInCardType.Register" (notifyParent)="hideSignInComponent()" *ngIf="showRegisterCard"></app-login-registration-modal>
+<app-login-modal (closeButtonClicked)="hideSignInComponent()" *ngIf="showLoginCard"></app-login-modal>

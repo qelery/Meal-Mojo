@@ -25,7 +25,7 @@ export class CheckoutComponent implements OnInit {
   customerCoordinates: any;
   constructor(private orderService: OrderService, private router: Router, private locationService: LocationService) {
     this.heroImageUrl = "assets/image/checkout-hero-image.jpeg";
-    this.iconMarkerImage = 'assets/image/food-icon-70.png'
+    this.iconMarkerImage = 'assets/image/food-icon-70.png';
   }
 
   ngOnInit(): void {
@@ -34,7 +34,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   submitOrder() {
-    const checkoutOptions = {deliveryMethod: this.deliveryMethod, paymentMethod: this.paymentMethod, tip: this.tip}
+    const checkoutOptions = {deliveryMethod: this.deliveryMethod, paymentMethod: this.paymentMethod, tip: this.tip};
     this.orderService.submitOrder(checkoutOptions);
     this.router.navigate(['/orders']);
   }

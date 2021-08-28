@@ -41,13 +41,13 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
     if (this.events) {
       this.eventsSubscription = this.events.subscribe((tipPercentage: any) => {
         this.tipPercentage = tipPercentage;
-        this.calculateTotalPrice()
-      })
+        this.calculateTotalPrice();
+      });
     }
   }
 
   ngOnChanges(): void {
-    console.log("WOW")
+    console.log("WOW");
   }
 
   ngOnDestroy(): void {
@@ -86,7 +86,7 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private calculateTotalPrice() {
-    console.log(this.cartItems.length)
+    console.log(this.cartItems.length);
     if (this.cartItems.length === 0) {
       this.totalPrice = 0;
     }
@@ -94,6 +94,6 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
       (total: any, orderLineItem: any) => (total + orderLineItem.quantity * orderLineItem.priceEach),
       0);
     this.totalPrice = this.totalPrice + ((this.tipPercentage/100) * this.totalPrice);
-    console.log(this.totalPrice)
+    console.log(this.totalPrice);
   }
 }

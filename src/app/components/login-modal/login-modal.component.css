@@ -2,7 +2,7 @@ a {
   color: inherit;
 }
 
-.s-overlay {
+.overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -29,12 +29,13 @@ a {
   }
 }
 
-.s-overlay:hover {
+.overlay:hover {
   transition: 1s;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.s-wrapper {
+.wrapper {
+  padding: 50px;
   overflow: hidden;
   max-width: 560px;
   max-height: 640px;
@@ -50,13 +51,17 @@ a {
   box-shadow: rgba(34, 34, 34, 0.8) 0 22px 40px 0;
 }
 
-.s-title {
+.close {
+  text-align: right;
+}
+
+.title {
   display: flex;
   justify-content: center;
-  padding: 50px 0 0;
 }
 
 h4 {
+  margin: 0.25em 0;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, serif;
   font-size: 26px;
   font-weight: 600;
@@ -70,24 +75,20 @@ h5 a {
   cursor: pointer;
 }
 
-.s-exit {
-  position: absolute;
+.exit {
   top: 20px;
   left: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   cursor: pointer;
-  height: 24px;
-  width: 24px;
-  margin-right: 14px;
 }
 
 .fa-times {
   font-size: 2em;
 }
 
-.s-body {
+.card-body {
   overflow-y: visible;
   padding-left: 42px;
   padding-right: 42px;
@@ -96,13 +97,12 @@ h5 a {
   min-width: 310px;
 }
 
-.s-form {
+.form {
   width: 100%;
 }
 
-.s-error {
+.error {
   color: #ff0000;
-  font-size: small;
   text-align: center;
 }
 
@@ -118,7 +118,7 @@ h5 {
   padding: 0;
 }
 
-.s-input {
+.input {
   border-radius: 0;
   appearance: none;
   font-size: 16px;
@@ -144,15 +144,15 @@ button, input {
   overflow: visible;
 }
 
-.s-btn:disabled {
+.btn:disabled {
   background-color: #aaa;
   color: rgb(255, 255, 255);
   cursor: default;
 }
 
-.s-btn {
+.btn {
+  margin-top: 1em;
   padding: 0;
-  /*margin-top: 2rem;*/
   appearance: none;
   border: none;
   outline: none;
@@ -172,29 +172,25 @@ button, input {
 
 @media screen and (min-width: 768px) {
 
-  .s-title {
-    padding: 38px 0 0;
-  }
-
   .c-exit {
     top: 28px;
     left: initial;
     right: 12px;
   }
 
-  .s-wrapper {
+  .wrapper {
     overflow-y: hidden;
   }
 }
 
 @media screen and (min-width: 1060px) {
 
-  .s-body {
+  .body {
     padding-left: 36px;
     padding-right: 36px;
   }
 
-  .s-input {
+  .input {
     max-width: 335px;
     margin-left: 14px;
     margin-right: 14px;

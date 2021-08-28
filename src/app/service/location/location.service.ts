@@ -38,7 +38,7 @@ export class LocationService {
     localStorage.setItem('currentAddress', `${formattedAddress}`);
     localStorage.setItem('longitude', `${fullAddress.longitude}`);
     localStorage.setItem('latitude', `${fullAddress.latitude}`);
-    console.log(`local stoage is: ${localStorage.getItem('currentUser')}`)
+    console.log(`local stoage is: ${localStorage.getItem('currentUser')}`);
     if (localStorage.getItem('currentUser')) {
       this.saveToDatabase(fullAddress);
     }
@@ -63,9 +63,9 @@ export class LocationService {
     this.findAddress(address).subscribe((response: any) => {
       const components = response.results[0]['address_components'];
       const geometry = response.results[0]['geometry'];
-      console.log(address)
-      console.log(response)
-      console.log("HERE....")
+      console.log(address);
+      console.log(response);
+      console.log("HERE....");
 
       let subpremise = '';
       let streetNumber = '';
@@ -109,12 +109,12 @@ export class LocationService {
         state: state,
         latitude: latitude,
         longitude: longitude
-      }
+      };
 
       const formattedAddress = `${street1}` + (street2 ? `, ${street2}` : '') + `, ${city}, ${state}`;
 
       this.setUserCurrentAddress(fullAddress, formattedAddress);
-      this.router.navigate(['/restaurants'])
+      this.router.navigate(['/restaurants']);
     }, err => console.log(err));
   }
 }

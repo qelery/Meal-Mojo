@@ -49,7 +49,7 @@ module.exports = function (config) {
         flags: ['--no-sandbox'],
       }
     },
-    singleRun: false,
+    singleRun: true,
     captureTimeout: 60000,
     browserDisconnectTolerance: 3,
     browserDisconnectTimeout: 60000,

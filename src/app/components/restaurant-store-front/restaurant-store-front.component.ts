@@ -30,7 +30,7 @@ export class RestaurantStoreFrontComponent implements OnInit {
           this.menuItems = response.menuItems;
           this.restaurantName = response.businessName;
           const address = response.address;
-          this.generalAddress = `${address.street1}, ${address.city}`
+          this.generalAddress = `${address.street1}, ${address.city}`;
           const hours = response.operatingHoursList
             .find((hour: any) => hour.dayOfWeek === this.currentDayOfWeek.toUpperCase());
           this.openTime = hours.openTime ? this.convertToShortTime(hours.openTime) : 'Unknown';

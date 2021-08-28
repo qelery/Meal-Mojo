@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [

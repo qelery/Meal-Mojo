@@ -18,7 +18,7 @@ export class RestaurantsComponent implements OnInit {
     this.orderService.getRestaurantsNearUser().subscribe((response: any) => {
       this.nearbyRestaurants = response;
       for (let x of this.nearbyRestaurants) {
-        console.log(x)
+        console.log(x);
       }
     }, (err: any) => console.log(err));
     this.currentAddress = localStorage.getItem('currentAddress');

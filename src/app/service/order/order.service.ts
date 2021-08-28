@@ -17,8 +17,8 @@ export class OrderService {
   getRestaurantsNearUser(): Observable<any> {
     const long = localStorage.longitude;
     const lat = localStorage.latitude;
-    console.log(localStorage.longitude)
-    console.log("in get restaurants")
+    console.log(localStorage.longitude);
+    console.log("in get restaurants");
     return this.http.get(`${environment.restApiUrl}/api/order/restaurants?` +
       `longitude=${long.toString()}` +
       `&latitude=${lat.toString()}` +
@@ -64,7 +64,7 @@ export class OrderService {
     };
     this.cartItems = this.http.delete(`${environment.restApiUrl}/api/order/restaurants/${restaurantId}/menuitems/${menuItemId}/orderlines`, requestOptions)
       .subscribe(response => {
-        console.log("the subject"); this.getCartItems()});
+        console.log("the subject"); this.getCartItems();});
   }
 
   submitOrder(checkoutOptions: any) {

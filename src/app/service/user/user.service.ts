@@ -5,6 +5,7 @@ import { environment } from "../../../environments/environment";
 import {Router} from "@angular/router";
 import {LocationService} from "../location/location.service";
 import {OrderService} from "../order/order.service";
+import { HttpRequestService } from '../http-request/http-request.service';
 
 
 @Injectable({
@@ -14,16 +15,19 @@ export class UserService {
   currentUser: string | null;
   searchSubject = new BehaviorSubject('');
 
-  constructor(private  http: HttpClient, private router: Router,
+// TODO: Make an auth service? https://www.youtube.com/watch?v=VaUkAi14nKY&list=PL_euSNU_eLbdg0gKbR8zmVJb4xLgHR7BX&index=27
+
+  constructor(private httpRequestService: HttpRequestService, private router: Router,
               private locationService: LocationService, private orderService: OrderService) { }
 
-  loginUser(user: User): Observable<any> {
-    return this.http.post(`${environment.restApiUrl}/auth/users/login`, user);
+  loginUser(user: User):void {
+    // this.http.post(`${environment.restApiUrl}/auth/users/login`, user);
   }
 
   registerUser(user: User): Observable<any> {
-    return this.http
-      .post(`${environment.restApiUrl}/auth/users/register/customer`, user);
+    return null;
+    // return this.http
+    //   .post(`${environment.restApiUrl}/auth/users/register/customer`, user);
   }
 
   logoutUser(): void {
@@ -36,7 +40,7 @@ export class UserService {
     this.currentUser = '';
     this.locationService.formattedAddressSubject.next(null);
     this.searchSubject.next(this.currentUser);
-    console.log("Logging out!!")
+    console.log("Logging out!!");
     this.router.navigate(['']).then(res => this.searchSubject.next(this.currentUser));
   }
 
