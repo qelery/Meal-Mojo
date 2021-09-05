@@ -19,5 +19,5 @@ export const loginUserSuccess = createAction(
 
 export const loginUserFailure = createAction(
   AuthActionTypes.LOGIN_USER_FAILURE,
-  props<{ errorStatus: number }>()
+  props<{ error: string }>()
 );

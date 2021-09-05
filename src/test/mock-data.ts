@@ -5,7 +5,7 @@ export const mockUser: User = {
   email: 'john@example.com',
   firstName: 'John',
   lastName: 'Smith',
-  address: undefined,
+  address: null,
 };
 
 export const mockLoginRequest: LoginRequest = {

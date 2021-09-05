@@ -10,8 +10,7 @@ export const selectLoginIsLoading = createSelector(
   (authState: AuthState) => authState.userLoginState.isLoading,
 );
 
-export const selectErrorStatus = createSelector(
+export const selectLoginError = createSelector(
   authFeature,
-  (authState: AuthState) => authState.userLoginState.errorStatus,
+  (authState: AuthState) => authState.userLoginState.error,
 );
-

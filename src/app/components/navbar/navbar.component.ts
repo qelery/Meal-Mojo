@@ -1,56 +1,36 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
-import {UserService} from "../../service/user/user.service";
-import {LocationService} from "../../service/location/location.service";
+import { Component, OnInit } from '@angular/core';
+import { LocalStorageService } from '../../service/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit, OnChanges {
-
+export class NavbarComponent implements OnInit {
   showRegisterCard: boolean;
   showLoginCard: boolean;
-  isUserLoggedIn: any;
+  isUserLoggedIn: boolean;
   currentAddress: any;
 
-  constructor(private userService: UserService, private  locationService: LocationService) {
-    this.showRegisterCard = false;
+  constructor(private localStorageService: LocalStorageService) {
     this.showLoginCard = false;
   }
 
   ngOnInit(): void {
-    this.locationService.formattedAddressSubject.subscribe(currentAddress => {
-      this.currentAddress = currentAddress;
+    this.localStorageService.userSubject.subscribe((user) => {
+      this.isUserLoggedIn = !!user;
     });
-    if (localStorage.getItem('token')) {
-      this.isUserLoggedIn = true;
-      return;
-    }
-    this.userService.searchSubject.subscribe(currentUser => {
-        this.isUserLoggedIn = !!currentUser;
-    });
-  }
-
-  ngOnChanges(): void {
-    if (localStorage.getItem('token')) {
-      this.isUserLoggedIn = true;
-    }
-    if (localStorage.getItem('latitude')) {
-      this.currentAddress = true;
-    }
   }
 
   showRegister() {
     this.showRegisterCard = true;
   }
 
-  showLogIn() {
+  showLoginModal() {
     this.showLoginCard = true;
   }
 
-  hideSignInComponent() {
-    this.showRegisterCard = false;
+  hideLoginModal() {
     this.showLoginCard = false;
   }
 }

@@ -1,7 +1,7 @@
 <div class="overlay">
   <div class="wrapper">
     <div class="exit">
-      <fa-icon (click)="hideSignInComponent()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
+      <fa-icon (click)="hideLoginComponent()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
     </div>
     <div class="title">
       <h4>Welcome back!</h4>
@@ -9,17 +9,20 @@
     <div class="card-body">
       <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
         <h5>Enter your email</h5>
-        <input [(ngModel)]="loginRequestModel.username" name="username" type="text" class="input" placeholder="Email" required>
+        <input [(ngModel)]="loginRequestModel.username" name="username" type="text" class="input" placeholder="Email"
+               required>
         <h5>Enter your password</h5>
-        <input [(ngModel)]="loginRequestModel.password" name="password" type="password" class="input" placeholder="Password"
+        <input [(ngModel)]="loginRequestModel.password" name="password" type="password" class="input"
+               placeholder="Password"
                required>
         <button [disabled]="!loginForm.form.valid" type="submit" class="btn">
-          <span>Sign In</span>
+          <span *ngIf="(isLoading$ | async) === false">Sign In</span>
+          <span *ngIf="isLoading$ | async">Signing In...</span>
         </button>
       </form>
     </div>
     <h5><a>Create an account</a></h5>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
   </div>
 </div>
 

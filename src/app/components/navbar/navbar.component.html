@@ -30,7 +30,7 @@
         </a>
       </li>
       <li class="active">
-        <a id="login"  (click)="showLogIn()">
+        <a id="login"  (click)="showLoginModal()">
           Log In
         </a>
       </li>
@@ -75,7 +75,7 @@
             </a>
           </li>
           <li>
-            <a (click)="showLogIn()">
+            <a (click)="showLoginModal()">
               Log In
             </a>
           </li>
@@ -91,4 +91,4 @@
     </ul>
   </div>
 </nav>
-<app-login-modal (closeButtonClicked)="hideSignInComponent()" *ngIf="showLoginCard"></app-login-modal>
+<app-login-modal (closeModalEmitter)="hideLoginModal()" *ngIf="showLoginCard"></app-login-modal>

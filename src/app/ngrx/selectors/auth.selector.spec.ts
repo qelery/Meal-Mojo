@@ -3,9 +3,10 @@ import {
   initialAuthState,
   initialUserLoginState,
 } from '../reducers/auth.reducer';
-import { selectErrorStatus, selectLoginIsLoading } from './auth.selector';
+import { selectLoginError, selectLoginIsLoading } from './auth.selector';
+import { LOGIN_ERROR_MSG_403 } from '../effects/auth.effects';
 
-describe('Auth Selectors', () => {
+fdescribe('Auth Selectors', () => {
   const mockState: AppState = {
     ...initialAppState,
     authState: {
@@ -13,7 +14,7 @@ describe('Auth Selectors', () => {
       userLoginState: {
         ...initialUserLoginState,
         isLoading: false,
-        errorStatus: 403,
+        error: LOGIN_ERROR_MSG_403,
       },
     },
   };
@@ -25,8 +26,8 @@ describe('Auth Selectors', () => {
   });
 
   it('should select errorStatus from state', () => {
-    expect(selectErrorStatus(mockState)).toEqual(
-      mockState.authState.userLoginState.errorStatus
+    expect(selectLoginError(mockState)).toEqual(
+      mockState.authState.userLoginState.error
     );
   });
 });

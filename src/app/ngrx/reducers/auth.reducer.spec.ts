@@ -1,4 +1,3 @@
-import * as fromReducer from './auth.reducer';
 import {
   authReducer,
   AuthState,
@@ -6,12 +5,12 @@ import {
   initialUserLoginState,
 } from './auth.reducer';
 import {
-  AuthActionTypes,
   loginUser,
   loginUserFailure,
   loginUserSuccess,
 } from '../actions/auth.action';
 import { mockLoginRequest, mockLoginResponse } from '../../../test/mock-data';
+import { LOGIN_ERROR_MSG_403 } from '../effects/auth.effects';
 
 fdescribe('AuthReducer', () => {
   describe('for an unknown action', () => {
@@ -51,7 +50,7 @@ fdescribe('AuthReducer', () => {
         userLoginState: {
           ...initialUserLoginState,
           isLoading: false,
-          errorStatus: null,
+          error: null,
         },
       };
 
@@ -65,17 +64,17 @@ fdescribe('AuthReducer', () => {
 
   describe('loginUserFailure action', () => {
     it('should update the isLoading and errorStatus state in an immutatble way', () => {
-      const errorStatus = 403;
+      const error = LOGIN_ERROR_MSG_403;
       const newAuthState: AuthState = {
         ...initialAuthState,
         userLoginState: {
           ...initialUserLoginState,
           isLoading: false,
-          errorStatus,
+          error,
         },
       };
 
-      const action = loginUserFailure({ errorStatus });
+      const action = loginUserFailure({ error });
       const state = authReducer(initialAuthState, action);
 
       expect(state).toEqual(newAuthState);

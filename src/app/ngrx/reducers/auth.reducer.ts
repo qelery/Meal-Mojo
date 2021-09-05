@@ -4,12 +4,12 @@ import { BaseState } from '../state/app.state';
 
 export interface UserLoginState extends BaseState {
   isLoading: boolean;
-  errorStatus: number | null;
+  error: string | null;
 }
 
 export const initialUserLoginState = {
   isLoading: false,
-  errorStatus: null,
+  error: null,
 };
 
 export interface AuthState {
@@ -34,15 +34,15 @@ const reducer = createReducer(
     userLoginState: {
       ...state.userLoginState,
       isLoading: false,
-      errorStatus: null,
+      error: null,
     }
   })),
-  on(AuthActions.loginUserFailure, (state, { errorStatus }): AuthState => ({
+  on(AuthActions.loginUserFailure, (state, { error }): AuthState => ({
     ...state,
     userLoginState: {
       ...state.userLoginState,
       isLoading: false,
-      errorStatus,
+      error,
     }
   }))
 );

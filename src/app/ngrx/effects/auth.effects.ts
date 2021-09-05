@@ -9,14 +9,17 @@ import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { AuthService } from '../../service/auth/auth.service';
 import { of } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TokenStorageService } from '../../service/token-storage/token-storage.service';
+import { LocalStorageService } from '../../service/local-storage/local-storage.service';
+
+export const LOGIN_ERROR_MSG_403 = 'Invalid username or password.';
+export const LOGIN_ERROR_MSG_SERVER = 'Server Error. Please try again later.';
 
 @Injectable()
 export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly authService: AuthService,
-    private readonly tokenStorage: TokenStorageService
+    private readonly localStorage: LocalStorageService
   ) {}
 
   loginUser$ = createEffect(() => {
@@ -25,8 +28,9 @@ export class AuthEffects {
       exhaustMap(({ loginRequest }: any) =>
         this.authService.login(loginRequest).pipe(
           map((loginResponse) => loginUserSuccess({ loginResponse })),
-          catchError((error: HttpErrorResponse) => {
-            return of(loginUserFailure({ errorStatus: error.status }));
+          catchError((errorResp: HttpErrorResponse) => {
+            const error = this.getErrorMessage(errorResp);
+            return of(loginUserFailure({ error }));
           })
         )
       )
@@ -38,11 +42,17 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(AuthActionTypes.LOGIN_USER_SUCCESS),
         map(({ loginResponse }: any) => {
-          this.tokenStorage.saveToken(loginResponse.token);
-          this.tokenStorage.saveUser(loginResponse.userInfo);
+          this.localStorage.saveToken(loginResponse.token);
+          this.localStorage.saveUser(loginResponse.userInfo);
         })
       );
     },
     { dispatch: false }
   );
+
+  getErrorMessage(errorResp: HttpErrorResponse): string {
+    return errorResp.status === 403
+      ? LOGIN_ERROR_MSG_403
+      : LOGIN_ERROR_MSG_SERVER;
+  }
 }

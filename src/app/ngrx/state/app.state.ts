@@ -5,7 +5,7 @@ import { authReducer, AuthState, initialAuthState } from '../reducers/auth.reduc
 
 export interface BaseState {
   isLoading: boolean;
-  errorStatus: number | null;
+  error: string | null;
 }
 
 export interface AppState {

@@ -7,20 +7,21 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '../../token-storage/token-storage.service';
+import { LocalStorageService } from '../../local-storage/local-storage.service';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private tokenService: TokenStorageService) {}
+export class AuthHttpInterceptor implements HttpInterceptor {
+
+  constructor(private localStorageService: LocalStorageService) {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let authRequest = req;
-    const token = this.tokenService.getToken();
+    const token = this.localStorageService.getToken();
     if (token != null) {
       authRequest = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token),
@@ -31,5 +32,5 @@ export class AuthInterceptor implements HttpInterceptor {
 }
 
 export const authInterceptorProviders = [
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  { provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true }
 ];

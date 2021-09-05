@@ -28,9 +28,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, reducers } from './ngrx/state/app.state';
-import { authInterceptorProviders } from './service/http-request/helpers/auth.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { authInterceptorProviders } from './service/http-request/helpers/auth-http-interceptor.service';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthEffects } from './ngrx/effects/auth.effects';
 
 @NgModule({
   declarations: [
@@ -57,11 +58,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NoopAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey,
     }),
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

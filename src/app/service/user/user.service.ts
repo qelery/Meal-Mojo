@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {LocationService} from "../location/location.service";
 import {OrderService} from "../order/order.service";
 import { HttpRequestService } from '../http-request/http-request.service';
+import { User } from '../../shared/model';
 
 
 @Injectable({
@@ -50,7 +51,7 @@ export class UserService {
   }
 }
 
-export interface User {
-  email: string,
-  password: string
-}
+// export interface User {
+//   email: string,
+//   password: string
+// }

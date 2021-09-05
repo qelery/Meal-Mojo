@@ -26,16 +26,6 @@ describe('HttpRequestService', () => {
     expect(httpRequestService).toBeTruthy();
   });
 
-  it(`should add user's token to HTTP headers`, () => {
-    const expectedToken = 'a1b2c3d4e5';
-    localStorage.setItem('token', expectedToken);
-
-    httpRequestService.perform(HttpMethod.GET, dummyRoute).subscribe();
-
-    const testRequest = httpMock.match(httpRequestService.apiUrl + dummyRoute)[0];
-    expect(testRequest.request.headers.get('token')).toEqual(expectedToken);
-  });
-
   describe('should be able to perform requests for', () => {
 
     it('GET method', () => {
