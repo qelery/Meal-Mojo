@@ -7,14 +7,12 @@ import { LocalStorageService } from '../../service/local-storage/local-storage.s
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  showRegisterCard: boolean;
-  showLoginCard: boolean;
+  registerModalIsVisible = false;
+  loginModalIsVisible = false;
   isUserLoggedIn: boolean;
   currentAddress: any;
 
-  constructor(private localStorageService: LocalStorageService) {
-    this.showLoginCard = false;
-  }
+  constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
     this.localStorageService.userSubject.subscribe((user) => {
@@ -23,14 +21,20 @@ export class NavbarComponent implements OnInit {
   }
 
   showRegister() {
-    this.showRegisterCard = true;
+    this.registerModalIsVisible = true;
   }
 
   showLoginModal() {
-    this.showLoginCard = true;
+    this.loginModalIsVisible = true;
   }
 
-  hideLoginModal() {
-    this.showLoginCard = false;
+  hideModal() {
+    this.loginModalIsVisible = false;
+    this.registerModalIsVisible = false;
+  }
+
+  switchModal() {
+    this.loginModalIsVisible = !this.loginModalIsVisible;
+    this.registerModalIsVisible = !this.registerModalIsVisible;
   }
 }

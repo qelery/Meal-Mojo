@@ -83,10 +83,6 @@ fdescribe('NameAsyncValidator Directive', () => {
     inputs.forEach((input: string) => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
-        if (!errors) {
-          console.log(input);
-        }
-
         expect(errors).toEqual({ invalidName: true });
         done();
       });

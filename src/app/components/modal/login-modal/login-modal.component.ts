@@ -4,12 +4,12 @@ import { Store } from '@ngrx/store';
 import {
   selectLoginError,
   selectLoginIsLoading,
-} from '../../ngrx/selectors/auth.selector';
-import * as AuthActionTypes from '../../ngrx/actions/auth.action';
+} from '../../../ngrx/selectors/auth.selector';
+import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from '../../service/local-storage/local-storage.service';
-import { User } from '../../shared/model';
-import { LoginRequest } from '../../ngrx/reducers/auth.reducer';
+import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
+import { User } from '../../../shared/model';
+import { LoginRequest } from '../../../ngrx/reducers/auth.reducer';
 
 @Component({
   selector: 'app-login-modal',

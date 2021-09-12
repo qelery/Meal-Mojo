@@ -91,4 +91,5 @@
     </ul>
   </div>
 </nav>
-<app-login-modal (closeModalEmitter)="hideLoginModal()" *ngIf="showLoginCard"></app-login-modal>
+<app-login-modal (closeModalEmitter)="hideModal()" (switchModalEmitter)="switchModal()" *ngIf="loginModalIsVisible"></app-login-modal>
+<app-register-modal (closeModalEmitter)="hideModal()" (switchModalEmitter)="switchModal()" *ngIf="registerModalIsVisible"></app-register-modal>

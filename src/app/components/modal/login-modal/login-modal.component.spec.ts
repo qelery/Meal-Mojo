@@ -1,14 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginModalComponent } from './login-modal.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppState, initialAppState } from '../../ngrx/state/app.state';
+import { AppState, initialAppState } from '../../../ngrx/state/app.state';
 import {
   initialAuthState,
   initialUserLoginState,
-} from '../../ngrx/reducers/auth.reducer';
+} from '../../../ngrx/reducers/auth.reducer';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
-import { LOGIN_ERROR_MSG_403 } from '../../ngrx/effects/auth.effects';
+import { LOGIN_ERROR_MSG_403 } from '../../../ngrx/effects/auth.effects';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
 
 fdescribe('LoginModal', () => {
