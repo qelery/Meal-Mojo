@@ -2,15 +2,23 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import {
-  selectLoginError,
-  selectLoginIsLoading,
+  selectRegisterError,
+  selectRegisterIsLoading,
 } from '../../../ngrx/selectors/auth.selector';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { nameValidator } from '../../../shared/custom-validators/name-name-async-validator/name-async-validator.directive';
+import { RegisterRequest } from '../../../ngrx/reducers/auth.reducer';
+import { Role, User } from '../../../shared/model';
+import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
 
 const REGEX_NUMBER_OR_UPPERCASE = '^(?=.*[A-Z0-9]).*$';
+
+// TODO: Handle username already exists
+// TODO: Handle server error
+// TODO: Need unit tests for this component
+// TODO: Close button on modals hard to click
 
 @Component({
   selector: 'app-register-modal',
@@ -37,9 +45,9 @@ export class RegisterModalComponent implements OnInit {
   });
   pageOneVisible = true;
   pageTwoVisible = false;
-  pwReqOneMet = false;
-  pwReqTwoMet = false;
-  pwReqThreeMet = false;
+  pwReqLengthIsMet = false;
+  pwReqPatternIsMet = false;
+  pwConfirmFieldMatches = false;
   @Output() closeModalEmitter: EventEmitter<any> = new EventEmitter();
   @Output() switchModalEmitter: EventEmitter<any> = new EventEmitter();
 
@@ -50,8 +58,8 @@ export class RegisterModalComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.error$ = this.store.select<string>(selectLoginError);
-    this.isLoading$ = this.store.select<boolean>(selectLoginIsLoading);
+    this.error$ = this.store.select<string>(selectRegisterError);
+    this.isLoading$ = this.store.select<boolean>(selectRegisterIsLoading);
   }
 
   showPageTwo(): void {
@@ -59,21 +67,10 @@ export class RegisterModalComponent implements OnInit {
     this.pageTwoVisible = true;
   }
 
-  hideRegisterComponent(): void {
-    this.closeModalEmitter.emit();
-  }
-
-  onSubmit(): void {
-  }
-
-  switchModal(): void {
-    this.switchModalEmitter.emit();
-  }
-
   checkPasswordRequirements(): void {
-    this.pwReqOneMet = false;
-    this.pwReqTwoMet = false;
-    this.pwReqThreeMet = false;
+    this.pwReqLengthIsMet = false;
+    this.pwReqPatternIsMet = false;
+    this.pwConfirmFieldMatches = false;
 
     this.registrationForm.updateValueAndValidity();
 
@@ -81,10 +78,37 @@ export class RegisterModalComponent implements OnInit {
       return;
     }
 
-    this.pwReqOneMet = !this.registrationForm.get('password').errors?.minlength;
-    this.pwReqTwoMet = !this.registrationForm.get('password').errors?.pattern;
-    this.pwReqThreeMet =
+    this.pwReqLengthIsMet =
+      !this.registrationForm.get('password').errors?.minlength;
+    this.pwReqPatternIsMet =
+      !this.registrationForm.get('password').errors?.pattern;
+    this.pwConfirmFieldMatches =
       this.registrationForm.get('password').value ===
       this.registrationForm.get('confirmPass').value;
+  }
+
+  hideModal(): void {
+    this.closeModalEmitter.emit();
+  }
+
+  switchModalToLoginModal(): void {
+    this.switchModalEmitter.emit();
+  }
+
+  onSubmit(): void {
+    const registerRequest: RegisterRequest = {
+      firstName: this.registrationForm.get('firstName').value,
+      lastName: this.registrationForm.get('lastName').value,
+      email: this.registrationForm.get('email').value,
+      password: this.registrationForm.get('password').value,
+      role: Role.CUSTOMER,
+    };
+    this.store.dispatch(AuthActionTypes.registerUser({ registerRequest }));
+
+    this.localStorageService.userSubject.subscribe((user: User) => {
+      if (user) {
+        this.hideModal();
+      }
+    });
   }
 }

@@ -1,7 +1,7 @@
 <div class="overlay">
   <div class="wrapper">
     <div class="exit">
-      <fa-icon (click)="hideLoginComponent()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
+      <fa-icon (click)="hideModal()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
     </div>
     <div class="title">
       <h4>Welcome back!</h4>
@@ -21,7 +21,7 @@
         </button>
       </form>
     </div>
-    <h5><a (click)="switchModal()">Create an account</a></h5>
+    <h5><a (click)="switchToRegisterModal()" data-switch-to-register>Create an account</a></h5>
     <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
   </div>
 </div>

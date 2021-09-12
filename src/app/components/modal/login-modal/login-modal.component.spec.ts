@@ -6,10 +6,11 @@ import {
   initialAuthState,
   initialUserLoginState,
 } from '../../../ngrx/reducers/auth.reducer';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 import { LOGIN_ERROR_MSG_403 } from '../../../ngrx/effects/auth.effects';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
+import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
+import { mockLoginRequest } from '../../../test/mock-data';
 
 fdescribe('LoginModal', () => {
   let component: LoginModalComponent;
@@ -33,7 +34,7 @@ fdescribe('LoginModal', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LoginModalComponent],
-      imports: [HttpClientTestingModule, FormsModule, FontAwesomeTestingModule],
+      imports: [FormsModule, FontAwesomeTestingModule],
       providers: [provideMockStore({ initialState: mockState })],
     }).compileComponents();
 
@@ -56,7 +57,7 @@ fdescribe('LoginModal', () => {
     });
   });
 
-  it('should select isLoading state from the store', () => {
+  it('should select loginIsLoading state from the store', () => {
     component.isLoading$.subscribe((isLoading) => {
       expect(isLoading).toEqual(expectedIsLoading);
     });
@@ -64,9 +65,26 @@ fdescribe('LoginModal', () => {
 
   it('should emit event to hide component when close button clicked', () => {
     spyOn(component.closeModalEmitter, 'emit');
-    const nativeElement = fixture.nativeElement;
-    const closeButton = nativeElement.querySelector('.close');
-    closeButton.dispatchEvent(new Event('click'));
+    const closeButton = fixture.nativeElement.querySelector('.close');
+    closeButton.click();
     expect(component.closeModalEmitter.emit).toHaveBeenCalled();
+  });
+
+  it('should emit event to other auth modal when go to register link clicked', () => {
+    spyOn(component.switchModalEmitter, 'emit');
+    const goToRegisterLink = fixture.nativeElement.querySelector(
+      '[data-switch-to-register]'
+    );
+    goToRegisterLink.click();
+    expect(component.switchModalEmitter.emit).toHaveBeenCalled();
+  });
+
+  it('should dispatch an action to login user on submit', () => {
+    spyOn(mockStore, 'dispatch');
+    component.loginRequestModel = mockLoginRequest;
+    component.onSubmit();
+    expect(mockStore.dispatch).toHaveBeenCalledWith(
+      AuthActionTypes.loginUser({ loginRequest: mockLoginRequest })
+    );
   });
 });

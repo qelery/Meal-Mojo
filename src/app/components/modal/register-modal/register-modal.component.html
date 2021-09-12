@@ -1,7 +1,7 @@
 <div class="overlay">
   <div class="wrapper">
     <div class="exit">
-      <fa-icon (click)="hideRegisterComponent()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
+      <fa-icon (click)="hideModal()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
     </div>
     <div class="title">
       <h4>Ready to eat? Register Below!</h4>
@@ -35,6 +35,7 @@
             <h5>Email</h5>
             <input formControlName="email" type="email" class="input">
             <p class="error" *ngIf="registrationForm.get('email').errors">Please enter a valid email.</p>
+            <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
           </div>
           <div class="flex-row-space col-2">
             <div class="flex-column-center">
@@ -49,9 +50,9 @@
           <div class="requirements">
             <p>Password Requirements: </p>
             <ul>
-              <li [class]="pwReqOneMet ? 'green' : 'red'">At least 6 characters</li>
-              <li [class]="pwReqTwoMet ? 'green' : 'red'">At least 1 number or uppercase</li>
-              <li [class]="pwReqThreeMet ? 'green' : 'red'">Password fields must match</li>
+              <li [class]="pwReqLengthIsMet ? 'green' : 'red'">At least 6 characters</li>
+              <li [class]="pwReqPatternIsMet ? 'green' : 'red'">At least 1 number or uppercase</li>
+              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'">Password fields must match</li>
             </ul>
           </div>
           <div class="flex-column-center">
@@ -65,6 +66,6 @@
         </div>
       </form>
     </div>
-    <h5><a (click)="switchModal()">Already have an account?</a></h5>
+    <h5><a (click)="switchModalToLoginModal()" data-switch-to-login>Already have an account?</a></h5>
   </div>
 </div>

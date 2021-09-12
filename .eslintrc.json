@@ -36,7 +36,8 @@
             "style": "kebab-case"
           }
         ],
-        "semi": [1, "always"]
+        "semi": [1, "always"],
+        "max-len": [2, 1000, 4, {"ignoreUrls":  true}]
       },
       "plugins": [
         "ngrx"

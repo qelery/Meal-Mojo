@@ -34,11 +34,11 @@ export class LoginModalComponent implements OnInit {
     this.isLoading$ = this.store.select<boolean>(selectLoginIsLoading);
   }
 
-  hideLoginComponent(): void {
+  hideModal(): void {
     this.closeModalEmitter.emit();
   }
 
-  switchModal(): void {
+  switchToRegisterModal(): void {
     this.switchModalEmitter.emit();
   }
 
@@ -48,7 +48,7 @@ export class LoginModalComponent implements OnInit {
 
     this.localStorageService.userSubject.subscribe((user: User) => {
       if (user) {
-        this.hideLoginComponent();
+        this.hideModal();
       }
     });
   }

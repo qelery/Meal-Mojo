@@ -36,6 +36,28 @@ fdescribe('NameAsyncValidator Directive', () => {
     });
   });
 
+  it('should return a validation error for invalid patterns', (done) => {
+    const inputs = [
+      `Bob!`,
+      `Bob@`,
+      `Bob1`,
+      `(Bob)`,
+      `[Bob]`,
+      `Bob&Ross`,
+      `Bob@Ross`,
+      `Bob"Ross`,
+      `Bob_Ross`,
+    ];
+
+    inputs.forEach((input: string) => {
+      const asyncValidatorFn = nameValidator()(new FormControl(input));
+      asyncValidatorFn.subscribe((errors) => {
+        expect(errors).toEqual({ invalidName: true });
+        done();
+      });
+    });
+  });
+
   it('should return null for valid patterns', (done) => {
     const inputs = [
       `a`,
@@ -62,28 +84,6 @@ fdescribe('NameAsyncValidator Directive', () => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
         expect(errors).toEqual(null);
-        done();
-      });
-    });
-  });
-
-  it('should return a validation error for invalid patterns', (done) => {
-    const inputs = [
-      `Bob!`,
-      `Bob@`,
-      `Bob1`,
-      `(Bob)`,
-      `[Bob]`,
-      `Bob&Ross`,
-      `Bob@Ross`,
-      `Bob"Ross`,
-      `Bob_Ross`,
-    ];
-
-    inputs.forEach((input: string) => {
-      const asyncValidatorFn = nameValidator()(new FormControl(input));
-      asyncValidatorFn.subscribe((errors) => {
-        expect(errors).toEqual({ invalidName: true });
         done();
       });
     });
