@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { LoginRequest } from '../../service/auth/model';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import {
@@ -10,6 +9,7 @@ import * as AuthActionTypes from '../../ngrx/actions/auth.action';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../../service/local-storage/local-storage.service';
 import { User } from '../../shared/model';
+import { LoginRequest } from '../../ngrx/reducers/auth.reducer';
 
 @Component({
   selector: 'app-login-modal',
@@ -22,6 +22,7 @@ export class LoginModalComponent implements OnInit {
   isLoading$: Observable<boolean>;
   loginRequestModel: LoginRequest = { username: '', password: '' };
   @Output() closeModalEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() switchModalEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(
     private readonly store: Store,
@@ -35,6 +36,10 @@ export class LoginModalComponent implements OnInit {
 
   hideLoginComponent(): void {
     this.closeModalEmitter.emit();
+  }
+
+  switchModal(): void {
+    this.switchModalEmitter.emit();
   }
 
   onSubmit(): void {

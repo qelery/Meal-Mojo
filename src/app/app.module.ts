@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -23,15 +23,20 @@ import { AgmCoreModule } from '@agm/core';
 import { environment } from '../environments/environment';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { LoginModalComponent } from './components/modal/login-modal/login-modal.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, reducers } from './ngrx/state/app.state';
 import { authInterceptorProviders } from './service/http-request/helpers/auth-http-interceptor.service';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule,
+} from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthEffects } from './ngrx/effects/auth.effects';
+import { RegisterModalComponent } from './components/modal/register-modal/register-modal.component';
+import { NameAsyncValidatorDirective } from './shared/custom-validators/name-name-async-validator/name-async-validator.directive';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,8 @@ import { AuthEffects } from './ngrx/effects/auth.effects';
     CheckoutComponent,
     OrdersComponent,
     OrderCardComponent,
+    RegisterModalComponent,
+    NameAsyncValidatorDirective,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +77,7 @@ import { AuthEffects } from './ngrx/effects/auth.effects';
     }),
     BrowserAnimationsModule,
     FontAwesomeModule,
+    ReactiveFormsModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

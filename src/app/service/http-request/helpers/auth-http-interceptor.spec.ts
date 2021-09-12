@@ -13,7 +13,7 @@ describe('AuthHttpInterceptor', () => {
   let mockHttpController: HttpTestingController;
 
   beforeEach(() => {
-    const localStorageServiceSpy = jasmine.createSpyObj('TokenStorageService', [
+    const localStorageServiceSpy = jasmine.createSpyObj('LocalStorageService', [
       'getToken',
     ]);
 

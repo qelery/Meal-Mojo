@@ -14,3 +14,14 @@ export const selectLoginError = createSelector(
   authFeature,
   (authState: AuthState) => authState.userLoginState.error,
 );
+
+export const selectRegisterIsLoading = createSelector(
+  authFeature,
+  (authState: AuthState) => authState.userRegistrationState.isLoading,
+);
+
+export const selectRegisterError = createSelector(
+  authFeature,
+  (authState: AuthState) => authState.userRegistrationState.error,
+);
+

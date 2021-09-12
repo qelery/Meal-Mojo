@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageService } from './local-storage.service';
-import { mockUser } from '../../../test/mock-data';
+import { mockUser } from '../../test/mock-data';
 import { User } from '../../shared/model';
 
 fdescribe('LocalStorageService', () => {

@@ -5,21 +5,23 @@ import { HttpRequestService } from '../http-request/http-request.service';
 import { HttpMethod } from '../http-request/helpers/http-methods.helper';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Role } from '../../shared/model';
+import { LoginRequest, RegisterRequest } from '../../ngrx/reducers/auth.reducer';
 
 describe('AuthServiceService', () => {
   let service: AuthService;
   let mockHttpRequestService: jasmine.SpyObj<HttpRequestService>;
 
   beforeEach(() => {
-    mockHttpRequestService = jasmine.createSpyObj('HttpRequestService', ['perform']);
+    mockHttpRequestService = jasmine.createSpyObj('HttpRequestService', [
+      'perform',
+    ]);
 
-    TestBed.configureTestingModule(
-      {
-        imports: [HttpClientTestingModule],
-        providers: [
-          { provide: HttpRequestService, useValue: mockHttpRequestService },
-        ]
-      });
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: HttpRequestService, useValue: mockHttpRequestService },
+      ],
+    });
     service = TestBed.inject(AuthService);
   });
 
@@ -28,7 +30,7 @@ describe('AuthServiceService', () => {
   });
 
   it('should use the http service to login user', () => {
-    const loginRequest = { username: '', password: '' };
+    const loginRequest: LoginRequest = { username: '', password: '' };
 
     service.login(loginRequest);
 
@@ -40,7 +42,7 @@ describe('AuthServiceService', () => {
   });
 
   it('should use the http service to register user', () => {
-    const userRegistrationRequest = {
+    const registrationRequest: RegisterRequest = {
       email: 'john@example.com',
       password: 'password',
       role: Role.CUSTOMER,
@@ -48,12 +50,12 @@ describe('AuthServiceService', () => {
       lastName: 'smith',
     };
 
-    service.register(userRegistrationRequest);
+    service.register(registrationRequest);
 
     expect(mockHttpRequestService.perform).toHaveBeenCalledWith(
       HttpMethod.POST,
       '/api/users/register',
-      userRegistrationRequest
+      registrationRequest
     );
   });
 });

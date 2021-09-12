@@ -1,9 +1,5 @@
-import {
-  LoginRequest,
-  LoginResponse,
-  RegisterRequest,
-} from '../app/service/auth/model';
-import { Role, User } from '../app/shared/model';
+import { Role, User } from '../shared/model';
+import { LoginRequest, LoginResponse, RegisterRequest } from '../ngrx/reducers/auth.reducer';
 
 export const mockUser: User = {
   email: 'john@example.com',

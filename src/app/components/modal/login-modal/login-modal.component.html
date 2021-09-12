@@ -21,7 +21,7 @@
         </button>
       </form>
     </div>
-    <h5><a>Create an account</a></h5>
+    <h5><a (click)="switchModal()">Create an account</a></h5>
     <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
   </div>
 </div>
