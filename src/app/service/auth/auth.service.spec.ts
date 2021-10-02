@@ -1,61 +1,60 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
-import { HttpRequestService } from '../http-request/http-request.service';
-import { HttpMethod } from '../http-request/helpers/http-methods.helper';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Role } from '../../shared/model';
-import { LoginRequest, RegisterRequest } from '../../ngrx/reducers/auth.reducer';
+import {
+  HttpClientTestingModule,
+  HttpTestingController, TestRequest,
+} from '@angular/common/http/testing';
+import { environment } from '../../../environments/environment';
+import {
+  mockLoginRequest,
+  mockLoginResponse,
+  mockRegisterRequest,
+} from '../../test/mock-data';
+import { AuthHttpInterceptor } from '../auth-http-interceptor/auth-http-interceptor.service';
 
-describe('AuthServiceService', () => {
-  let service: AuthService;
-  let mockHttpRequestService: jasmine.SpyObj<HttpRequestService>;
+fdescribe('AuthServiceService', () => {
+  let authService: AuthService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    mockHttpRequestService = jasmine.createSpyObj('HttpRequestService', [
-      'perform',
-    ]);
-
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [
-        { provide: HttpRequestService, useValue: mockHttpRequestService },
-      ],
+      providers: [AuthHttpInterceptor],
     });
-    service = TestBed.inject(AuthService);
+    authService = TestBed.inject(AuthService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(authService).toBeTruthy();
   });
 
-  it('should use the http service to login user', () => {
-    const loginRequest: LoginRequest = { username: '', password: '' };
+  it('should use the http service to login user', (done) => {
+    authService.login(mockLoginRequest).subscribe((resp) => {
+      expect(resp).toEqual(mockLoginResponse);
+      done();
+    });
 
-    service.login(loginRequest);
+    const httpRequest: TestRequest = httpMock.expectOne(`${environment.restApiUrl}/api/users/login`);
+    expect(httpRequest.request.method).toBe('POST');
+    expect(httpRequest.request.body).toBe(mockLoginRequest);
 
-    expect(mockHttpRequestService.perform).toHaveBeenCalledWith(
-      HttpMethod.POST,
-      '/api/users/login',
-      loginRequest
-    );
+    httpRequest.flush(mockLoginResponse);
   });
 
-  it('should use the http service to register user', () => {
-    const registrationRequest: RegisterRequest = {
-      email: 'john@example.com',
-      password: 'password',
-      role: Role.CUSTOMER,
-      firstName: 'john',
-      lastName: 'smith',
-    };
+  it('should use the http service to register user', (done) => {
+    authService.register(mockRegisterRequest).subscribe((resp) => {
+      expect(resp).toEqual(mockLoginResponse);
+      done();
+    });
 
-    service.register(registrationRequest);
-
-    expect(mockHttpRequestService.perform).toHaveBeenCalledWith(
-      HttpMethod.POST,
-      '/api/users/register',
-      registrationRequest
+    const httpRequest: TestRequest = httpMock.expectOne(
+      `${environment.restApiUrl}/api/users/register`
     );
+    expect(httpRequest.request.method).toBe('POST');
+    expect(httpRequest.request.body).toBe(mockRegisterRequest);
+
+    httpRequest.flush(mockLoginResponse);
   });
 });

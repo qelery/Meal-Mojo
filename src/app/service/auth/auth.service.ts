@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpRequestService } from '../http-request/http-request.service';
-import { HttpMethod } from '../http-request/helpers/http-methods.helper';
 
 import { Observable } from 'rxjs';
-import { LoginRequest, LoginResponse, RegisterRequest } from '../../ngrx/reducers/auth.reducer';
-
-const { POST } = HttpMethod;
+import {
+  LoginRequest,
+  LoginResponse,
+  RegisterRequest,
+} from '../../ngrx/reducers/auth.reducer';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 // TODO: refresh jwt token?
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private readonly httpRequestService: HttpRequestService) {}
+  constructor(private readonly http: HttpClient) {}
 
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.httpRequestService.perform(
-      POST,
-      '/api/users/login',
+    return this.http.post<LoginResponse>(
+      `${environment.restApiUrl}/api/users/login`,
       loginRequest
     );
   }
 
   register(registerRequest: RegisterRequest): Observable<LoginResponse> {
-    return this.httpRequestService.perform(
-      POST,
-      '/api/users/register',
+    return this.http.post<LoginResponse>(
+      `${environment.restApiUrl}/api/users/register`,
       registerRequest
     );
   }

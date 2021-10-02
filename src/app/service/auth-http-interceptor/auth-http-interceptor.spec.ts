@@ -6,9 +6,9 @@ import {
   TestRequest,
 } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { LocalStorageService } from '../../local-storage/local-storage.service';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
-describe('AuthHttpInterceptor', () => {
+fdescribe('AuthHttpInterceptor', () => {
   let mockLocalStorageService: jasmine.SpyObj<LocalStorageService>;
   let mockHttpController: HttpTestingController;
 
@@ -35,7 +35,17 @@ describe('AuthHttpInterceptor', () => {
     mockHttpController = TestBed.inject(HttpTestingController);
   });
 
-  it('should add Authorization headers to request if token exists in local storage', inject(
+  it('should add Content-Type application/json header to request', inject(
+    [HttpClient],
+    (http: HttpClient) => {
+      http.get('/api/1').subscribe();
+
+      const httpRequest: TestRequest = mockHttpController.expectOne('/api/1');
+      expect(httpRequest.request.headers.get('Content-Type')).toEqual('application/json');
+    }
+  ));
+
+  it('should add Authorization header to request if token exists in local storage', inject(
     [HttpClient],
     (http: HttpClient) => {
       mockLocalStorageService.getToken.and.returnValue('123abc');
@@ -46,7 +56,7 @@ describe('AuthHttpInterceptor', () => {
     }
   ));
 
-  it('should not add Authorization headers to request if token does not exist in local storage', inject(
+  it('should not add Authorization header to request if token does not exist in local storage', inject(
     [HttpClient],
     (http: HttpClient) => {
       mockLocalStorageService.getToken.and.returnValue(undefined);

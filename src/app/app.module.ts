@@ -27,7 +27,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { metaReducers, reducers } from './ngrx/state/app.state';
-import { authInterceptorProviders } from './service/http-request/helpers/auth-http-interceptor.service';
+import { authInterceptorProviders } from './service/auth-http-interceptor/auth-http-interceptor.service';
 import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
