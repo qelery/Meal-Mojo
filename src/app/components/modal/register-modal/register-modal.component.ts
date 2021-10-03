@@ -8,10 +8,11 @@ import {
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { nameValidator } from '../../../shared/custom-validators/name-name-async-validator/name-async-validator.directive';
+import { nameValidator } from '../../../shared/custom-validators/name-async-validator/name-async-validator.directive';
 import { RegisterRequest } from '../../../ngrx/reducers/auth.reducer';
 import { Role, User } from '../../../shared/model';
 import * as AuthActions from '../../../ngrx/actions/auth.action';
+import { sameValueValidator } from '../../../shared/custom-validators/same-value-validator/same-value-validator.directive';
 
 const REGEX_NUMBER_OR_UPPERCASE = '^(?=.*[A-Z0-9]).*$';
 const MIN_PASS_LEN = 6;
@@ -30,25 +31,31 @@ export class RegisterModalComponent implements OnInit {
   faTimes = faTimes;
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
-  registrationForm = this.fb.group({
-    firstName: ['', Validators.required, nameValidator()],
-    lastName: [null, Validators.required, nameValidator()],
-    email: ['', { updateOn: 'blur', validators: [Validators.email] }],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.minLength(MIN_PASS_LEN),
-        Validators.pattern(REGEX_NUMBER_OR_UPPERCASE),
+  registrationForm = this.fb.group(
+    {
+      firstName: ['', Validators.required, nameValidator()],
+      lastName: ['', Validators.required, nameValidator()],
+      email: ['', { updateOn: 'blur', validators: [Validators.email] }],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(MIN_PASS_LEN),
+          Validators.pattern(REGEX_NUMBER_OR_UPPERCASE),
+        ],
       ],
-    ],
-    confirmPass: ['', [Validators.required]],
-  });
-  pageOneVisible = true;
-  pageTwoVisible = false;
-  pwReqLengthIsMet = false;
-  pwReqPatternIsMet = false;
-  pwConfirmFieldMatches = false;
+      confirmPass: [''],
+    },
+    { validators: sameValueValidator('password', 'confirmPass') }
+  );
+
+  // Todo, refactor this logic to the HTML using new errors
+  // pageOneVisible = true;
+  // pageTwoVisible = false;
+  // pwReqLengthIsMet = false;
+  // pwReqPatternIsMet = false;
+  // pwConfirmFieldMatches = false;
+
   @Output() closeModalEmitter: EventEmitter<any> = new EventEmitter();
   @Output() switchModalEmitter: EventEmitter<any> = new EventEmitter();
 
@@ -68,6 +75,8 @@ export class RegisterModalComponent implements OnInit {
     this.pageTwoVisible = true;
   }
 
+  // TODO: can this be cleaned up?
+
   checkPasswordRequirements(): void {
     this.pwReqLengthIsMet = false;
     this.pwReqPatternIsMet = false;
@@ -79,10 +88,8 @@ export class RegisterModalComponent implements OnInit {
       return;
     }
 
-    this.pwReqLengthIsMet =
-      !this.registrationForm.get('password').errors?.minlength;
-    this.pwReqPatternIsMet =
-      !this.registrationForm.get('password').errors?.pattern;
+    this.pwReqLengthIsMet = !this.registrationForm.get('password').errors?.minlength;
+    this.pwReqPatternIsMet = !this.registrationForm.get('password').errors?.pattern;
     this.pwConfirmFieldMatches =
       this.registrationForm.get('password').value ===
       this.registrationForm.get('confirmPass').value;

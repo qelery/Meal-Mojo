@@ -36,6 +36,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthEffects } from './ngrx/effects/auth.effects';
 import { RegisterModalComponent } from './components/modal/register-modal/register-modal.component';
 import { NameAsyncValidatorDirective } from './shared/custom-validators/name-async-validator/name-async-validator.directive';
+import { SameValueValidatorDirective } from './shared/custom-validators/same-value-validator/same-value-validator.directive';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { NameAsyncValidatorDirective } from './shared/custom-validators/name-asy
     OrderCardComponent,
     RegisterModalComponent,
     NameAsyncValidatorDirective,
+    SameValueValidatorDirective,
   ],
   imports: [
     BrowserModule,

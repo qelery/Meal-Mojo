@@ -14,7 +14,6 @@ describe('NameAsyncValidator Directive', () => {
       expect(formControl.errors).toBeNull();
     });
 
-
     const validCharsButNoLetterInputs = [`'`, `-`, `.`, `,`, `'-.,`];
 
     validCharsButNoLetterInputs.forEach((input: string) => {
@@ -106,7 +105,7 @@ describe('NameAsyncValidator Directive', () => {
     const invalidInput1 = '#$%^&';
     const invalidInput2 = '#$%^&*+';
 
-    let formControl = new FormControl(invalidInput1, [], nameValidator());
+    const formControl = new FormControl(invalidInput1, [], nameValidator());
     tick(ASYNC_VALIDATOR_DELAY_MS);
     expect(formControl.errors).toEqual({ invalidName: true });
     formControl.setValue(invalidInput2);
