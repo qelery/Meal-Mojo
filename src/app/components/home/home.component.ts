@@ -1,22 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { BrickInfo, brickInfo } from "../brick/brickInfo";
-import { Router } from "@angular/router";
+import { Component } from '@angular/core';
+import { infoTiles } from './info-tiles';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
+  tiles = infoTiles;
 
-  brickInfo: BrickInfo[];
-  loadSignInCard: boolean;
-
-  constructor() {
-    this.brickInfo = brickInfo;
-    this.loadSignInCard = false;
-  }
-
-  ngOnInit(): void {}
+  constructor() {}
 }
 

@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { AddressBarComponent } from './components/address-bar/address-bar.component';
-import { BrickComponent } from './components/brick/brick.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { LogoutComponent } from './components/logout/logout.component';
@@ -44,7 +43,6 @@ import { NameAsyncValidatorDirective } from './shared/custom-validators/name-nam
     NavbarComponent,
     BannerComponent,
     AddressBarComponent,
-    BrickComponent,
     HomeComponent,
     LoginModalComponent,
     LogoutComponent,

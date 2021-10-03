@@ -1,6 +1,18 @@
 <app-banner></app-banner>
-<app-brick
-  *ngFor="let brick of brickInfo; index as i"
-  [brickInfo]="brick"
-  [direction]=" i % 2 === 0 ? '' : 'slant-left' ">
-</app-brick>
+<div *ngFor="let tile of tiles; index as i">
+  <div [ngClass]="i % 2 === 0 ? '' : 'slant-left'">
+    <div class="b-wrapper">
+      <div class="b-text-container">
+        <div class="b-text-flex">
+          <div class="b-text-wrapper">
+            <h2>{{tile.heading}}</h2>
+            <p>{{tile.text}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="b-image" [ngStyle]="{backgroundImage: 'url('+tile.imageUrl+')'}">
+        <div class="b-slanted-blocker"></div>
+      </div>
+    </div>
+  </div>
+</div>
