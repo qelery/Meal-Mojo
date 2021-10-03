@@ -35,7 +35,6 @@
     "@ngrx/effects": "^12.4.0",
     "@ngrx/store": "^12.4.0",
     "@ngrx/store-devtools": "^12.4.0",
-    "@types/googlemaps": "^3.43.3",
     "chromedriver": "^92.0.1",
     "express": "^4.17.1",
     "moment": "^2.29.1",
