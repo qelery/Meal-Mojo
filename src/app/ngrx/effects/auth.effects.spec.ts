@@ -13,6 +13,7 @@ import {
   loginUser,
   loginUserFailure,
   loginUserSuccess,
+  logoutUser,
   registerUser,
   registerUserFailure,
   registerUserSuccess,
@@ -38,6 +39,7 @@ fdescribe('AuthEffects', () => {
     const tokenSpy = jasmine.createSpyObj('LocalStorageService', [
       'saveToken',
       'saveUser',
+      'clear',
     ]);
 
     TestBed.configureTestingModule({
@@ -208,6 +210,16 @@ fdescribe('AuthEffects', () => {
           );
         });
       });
+    });
+  });
+
+  describe('on logoutUser$', () => {
+    it('should call local LocalStorageService to clear token and user info', () => {
+      actions$ = of(logoutUser());
+
+      authEffects.logoutUser$.subscribe();
+
+      expect(localStorageServiceSpy.clear).toHaveBeenCalled();
     });
   });
 });

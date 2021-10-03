@@ -23,7 +23,7 @@ export class AuthEffects {
   constructor(
     private readonly actions$: Actions,
     private readonly authService: AuthService,
-    private readonly localStorage: LocalStorageService
+    private readonly localStorageService: LocalStorageService
   ) {}
 
   loginUser$ = createEffect(() => {
@@ -46,8 +46,8 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(AuthActionTypes.LOGIN_USER_SUCCESS),
         map(({ loginResponse }: any) => {
-          this.localStorage.saveToken(loginResponse.token);
-          this.localStorage.saveUser(loginResponse.userInfo);
+          this.localStorageService.saveToken(loginResponse.token);
+          this.localStorageService.saveUser(loginResponse.userInfo);
         })
       );
     },
@@ -74,9 +74,19 @@ export class AuthEffects {
       return this.actions$.pipe(
         ofType(AuthActionTypes.REGISTER_USER_SUCCESS),
         map(({ registerResponse }: any) => {
-          this.localStorage.saveToken(registerResponse.token);
-          this.localStorage.saveUser(registerResponse.userInfo);
+          this.localStorageService.saveToken(registerResponse.token);
+          this.localStorageService.saveUser(registerResponse.userInfo);
         })
+      );
+    },
+    { dispatch: false }
+  );
+
+  logoutUser$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AuthActionTypes.LOGOUT_USER),
+        map(() => this.localStorageService.clear())
       );
     },
     { dispatch: false }

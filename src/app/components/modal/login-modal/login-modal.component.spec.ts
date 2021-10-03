@@ -9,7 +9,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { LOGIN_ERROR_MSG_403 } from '../../../ngrx/effects/auth.effects';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
-import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
+import * as AuthActions from '../../../ngrx/actions/auth.action';
 import { mockLoginRequest } from '../../../test/mock-data';
 
 fdescribe('LoginModal', () => {
@@ -73,7 +73,7 @@ fdescribe('LoginModal', () => {
   it('should emit event to other auth modal when go to register link clicked', () => {
     spyOn(component.switchModalEmitter, 'emit');
     const goToRegisterLink = fixture.nativeElement.querySelector(
-      '[data-switch-to-register]'
+      '[data-cy="login-switch-to-register"]'
     );
     goToRegisterLink.click();
     expect(component.switchModalEmitter.emit).toHaveBeenCalled();
@@ -84,7 +84,7 @@ fdescribe('LoginModal', () => {
     component.loginRequestModel = mockLoginRequest;
     component.onSubmit();
     expect(mockStore.dispatch).toHaveBeenCalledWith(
-      AuthActionTypes.loginUser({ loginRequest: mockLoginRequest })
+      AuthActions.loginUser({ loginRequest: mockLoginRequest })
     );
   });
 });

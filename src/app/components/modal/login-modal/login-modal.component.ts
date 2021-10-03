@@ -5,7 +5,7 @@ import {
   selectLoginError,
   selectLoginIsLoading,
 } from '../../../ngrx/selectors/auth.selector';
-import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
+import * as AuthActions from '../../../ngrx/actions/auth.action';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
 import { User } from '../../../shared/model';
@@ -44,7 +44,7 @@ export class LoginModalComponent implements OnInit {
 
   onSubmit(): void {
     const loginRequest = { ...this.loginRequestModel };
-    this.store.dispatch(AuthActionTypes.loginUser({ loginRequest }));
+    this.store.dispatch(AuthActions.loginUser({ loginRequest }));
 
     this.localStorageService.userSubject.subscribe((user: User) => {
       if (user) {

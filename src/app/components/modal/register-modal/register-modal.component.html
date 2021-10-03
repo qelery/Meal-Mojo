@@ -1,64 +1,73 @@
 <div class="overlay">
   <div class="wrapper">
     <div class="exit">
-      <fa-icon (click)="hideModal()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
+      <fa-icon
+        class="close"
+        [icon]="faTimes"
+        transform="grow-19"
+        (click)="hideModal()"
+        data-cy="register-close"
+      >
+      </fa-icon>
     </div>
     <div class="title">
       <h4>Ready to eat? Register Below!</h4>
     </div>
     <div class="card-body">
-      <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmit()" data-cy="register-form">
         <div *ngIf="pageOneVisible">
 
           <div class="flex-column-center">
             <h5>First Name</h5>
-            <input formControlName="firstName" type="text" class="input">
+            <input formControlName="firstName" type="text" class="input" data-cy="register-first-name">
             <p class="error" *ngIf="registrationForm.get('firstName').errors?.invalidName">Please enter a valid first
               name.</p>
           </div>
           <div class="flex-column-center">
             <h5>Last Last</h5>
-            <input formControlName="lastName" type="text" class="input">
+            <input formControlName="lastName" type="text" class="input" data-cy="register-last-name">
             <p class="error" *ngIf="registrationForm.get('lastName').errors?.invalidName">Please enter a valid last
               name.</p>
           </div>
           <div class="flex-column-center">
             <button class="btn"
-                    [disabled]="!registrationForm.get('firstName').valid || !registrationForm.get('lastName').valid"
-                    (click)="showPageTwo()">
-              <span>Next</span>
+                    [disabled]="registrationForm.get('firstName').invalid || registrationForm.get('lastName').invalid"
+                    (click)="showPageTwo()"
+                    data-cy="register-next">
+              Next
             </button>
           </div>
         </div>
         <div *ngIf="pageTwoVisible">
           <div class="flex-column-center">
             <h5>Email</h5>
-            <input formControlName="email" type="email" class="input">
+            <input formControlName="email" type="email" class="input" data-cy="register-email">
             <p class="error" *ngIf="registrationForm.get('email').errors">Please enter a valid email.</p>
             <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
           </div>
           <div class="flex-row-space col-2">
             <div class="flex-column-center">
               <h5>Password</h5>
-              <input formControlName="password" type="password" class="input" (keyup)="checkPasswordRequirements()">
+              <input formControlName="password" type="password" class="input" (keyup)="checkPasswordRequirements()" data-cy="register-password">
             </div>
             <div class="flex-column-center">
               <h5>Confirm password</h5>
-              <input formControlName="confirmPass" type="password" class="input" (keyup)="checkPasswordRequirements()">
+              <input formControlName="confirmPass" type="password" class="input" (keyup)="checkPasswordRequirements()" data-cy="register-confirm-pass">
             </div>
           </div>
           <div class="requirements">
             <p>Password Requirements: </p>
             <ul>
-              <li [class]="pwReqLengthIsMet ? 'green' : 'red'">At least 6 characters</li>
-              <li [class]="pwReqPatternIsMet ? 'green' : 'red'">At least 1 number or uppercase</li>
-              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'">Password fields must match</li>
+              <li [class]="pwReqLengthIsMet ? 'green' : 'red'" data-cy="register-pw-req">At least 6 characters</li>
+              <li [class]="pwReqPatternIsMet ? 'green' : 'red'" data-cy="register-pw-req">At least 1 number or uppercase</li>
+              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'" data-cy="register-pw-req">Password fields must match</li>
             </ul>
           </div>
           <div class="flex-column-center">
             <button
               [disabled]="registrationForm.invalid || registrationForm.get('password').value !== registrationForm.get('confirmPass').value"
-              type="submit" class="btn">
+              type="submit" class="btn"
+              data-cy="register-submit">
               <span *ngIf="(isLoading$ | async) === false">Register</span>
               <span *ngIf="isLoading$ | async">Registering...</span>
             </button>
@@ -66,6 +75,7 @@
         </div>
       </form>
     </div>
-    <h5><a (click)="switchModalToLoginModal()" data-switch-to-login>Already have an account?</a></h5>
+    <h5><a (click)="switchModalToLoginModal()"
+           data-cy="register-switch-to-login">Already have an account?</a></h5>
   </div>
 </div>

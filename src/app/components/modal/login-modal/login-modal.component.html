@@ -1,13 +1,18 @@
 <div class="overlay">
   <div class="wrapper">
     <div class="exit">
-      <fa-icon (click)="hideModal()" class="close" [icon]="faTimes" transform="grow-19"></fa-icon>
+      <fa-icon
+        class="close"
+        [icon]="faTimes"
+        transform="grow-19"
+        (click)="hideModal()"
+        data-cy="login-close"></fa-icon>
     </div>
     <div class="title">
       <h4>Welcome back!</h4>
     </div>
     <div class="card-body">
-      <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+      <form class="form" #loginForm="ngForm" (ngSubmit)="onSubmit()" data-cy="login-form">
         <h5>Enter your email</h5>
         <input [(ngModel)]="loginRequestModel.username" name="username" type="text" class="input" placeholder="Email"
                required>
@@ -15,14 +20,14 @@
         <input [(ngModel)]="loginRequestModel.password" name="password" type="password" class="input"
                placeholder="Password"
                required>
-        <button [disabled]="!loginForm.form.valid" type="submit" class="btn">
+        <button [disabled]="!loginForm.form.valid" type="submit" class="btn" data-cy="login-submit">
           <span *ngIf="(isLoading$ | async) === false">Sign In</span>
           <span *ngIf="isLoading$ | async">Signing In...</span>
         </button>
       </form>
     </div>
-    <h5><a (click)="switchToRegisterModal()" data-switch-to-register>Create an account</a></h5>
-    <p class="error" *ngIf="(error$ | async)">{{ (error$ | async) }}</p>
+    <h5><a (click)="switchToRegisterModal()" data-cy="login-switch-to-register">Create an account</a></h5>
+    <p class="error" *ngIf="(error$ | async)" data-cy="login-error">{{ (error$ | async) }}</p>
   </div>
 </div>
 

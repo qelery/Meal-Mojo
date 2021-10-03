@@ -25,19 +25,19 @@
     </ul>
     <ul *ngIf="!isUserLoggedIn" class="nav-right">
       <li id="register"  class="active">
-        <a (click)="showRegister()">
+        <a (click)="showRegister()" data-cy="navbar-register">
           Register
         </a>
       </li>
       <li class="active">
-        <a id="login"  (click)="showLoginModal()">
+        <a id="login"  (click)="showLoginModal()" data-cy="navbar-login">
           Log In
         </a>
       </li>
     </ul>
     <ul *ngIf="isUserLoggedIn" class="nav-right small">
       <li>
-        <a  [routerLink]="['/logout']">
+        <a  [routerLink]="['/logout']" data-cy="navbar-logout">
           Log Out
         </a>
       </li>

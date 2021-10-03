@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterModalComponent } from './register-modal.component';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState, initialAppState } from '../../../ngrx/state/app.state';
@@ -11,7 +11,7 @@ import {
 } from '../../../ngrx/reducers/auth.reducer';
 import { REGISTER_ERROR_MSG_409 } from '../../../ngrx/effects/auth.effects';
 import { mockRegisterRequest } from '../../../test/mock-data';
-import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
+import * as AuthActions from '../../../ngrx/actions/auth.action';
 
 fdescribe('RegisterModalComponent', () => {
   let component: RegisterModalComponent;
@@ -123,10 +123,10 @@ fdescribe('RegisterModalComponent', () => {
     expect(component.pwConfirmFieldMatches).toBeFalse();
   });
 
-  it('should emit event to other auth modal when go to login link clicked', () => {
+  it('should emit event to switch to other auth modal when go to login link clicked', () => {
     spyOn(component.switchModalEmitter, 'emit');
     const goToRegisterLink = fixture.nativeElement.querySelector(
-      '[data-switch-to-login]'
+      '[data-cy="register-switch-to-login"]'
     );
     goToRegisterLink.click();
     expect(component.switchModalEmitter.emit).toHaveBeenCalled();
@@ -145,7 +145,7 @@ fdescribe('RegisterModalComponent', () => {
     component.onSubmit();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(
-      AuthActionTypes.registerUser({ registerRequest: mockRegisterRequest })
+      AuthActions.registerUser({ registerRequest: mockRegisterRequest })
     );
   });
 });

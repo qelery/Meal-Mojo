@@ -8,6 +8,7 @@ export enum AuthActionTypes {
   REGISTER_USER = '[REGISTER MODAL] REGISTER USER',
   REGISTER_USER_SUCCESS = '[REGISTER MODAL] REGISTER USER SUCCESS',
   REGISTER_USER_FAILURE = '[REGISTER MODAL] REGISTER USER FAILURE',
+  LOGOUT_USER = '[LOGOUT] LOGOUT USER',
 }
 
 export const loginUser = createAction(
@@ -38,4 +39,8 @@ export const registerUserSuccess = createAction(
 export const registerUserFailure = createAction(
   AuthActionTypes.REGISTER_USER_FAILURE,
   props<{ error: string }>()
+);
+
+export const logoutUser = createAction(
+  AuthActionTypes.LOGOUT_USER
 );

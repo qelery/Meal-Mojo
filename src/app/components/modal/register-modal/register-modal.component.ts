@@ -11,7 +11,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { nameValidator } from '../../../shared/custom-validators/name-name-async-validator/name-async-validator.directive';
 import { RegisterRequest } from '../../../ngrx/reducers/auth.reducer';
 import { Role, User } from '../../../shared/model';
-import * as AuthActionTypes from '../../../ngrx/actions/auth.action';
+import * as AuthActions from '../../../ngrx/actions/auth.action';
 
 const REGEX_NUMBER_OR_UPPERCASE = '^(?=.*[A-Z0-9]).*$';
 
@@ -103,7 +103,8 @@ export class RegisterModalComponent implements OnInit {
       password: this.registrationForm.get('password').value,
       role: Role.CUSTOMER,
     };
-    this.store.dispatch(AuthActionTypes.registerUser({ registerRequest }));
+
+    this.store.dispatch(AuthActions.registerUser({ registerRequest }));
 
     this.localStorageService.userSubject.subscribe((user: User) => {
       if (user) {
