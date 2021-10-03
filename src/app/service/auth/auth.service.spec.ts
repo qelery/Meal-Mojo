@@ -3,7 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { AuthService } from './auth.service';
 import {
   HttpClientTestingModule,
-  HttpTestingController, TestRequest,
+  HttpTestingController,
+  TestRequest,
 } from '@angular/common/http/testing';
 import { environment } from '../../../environments/environment';
 import {
@@ -12,6 +13,7 @@ import {
   mockRegisterRequest,
 } from '../../test/mock-data';
 import { AuthHttpInterceptor } from '../auth-http-interceptor/auth-http-interceptor.service';
+import { LoginResponse } from '../../ngrx/reducers/auth.reducer';
 
 fdescribe('AuthServiceService', () => {
   let authService: AuthService;
@@ -31,30 +33,32 @@ fdescribe('AuthServiceService', () => {
   });
 
   it('should use the http service to login user', (done) => {
-    authService.login(mockLoginRequest).subscribe((resp) => {
-      expect(resp).toEqual(mockLoginResponse);
+    authService.login(mockLoginRequest).subscribe((res: LoginResponse) => {
+      expect(res).toEqual(mockLoginResponse);
       done();
     });
 
-    const httpRequest: TestRequest = httpMock.expectOne(`${environment.restApiUrl}/api/users/login`);
-    expect(httpRequest.request.method).toBe('POST');
-    expect(httpRequest.request.body).toBe(mockLoginRequest);
+    const req = httpMock.expectOne(`${environment.restApiUrl}/api/users/login`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(mockLoginRequest);
 
-    httpRequest.flush(mockLoginResponse);
+    req.flush(mockLoginResponse);
   });
 
   it('should use the http service to register user', (done) => {
-    authService.register(mockRegisterRequest).subscribe((resp) => {
-      expect(resp).toEqual(mockLoginResponse);
-      done();
-    });
+    authService
+      .register(mockRegisterRequest)
+      .subscribe((resp: LoginResponse) => {
+        expect(resp).toEqual(mockLoginResponse);
+        done();
+      });
 
-    const httpRequest: TestRequest = httpMock.expectOne(
+    const req = httpMock.expectOne(
       `${environment.restApiUrl}/api/users/register`
     );
-    expect(httpRequest.request.method).toBe('POST');
-    expect(httpRequest.request.body).toBe(mockRegisterRequest);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(mockRegisterRequest);
 
-    httpRequest.flush(mockLoginResponse);
+    req.flush(mockLoginResponse);
   });
 });
