@@ -1,18 +1,20 @@
 import { nameValidator } from './name-async-validator.directive';
 import { FormControl } from '@angular/forms';
-import { fakeAsync, tick } from "@angular/core/testing";
+import { fakeAsync, tick } from '@angular/core/testing';
+
+const ASYNC_VALIDATOR_DELAY_MS = 500;
 
 describe('NameAsyncValidator Directive', () => {
-  it('should require at least one letter', (done) => {
+  it('should require at least one letter', fakeAsync(() => {
     const validInputs = ['a', 'A', 'z', 'Z', 'À', 'ÿ'];
 
     validInputs.forEach((input: string) => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
         expect(errors).toEqual(null);
-        done();
       });
     });
+    tick(ASYNC_VALIDATOR_DELAY_MS);
 
     const validCharsButNoLetterInputs = [`'`, `-`, `.`, `,`, `'-.,`];
 
@@ -20,80 +22,25 @@ describe('NameAsyncValidator Directive', () => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
         expect(errors).toEqual({ invalidName: true });
-        done();
       });
     });
-  });
+    tick(ASYNC_VALIDATOR_DELAY_MS);
+  }));
 
-  // it('should return a validation error for blank inputs', () => {
-  //   const inputs = ['', ' ', '\n\n\n', ' \n\t\r'];
-  //
-  //   inputs.forEach((input: string) => {
-  //     const asyncValidatorFn = nameValidator()(new FormControl(input));
-  //     asyncValidatorFn.subscribe((errors) => {
-  //       expect(errors).toEqual({ blankName: true });
-  //
-  //       expect(1).toBe(11);
-  //       // done();
-  //     });
-  //   });
-  // });
-  // it('should return a validation error for blank inputs', fakeAsync(() => {
-  //   const inputs = ['', ' ', '\n\n\n', ' \n\t\r'];
-  //
-  //   inputs.forEach((input: string) => {
-  //     const asyncValidatorFn = nameValidator()(new FormControl(input));
-  //     asyncValidatorFn.subscribe((errors) => {
-  //       expect(errors).toEqual({ blankName: true });
-  //     });
-  //     tick();
-  //   });
-  // }));
   it('should return a validation error for blank inputs', fakeAsync(() => {
     const inputs = ['', ' ', '\n\n\n', ' \n\t\r'];
 
-    const asyncValidatorFn = nameValidator()(new FormControl(inputs[0]));
-    asyncValidatorFn.subscribe((errors) => {
-      expect(errors).toEqual({ blankName: true });
+    inputs.forEach((input: string) => {
+      const asyncValidatorFn = nameValidator()(new FormControl(input));
+      asyncValidatorFn.subscribe((errors) => {
+        expect(errors).toEqual({ blankName: true });
+      });
     });
-    tick();
 
-    // inputs.forEach((input: string) => {
-    //   const asyncValidatorFn = nameValidator()(new FormControl(input));
-    //   asyncValidatorFn.subscribe((errors) => {
-    //     expect(errors).toEqual({ blankName: true });
-    //   });
-    //   tick();
-    // });
+    tick(ASYNC_VALIDATOR_DELAY_MS);
   }));
-  // it('should return a validation error for blank inputs', fakeAsync(() => {
-  //   const inputs = ['', ' ', '\n\n\n', ' \n\t\r'];
-  //
-  //   inputs.forEach((input: string) => {
-  //     const asyncValidatorFn = nameValidator()(new FormControl(input));
-  //     let actualErrors;
-  //     asyncValidatorFn.subscribe((errors) => {
-  //       actualErrors = errors;
-  //     });
-  //     tick();
-  //     expect(actualErrors).toEqual({ blankName: true });
-  //   });
-  // }));
-  // it('should return a validation error for blank inputs', fakeAsync(() => {
-  //   const inputs = ['', ' ', '\n\n\n', ' \n\t\r'];
-  //
-  //   inputs.forEach((input: string) => {
-  //     const asyncValidatorFn = nameValidator()(new FormControl(input));
-  //     let actualErrors;
-  //     asyncValidatorFn.subscribe((errors) => {
-  //       actualErrors = errors;
-  //     });
-  //     tick();
-  //     expect(actualErrors).toEqual({ blankName: true });
-  //   });
-  // }));
 
-  it('should return a validation error for invalid patterns', (done) => {
+  it('should return a validation error for invalid patterns', fakeAsync(() => {
     const inputs = [
       `Bob!`,
       `Bob@`,
@@ -110,12 +57,13 @@ describe('NameAsyncValidator Directive', () => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
         expect(errors).toEqual({ invalidName: true });
-        done();
       });
     });
-  });
 
-  it('should return null for valid patterns', (done) => {
+    tick(ASYNC_VALIDATOR_DELAY_MS);
+  }));
+
+  it('should return null for valid patterns', fakeAsync(() => {
     const inputs = [
       `a`,
       `A`,
@@ -141,8 +89,9 @@ describe('NameAsyncValidator Directive', () => {
       const asyncValidatorFn = nameValidator()(new FormControl(input));
       asyncValidatorFn.subscribe((errors) => {
         expect(errors).toEqual(null);
-        done();
       });
     });
-  });
+
+    tick(ASYNC_VALIDATOR_DELAY_MS);
+  }));
 });

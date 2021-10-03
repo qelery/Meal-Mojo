@@ -66,7 +66,7 @@ describe('AuthEffects', () => {
 
   describe('on loginUser$', () => {
     describe('should fire successfully', () => {
-      it('and dispatch a success action', (done) => {
+      it('and dispatch a success action', () => {
         authServiceSpy.login.and.returnValue(of(mockLoginResponse));
         actions$ = of(loginUser({ loginRequest: mockLoginRequest }));
 
@@ -77,7 +77,6 @@ describe('AuthEffects', () => {
           expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
             mockLoginRequest
           );
-          done();
         });
       });
 
@@ -97,7 +96,7 @@ describe('AuthEffects', () => {
     });
 
     describe('should fire unsuccessfully', () => {
-      it('and dispatch failure action with a canned error message for a 403 response', (done) => {
+      it('and dispatch failure action with a canned error message for a 403 response', () => {
         const errorResp = new HttpErrorResponse({
           error: 'Error message from backend',
           status: 403,
@@ -112,11 +111,10 @@ describe('AuthEffects', () => {
           expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
             mockLoginRequest
           );
-          done();
         });
       });
 
-      it('and dispatch failure action with canned error message for a non-403 response', (done) => {
+      it('and dispatch failure action with canned error message for a non-403 response', () => {
         const errorResp = new HttpErrorResponse({
           error: 'Error message from backend',
           status: 500,
@@ -129,7 +127,6 @@ describe('AuthEffects', () => {
           expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
             mockLoginRequest
           );
-          done();
         });
       });
     });
@@ -137,7 +134,7 @@ describe('AuthEffects', () => {
 
   describe('on registerUser$', () => {
     describe('should fire successfully', () => {
-      it('and dispatch a success action', (done) => {
+      it('and dispatch a success action', () => {
         authServiceSpy.register.and.returnValue(of(mockLoginResponse));
         actions$ = of(registerUser({ registerRequest: mockRegisterRequest }));
 
@@ -148,7 +145,6 @@ describe('AuthEffects', () => {
           expect(authServiceSpy.register).toHaveBeenCalledWith(
             mockRegisterRequest
           );
-          done();
         });
       });
 
@@ -170,7 +166,7 @@ describe('AuthEffects', () => {
     });
 
     describe('should fire unsuccessfully', () => {
-      it('and dispatch failure action with canned error message for a 409 response', (done) => {
+      it('and dispatch failure action with canned error message for a 409 response', () => {
         const errResponse = new HttpErrorResponse({
           error: 'Error message from backend',
           status: 409,
@@ -187,7 +183,6 @@ describe('AuthEffects', () => {
           expect(authServiceSpy.register).toHaveBeenCalledOnceWith(
             mockRegisterRequest
           );
-          done();
         });
       });
 

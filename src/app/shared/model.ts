@@ -1,5 +1,3 @@
-import { GeocoderGeometry } from '@agm/core';
-
 export enum Role {
   CUSTOMER = 'CUSTOMER',
   MERCHANT = 'MERCHANT',
@@ -15,8 +13,8 @@ export interface User {
 
 export interface Address {
   street1: string;
-  street2?: string;
-  street3?: string;
+  street2: string;
+  street3: string;
   city: string;
   zipcode: string;
   latitude: number;
