@@ -14,6 +14,7 @@ import { Role, User } from '../../../shared/model';
 import * as AuthActions from '../../../ngrx/actions/auth.action';
 
 const REGEX_NUMBER_OR_UPPERCASE = '^(?=.*[A-Z0-9]).*$';
+const MIN_PASS_LEN = 6;
 
 // TODO: Handle username already exists
 // TODO: Handle server error
@@ -37,7 +38,7 @@ export class RegisterModalComponent implements OnInit {
       '',
       [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(MIN_PASS_LEN),
         Validators.pattern(REGEX_NUMBER_OR_UPPERCASE),
       ],
     ],

@@ -6,7 +6,7 @@ import * as AuthActions from '../../ngrx/actions/auth.action';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
-fdescribe('LogoutComponent', () => {
+describe('LogoutComponent', () => {
   let component: LogoutComponent;
   let fixture: ComponentFixture<LogoutComponent>;
   let mockStore: MockStore;

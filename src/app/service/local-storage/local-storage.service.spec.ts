@@ -4,7 +4,7 @@ import { LocalStorageService } from './local-storage.service';
 import { mockUser } from '../../test/mock-data';
 import { User } from '../../shared/model';
 
-fdescribe('LocalStorageService', () => {
+describe('LocalStorageService', () => {
   let localStorageService: LocalStorageService;
   const TOKEN_KEY = 'auth-token';
   const USER_KEY = 'auth-user';

@@ -8,9 +8,9 @@ import {
 import { AuthHttpInterceptor } from '../auth-http-interceptor/auth-http-interceptor.service';
 import { mockAddress, mockRestaurantList } from '../../test/mock-data';
 import { Restaurant } from '../../shared/model';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env';
 
-fdescribe('RestaurantService', () => {
+describe('RestaurantService', () => {
   let restaurantService: RestaurantService;
   let httpMock: HttpTestingController;
 
@@ -27,12 +27,11 @@ fdescribe('RestaurantService', () => {
     expect(restaurantService).toBeTruthy();
   });
 
-  it('should use the http service to get nearby restaurants', (done) => {
+  it('should use the http service to get nearby restaurants', () => {
     restaurantService
       .getRestaurantsNearby(mockAddress)
       .subscribe((res: Restaurant[]) => {
         expect(res).toEqual(mockRestaurantList);
-        done();
       });
 
     const req = httpMock.expectOne((httpReq) =>
@@ -48,13 +47,12 @@ fdescribe('RestaurantService', () => {
     req.flush(mockRestaurantList);
   });
 
-  it('should use the http service to get a restaurant by its id', (done) => {
+  it('should use the http service to get a restaurant by its id', () => {
     const id = 1;
     const expectedRestaurant = mockRestaurantList[0];
 
     restaurantService.getRestaurant(id).subscribe((res: Restaurant) => {
       expect(res).toEqual(expectedRestaurant);
-      done();
     });
 
     const req = httpMock.expectOne(

@@ -6,7 +6,7 @@ import {
 import { selectLoginError, selectLoginIsLoading, selectRegisterError, selectRegisterIsLoading } from './auth.selector';
 import { LOGIN_ERROR_MSG_403 } from '../effects/auth.effects';
 
-fdescribe('Auth Selectors', () => {
+describe('Auth Selectors', () => {
   const mockState: AppState = {
     ...initialAppState,
     authState: {

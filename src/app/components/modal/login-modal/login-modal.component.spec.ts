@@ -12,7 +12,7 @@ import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testi
 import * as AuthActions from '../../../ngrx/actions/auth.action';
 import { mockLoginRequest } from '../../../test/mock-data';
 
-fdescribe('LoginModal', () => {
+describe('LoginModal', () => {
   let component: LoginModalComponent;
   let fixture: ComponentFixture<LoginModalComponent>;
   let mockStore: MockStore;

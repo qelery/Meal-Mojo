@@ -48,19 +48,27 @@
           <div class="flex-row-space col-2">
             <div class="flex-column-center">
               <h5>Password</h5>
-              <input formControlName="password" type="password" class="input" (keyup)="checkPasswordRequirements()" data-cy="register-password">
+              <input formControlName="password" type="password" class="input" (keyup)="checkPasswordRequirements()"
+                     data-cy="register-password">
             </div>
             <div class="flex-column-center">
               <h5>Confirm password</h5>
-              <input formControlName="confirmPass" type="password" class="input" (keyup)="checkPasswordRequirements()" data-cy="register-confirm-pass">
+              <input formControlName="confirmPass" type="password" class="input" (keyup)="checkPasswordRequirements()"
+                     data-cy="register-confirm-pass">
             </div>
           </div>
           <div class="requirements">
             <p>Password Requirements: </p>
             <ul>
-              <li [class]="pwReqLengthIsMet ? 'green' : 'red'" data-cy="register-pw-req">At least 6 characters</li>
-              <li [class]="pwReqPatternIsMet ? 'green' : 'red'" data-cy="register-pw-req">At least 1 number or uppercase</li>
-              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'" data-cy="register-pw-req">Password fields must match</li>
+              <li [class]="pwReqLengthIsMet ? 'green' : 'red'" data-cy="register-pw-req">
+                At least 6 characters
+              </li>
+              <li [class]="pwReqPatternIsMet ? 'green' : 'red'" data-cy="register-pw-req">
+                At least 1 number or uppercase
+              </li>
+              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'" data-cy="register-pw-req">
+                Password fields must match
+              </li>
             </ul>
           </div>
           <div class="flex-column-center">

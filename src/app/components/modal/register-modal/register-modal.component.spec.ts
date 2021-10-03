@@ -13,7 +13,7 @@ import { REGISTER_ERROR_MSG_409 } from '../../../ngrx/effects/auth.effects';
 import { mockRegisterRequest } from '../../../test/mock-data';
 import * as AuthActions from '../../../ngrx/actions/auth.action';
 
-fdescribe('RegisterModalComponent', () => {
+describe('RegisterModalComponent', () => {
   let component: RegisterModalComponent;
   let fixture: ComponentFixture<RegisterModalComponent>;
   let mockStore: MockStore;

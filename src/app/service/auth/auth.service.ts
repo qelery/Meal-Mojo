@@ -6,7 +6,7 @@ import {
   LoginResponse,
   RegisterRequest,
 } from '../../ngrx/reducers/auth.reducer';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env';
 import { HttpClient } from '@angular/common/http';
 
 // TODO: refresh jwt token?

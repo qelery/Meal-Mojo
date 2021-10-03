@@ -19,7 +19,7 @@ import {
 } from '../../test/mock-data';
 import { LOGIN_ERROR_MSG_403 } from '../effects/auth.effects';
 
-fdescribe('AuthReducer', () => {
+describe('AuthReducer', () => {
   describe('for an unknown action', () => {
     it('should return the default state', () => {
       const action = {

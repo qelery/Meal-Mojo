@@ -19,8 +19,8 @@ export class AddressBarComponent implements OnInit {
           this.validAddressFound = false;
           return;
     }
-    this.locationService.processAddress(this.address);
-    setTimeout(() => this.validAddressFound = false, 2000);
+    // this.locationService.processAddress(this.address);
+    // setTimeout(() => this.validAddressFound = false, 2000);
   }
 
 }

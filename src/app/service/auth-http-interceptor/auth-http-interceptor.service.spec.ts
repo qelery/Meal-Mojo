@@ -8,7 +8,7 @@ import {
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 
-fdescribe('AuthHttpInterceptor', () => {
+describe('AuthHttpInterceptor', () => {
   let mockLocalStorageService: jasmine.SpyObj<LocalStorageService>;
   let mockHttpController: HttpTestingController;
 

@@ -4,9 +4,8 @@ import { AuthService } from './auth.service';
 import {
   HttpClientTestingModule,
   HttpTestingController,
-  TestRequest,
 } from '@angular/common/http/testing';
-import { environment } from '../../../environments/environment';
+import { environment } from '@env';
 import {
   mockLoginRequest,
   mockLoginResponse,
@@ -15,7 +14,7 @@ import {
 import { AuthHttpInterceptor } from '../auth-http-interceptor/auth-http-interceptor.service';
 import { LoginResponse } from '../../ngrx/reducers/auth.reducer';
 
-fdescribe('AuthServiceService', () => {
+describe('AuthServiceService', () => {
   let authService: AuthService;
   let httpMock: HttpTestingController;
 
@@ -32,32 +31,30 @@ fdescribe('AuthServiceService', () => {
     expect(authService).toBeTruthy();
   });
 
-  it('should use the http service to login user', (done) => {
+  it('should use the http service to login user', () => {
     authService.login(mockLoginRequest).subscribe((res: LoginResponse) => {
       expect(res).toEqual(mockLoginResponse);
-      done();
     });
 
     const req = httpMock.expectOne(`${environment.restApiUrl}/api/users/login`);
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toBe(mockLoginRequest);
+    expect(req.request.body).toEqual(mockLoginRequest);
 
     req.flush(mockLoginResponse);
   });
 
-  it('should use the http service to register user', (done) => {
+  it('should use the http service to register user', () => {
     authService
       .register(mockRegisterRequest)
       .subscribe((resp: LoginResponse) => {
         expect(resp).toEqual(mockLoginResponse);
-        done();
       });
 
     const req = httpMock.expectOne(
       `${environment.restApiUrl}/api/users/register`
     );
     expect(req.request.method).toBe('POST');
-    expect(req.request.body).toBe(mockRegisterRequest);
+    expect(req.request.body).toEqual(mockRegisterRequest);
 
     req.flush(mockLoginResponse);
   });

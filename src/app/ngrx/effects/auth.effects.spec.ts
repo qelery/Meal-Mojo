@@ -28,7 +28,7 @@ import {
   mockRegisterRequest,
 } from '../../test/mock-data';
 
-fdescribe('AuthEffects', () => {
+describe('AuthEffects', () => {
   let authEffects: AuthEffects;
   let actions$ = new Observable<Action>();
   let authServiceSpy: jasmine.SpyObj<AuthService>;

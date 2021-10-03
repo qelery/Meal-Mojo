@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {OrderService} from "../../service/order/order.service";
-import {Router} from "@angular/router";
-import {LocationService} from "../../service/location/location.service";
-import {BehaviorSubject, Subject} from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { OrderService } from '../../service/order/order.service';
+import { Router } from '@angular/router';
+import { LocationService } from '../../service/location/location.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
 })
 export class CheckoutComponent implements OnInit {
   @ViewChild('map') mapElement: any;
@@ -23,18 +23,23 @@ export class CheckoutComponent implements OnInit {
   public tip = '0';
   restaurantCoordinates: any;
   customerCoordinates: any;
-  constructor(private orderService: OrderService, private router: Router, private locationService: LocationService) {
-    this.heroImageUrl = "assets/image/checkout-hero-image.jpeg";
+
+  constructor(private orderService: OrderService, private router: Router) {
+    this.heroImageUrl = 'assets/image/checkout-hero-image.jpeg';
     this.iconMarkerImage = 'assets/image/food-icon-70.png';
   }
 
   ngOnInit(): void {
     this.orderService.getCartItems();
-    this.customerCoordinates = this.locationService.getUserCurrentAddress();
+    // this.customerCoordinates = this.locationService.getUserCurrentAddress();
   }
 
   submitOrder() {
-    const checkoutOptions = {deliveryMethod: this.deliveryMethod, paymentMethod: this.paymentMethod, tip: this.tip};
+    const checkoutOptions = {
+      deliveryMethod: this.deliveryMethod,
+      paymentMethod: this.paymentMethod,
+      tip: this.tip,
+    };
     this.orderService.submitOrder(checkoutOptions);
     this.router.navigate(['/orders']);
   }
