@@ -19,7 +19,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { BannerSmallComponent } from './components/banner-small/banner-small.component';
 import { AgmCoreModule } from '@agm/core';
-import { environment } from '../environments/environment';
+import { environment } from '@env';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderCardComponent } from './components/order-card/order-card.component';
 import { LoginModalComponent } from './components/modal/login-modal/login-modal.component';
@@ -35,7 +35,7 @@ import {
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthEffects } from './ngrx/effects/auth.effects';
 import { RegisterModalComponent } from './components/modal/register-modal/register-modal.component';
-import { NameAsyncValidatorDirective } from './shared/custom-validators/name-name-async-validator/name-async-validator.directive';
+import { NameAsyncValidatorDirective } from './shared/custom-validators/name-async-validator/name-async-validator.directive';
 
 @NgModule({
   declarations: [
