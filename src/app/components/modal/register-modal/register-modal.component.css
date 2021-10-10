@@ -143,11 +143,6 @@ h5 a {
 
 .requirements li {
   list-style-type: disc;
-  color: #f00;
-}
-
-.requirements li.green {
-  color: #02af02;
 }
 
 h5 {

@@ -14,7 +14,8 @@ import { Role, User } from '../../../shared/model';
 import * as AuthActions from '../../../ngrx/actions/auth.action';
 import { sameValueValidator } from '../../../shared/custom-validators/same-value-validator/same-value-validator.directive';
 
-const REGEX_NUMBER_OR_UPPERCASE = '^(?=.*[A-Z0-9]).*$';
+const REGEX_NUMBER_OR_UPPERCASE_OR_SPECIAL_CHARACTER =
+  '^(?=.*[A-Z0-9*A-Z0-9*$@!#%&()^~{}\\-_+=]).*$';
 const MIN_PASS_LEN = 6;
 
 // TODO: Handle username already exists
@@ -38,26 +39,25 @@ export class RegisterModalComponent implements OnInit {
       email: ['', { updateOn: 'blur', validators: [Validators.email] }],
       password: [
         '',
-        [
-          Validators.required,
-          Validators.minLength(MIN_PASS_LEN),
-          Validators.pattern(REGEX_NUMBER_OR_UPPERCASE),
-        ],
+        {
+          updateOn: 'blur',
+          validators: [
+            Validators.required,
+            Validators.minLength(MIN_PASS_LEN),
+            Validators.pattern(REGEX_NUMBER_OR_UPPERCASE_OR_SPECIAL_CHARACTER),
+          ],
+        },
       ],
-      confirmPass: [''],
+      confirmPassword: [''],
     },
-    { validators: sameValueValidator('password', 'confirmPass') }
+    { validators: sameValueValidator('password', 'confirmPassword') }
   );
 
-  // Todo, refactor this logic to the HTML using new errors
-  // pageOneVisible = true;
-  // pageTwoVisible = false;
-  // pwReqLengthIsMet = false;
-  // pwReqPatternIsMet = false;
-  // pwConfirmFieldMatches = false;
+  pageOneVisible = true;
+  pageTwoVisible = false;
 
-  @Output() closeModalEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() switchModalEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() closeModalEmitter = new EventEmitter<void>();
+  @Output() switchModalEmitter = new EventEmitter<void>();
 
   constructor(
     private readonly store: Store,
@@ -73,26 +73,6 @@ export class RegisterModalComponent implements OnInit {
   showPageTwo(): void {
     this.pageOneVisible = false;
     this.pageTwoVisible = true;
-  }
-
-  // TODO: can this be cleaned up?
-
-  checkPasswordRequirements(): void {
-    this.pwReqLengthIsMet = false;
-    this.pwReqPatternIsMet = false;
-    this.pwConfirmFieldMatches = false;
-
-    this.registrationForm.updateValueAndValidity();
-
-    if (this.registrationForm.get('password').errors?.required) {
-      return;
-    }
-
-    this.pwReqLengthIsMet = !this.registrationForm.get('password').errors?.minlength;
-    this.pwReqPatternIsMet = !this.registrationForm.get('password').errors?.pattern;
-    this.pwConfirmFieldMatches =
-      this.registrationForm.get('password').value ===
-      this.registrationForm.get('confirmPass').value;
   }
 
   hideModal(): void {

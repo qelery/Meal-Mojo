@@ -71,58 +71,6 @@ describe('RegisterModalComponent', () => {
     expect(component.closeModalEmitter.emit).toHaveBeenCalled();
   });
 
-  it('should keep track of if which password requirements are met', () => {
-    component.registrationForm.setValue({
-      firstName: mockRegisterRequest.firstName,
-      lastName: mockRegisterRequest.lastName,
-      email: mockRegisterRequest.email,
-      password: mockRegisterRequest.password,
-      confirmPass: mockRegisterRequest.password,
-    });
-
-    component.checkPasswordRequirements();
-
-    expect(component.pwReqLengthIsMet).toBeTrue();
-    expect(component.pwReqPatternIsMet).toBeTrue();
-    expect(component.pwConfirmFieldMatches).toBeTrue();
-
-
-    component.registrationForm.patchValue({
-      password: '2shrt',
-      confirmPass: '2shrt',
-    });
-
-    component.checkPasswordRequirements();
-
-    expect(component.pwReqLengthIsMet).toBeFalse();
-    expect(component.pwReqPatternIsMet).toBeTrue();
-    expect(component.pwConfirmFieldMatches).toBeTrue();
-
-
-    component.registrationForm.patchValue({
-      password: 'no-uppercase-or-number',
-      confirmPass: 'no-uppercase-or-number',
-    });
-
-    component.checkPasswordRequirements();
-
-    expect(component.pwReqLengthIsMet).toBeTrue();
-    expect(component.pwReqPatternIsMet).toBeFalse();
-    expect(component.pwConfirmFieldMatches).toBeTrue();
-
-
-    component.registrationForm.patchValue({
-      password: 'differentPasswords',
-      confirmPass: 'diffPasswords',
-    });
-
-    component.checkPasswordRequirements();
-
-    expect(component.pwReqLengthIsMet).toBeTrue();
-    expect(component.pwReqPatternIsMet).toBeTrue();
-    expect(component.pwConfirmFieldMatches).toBeFalse();
-  });
-
   it('should emit event to switch to other auth modal when go to login link clicked', () => {
     spyOn(component.switchModalEmitter, 'emit');
     const goToRegisterLink = fixture.nativeElement.querySelector(
@@ -139,7 +87,7 @@ describe('RegisterModalComponent', () => {
       lastName: mockRegisterRequest.lastName,
       email: mockRegisterRequest.email,
       password: mockRegisterRequest.password,
-      confirmPass: mockRegisterRequest.password,
+      confirmPassword: mockRegisterRequest.password,
     });
 
     component.onSubmit();

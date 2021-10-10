@@ -48,35 +48,43 @@
           <div class='flex-row-space col-2'>
             <div class='flex-column-center'>
               <h5>Password</h5>
-              <input formControlName='password' type='password' class='input' (keyup)='checkPasswordRequirements()'
+              <input formControlName='password' type='password' class='input'
                      data-cy='register-password'>
+              <p class='error'
+                 *ngIf="registrationForm.get('password').value &&
+                  registrationForm.get('password').errors"
+              >
+                Does not meet requirements</p>
             </div>
             <div class='flex-column-center'>
               <h5>Confirm password</h5>
-              <input formControlName='confirmPass' type='password' class='input' (keyup)='checkPasswordRequirements()'
-                     data-cy='register-confirm-pass'>
+              <input formControlName='confirmPassword'
+                     type='password'
+                     class='input'
+                     data-cy='register-confirm-password'
+              >
+              <p class='error'
+                 *ngIf="registrationForm.get('confirmPassword').value &&
+                 registrationForm.errors?.sameValue &&
+                 !registrationForm.get('password').errors"
+              >
+                Passwords don't match</p>
             </div>
-            <p>
-              {{ this.registrationForm?.errors | json }}
-            </p>
           </div>
           <div class='requirements'>
             <p>Password Requirements: </p>
             <ul>
-              <li [class]="pwReqLengthIsMet ? 'green' : 'red'" data-cy='register-pw-req'>
+              <li>
                 At least 6 characters
               </li>
-              <li [class]="pwReqPatternIsMet ? 'green' : 'red'" data-cy='register-pw-req'>
-                At least 1 number or uppercase
-              </li>
-              <li [class]="pwConfirmFieldMatches ? 'green' : 'red'" data-cy='register-pw-req'>
-                Password fields must match
+              <li>
+                At least 1 number, uppercase, or symbol
               </li>
             </ul>
           </div>
           <div class='flex-column-center'>
             <button
-              [disabled]="registrationForm.invalid || registrationForm.get('password').value !== registrationForm.get('confirmPass').value"
+              [disabled]='registrationForm.invalid'
               type='submit' class='btn'
               data-cy='register-submit'>
               <span *ngIf='(isLoading$ | async) === false'>Register</span>
@@ -84,9 +92,6 @@
             </button>
           </div>
         </div>
-        <p *ngIf='registrationForm'>
-          {{ registrationForm.get('confirmPass').errors | json }}
-        </p>
       </form>
     </div>
     <h5><a (click)='switchModalToLoginModal()'

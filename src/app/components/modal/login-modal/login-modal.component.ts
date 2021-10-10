@@ -21,8 +21,8 @@ export class LoginModalComponent implements OnInit {
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
   loginRequestModel: LoginRequest = { username: '', password: '' };
-  @Output() closeModalEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() switchModalEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() closeModalEmitter = new EventEmitter<void>();
+  @Output() switchModalEmitter = new EventEmitter<void>();
 
   constructor(
     private readonly store: Store,
