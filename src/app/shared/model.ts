@@ -85,56 +85,5 @@ export type DayOfWeek =
   | 'Friday'
   | 'Saturday';
 
-export interface GoogleGeocoderResponse {
-  results: GoogleGeocoderResult[];
-  status: GoogleGeocoderStatus;
-}
-
-interface GoogleGeocoderResult {
-  address_components: GoogleGeocoderAddressComponent[];
-  formatted_address: string;
-  geometry: GoogleGeocoderGeometry;
-  partial_match?: boolean | undefined;
-  place_id: string;
-  plus_code?: GoogleGeocoderPlacePlusCode | undefined;
-  postcode_localities?: string[] | undefined;
-  types: string[];
-}
-
-interface GoogleGeocoderAddressComponent {
-  long_name: string;
-  short_name: string;
-  types: string[];
-}
-
-interface GoogleGeocoderGeometry {
-  location: {
-    lat: number;
-    lng: number;
-  };
-  location_type: string;
-  viewport: {
-    northeast: {
-      lat: number;
-      lng: number;
-    };
-    southwest: {
-      lat: number;
-      lng: number;
-    };
-  };
-}
-
-interface GoogleGeocoderPlacePlusCode {
-  compound_code?: string | undefined;
-  global_code: string;
-}
-
-type GoogleGeocoderStatus =
-  | 'ERROR'
-  | 'INVALID_REQUEST'
-  | 'OK'
-  | 'OVER_QUERY_LIMIT'
-  | 'REQUEST_DENIED'
-  | 'UNKNOWN_ERROR'
-  | 'ZERO_RESULTS';
+export type GooglePlaceResult = google.maps.places.PlaceResult;
+export type GoogleGeocoderAddressComponent = google.maps.GeocoderAddressComponent;

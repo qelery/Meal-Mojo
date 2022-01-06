@@ -1,125 +1,96 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {BehaviorSubject, Observable} from "rxjs";
-import {Router} from "@angular/router";
-
+import { Injectable } from '@angular/core';
+import { environment } from '@env';
+import { Address, GoogleGeocoderAddressComponent, GooglePlaceResult } from '../../shared/model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LocationService {
-  formattedAddressSubject = new BehaviorSubject(null);
-  userCoordinatesSubject = new BehaviorSubject(null);
-  userCoordinates: Coordinates;
-  formattedAddress: string;
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor() {
     if (!environment.googleApiKey) {
-      throw new Error("You must provide your own Google API Key for the Meal Mojo app to work." +
-        "Please visit: https://developers.google.com/maps/documentation/geolocation/get-api-key to get an API key");
+      throw new Error(
+        'You must provide your own Google API Key for the Meal Mojo app to work.' +
+          'Please visit: https://developers.google.com/maps/documentation/geolocation/get-api-key to get an API key'
+      );
     }
   }
 
-  findAddress(userEnteredAddress: string): any {
-    // return this.http.get(this.formatGoogleApiLink(userEnteredAddress));
+  convertGooglePlaceResultToAddress(result: GooglePlaceResult): Address {
+    const components = result.address_components;
+    const address = this.parseGooglePlaceAddressComponents(components);
+    address.latitude = result.geometry?.location?.lat();
+    address.longitude = result.geometry?.location?.lng();
+    return this.hasRequiredFields(address) ? address : null;
   }
-  //
-  // formatGoogleApiLink(address: string): string {
-  //   const baseUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=`;
-  //   return `${baseUrl}${address}&key=${environment.googleApiKey}`;
-  // }
-  //
-  // setUserCurrentAddress(fullAddress: any, formattedAddress: any) {
-  //   this.formattedAddress = formattedAddress;
-  //   console.log("Setting address");
-  //   this.formattedAddressSubject.next(this.formattedAddress);
-  //   this.userCoordinates = {longitude: fullAddress.longitude, latitude: fullAddress.latitude};
-  //   localStorage.setItem('currentAddress', `${formattedAddress}`);
-  //   localStorage.setItem('longitude', `${fullAddress.longitude}`);
-  //   localStorage.setItem('latitude', `${fullAddress.latitude}`);
-  //   console.log(`local stoage is: ${localStorage.getItem('currentUser')}`);
-  //   if (localStorage.getItem('currentUser')) {
-  //     this.saveToDatabase(fullAddress);
-  //   }
-  // }
-  //
-  // getUserCurrentAddress(): any {
-  //   return [localStorage.getItem('longitude'), localStorage.getItem('latitude')];
-  // }
-  //
-  // saveToDatabase(addressDatabaseFormat: any): any {
-  //   const token = localStorage.getItem('token');
-  //   const requestOptions = {
-  //     headers: new HttpHeaders({
-  //       Authorization: `Bearer ${token}`
-  //     }),
-  //   };
-  //   this.http.put(`${environment.restApiUrl}/auth/users/update`, {address: addressDatabaseFormat}, requestOptions)
-  //     .subscribe(rest => console.log(rest));
-  // }
-  //
-  // processAddress(address: string): void {
-  //   this.findAddress(address).subscribe((response: any) => {
-  //     const components = response.results[0]['address_components'];
-  //     const geometry = response.results[0]['geometry'];
-  //     console.log(address);
-  //     console.log(response);
-  //     console.log("HERE....");
-  //
-  //     let subpremise = '';
-  //     let streetNumber = '';
-  //     let streetName = '';
-  //     let state = '';
-  //     let zipcode = '';
-  //     let city = '';
-  //
-  //     components.forEach((part: any) => {
-  //       if (part.types.includes("subpremise")) {
-  //         subpremise = part['long_name'];
-  //       } else if (part.types.includes("street_number")) {
-  //         streetNumber = part['long_name'];
-  //       } else if (part.types.includes("route")) {
-  //         streetName = part['long_name'];
-  //       } else if (part.types.includes("administrative_area_level_1")) {
-  //         state = part['short_name'];
-  //       } else if (part.types.includes("postal_code")) {
-  //         zipcode = part['long_name'];
-  //       } else if (part.types.includes("locality")) {
-  //         city = part['long_name'];
-  //       }
-  //     });
-  //
-  //     // If no street name (result is ambiguous) or multiple results returned (not specific enough)
-  //     if (!streetName || response.results.length !== 1) {
-  //       return;
-  //     }
-  //
-  //     const street1 = `${streetNumber} ${streetName}`;
-  //     const street2 = subpremise || null;
-  //
-  //     const longitude = geometry.location['lng'];
-  //     const latitude = geometry.location['lat'];
-  //
-  //     const fullAddress = {
-  //       street1: street1,
-  //       street2: street2,
-  //       city: city,
-  //       zipcode: zipcode,
-  //       state: state,
-  //       latitude: latitude,
-  //       longitude: longitude
-  //     };
-  //
-  //     const formattedAddress = `${street1}` + (street2 ? `, ${street2}` : '') + `, ${city}, ${state}`;
-  //
-  //     this.setUserCurrentAddress(fullAddress, formattedAddress);
-  //     this.router.navigate(['/restaurants']);
-  //   }, err => console.log(err));
-  // }
-}
 
-interface Coordinates {
-  longitude: number;
-  latitude: number;
+  private parseGooglePlaceAddressComponents(
+    components: GoogleGeocoderAddressComponent[]
+  ): Address {
+    const address = this.getAddressWithNullProps();
+
+    let streetNumber = '';
+    let streetRoute = '';
+
+    for (const { types, short_name } of components) {
+      const field = types[0];
+      const value = short_name;
+      switch (field) {
+        case 'street_number':
+          streetNumber = value;
+          break;
+        case 'route':
+          streetRoute = value;
+          break;
+        case 'subpremise':
+          address.street2 = value;
+          break;
+        case 'premise':
+          address.street3 = value;
+          break;
+        case 'locality':
+          address.city = value;
+          break;
+        case 'postal_code':
+          address.zipcode = value;
+          break;
+        case 'administrative_area_level_1':
+          address.state = value;
+          break;
+        case 'country':
+          address.country = value;
+          break;
+      }
+    }
+
+    if (streetNumber && streetRoute) {
+      address.street1 = `${streetNumber} ${streetRoute}`;
+    }
+    return address;
+  }
+
+  private hasRequiredFields(address: Address): boolean {
+    for (const key in address) {
+      if (key === 'street2' || key === 'street3') {
+        continue;
+      }
+      if (address[key] === null) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private getAddressWithNullProps(): Address {
+    return {
+      street1: null,
+      street2: null,
+      street3: null,
+      city: null,
+      state: null,
+      zipcode: null,
+      country: null,
+      latitude: null,
+      longitude: null,
+    };
+  }
 }

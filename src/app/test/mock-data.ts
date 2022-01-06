@@ -1,6 +1,5 @@
 import {
-  Address,
-  GoogleGeocoderResponse,
+  Address, GooglePlaceResult,
   MenuItem,
   OperatingHours,
   Order,
@@ -14,6 +13,8 @@ import {
   LoginResponse,
   RegisterRequest,
 } from '../ngrx/reducers/auth.reducer';
+import LatLng = google.maps.LatLng;
+import LatLngBounds = google.maps.LatLngBounds;
 
 export const mockAddress: Address = {
   street1: '5700 S Lake Shore Dr',
@@ -77,8 +78,7 @@ export const mockMenuItems: MenuItem[] = [
   {
     id: 54,
     name: 'Southwestern Cobb Salad',
-    description:
-      'avocado, red onion, red pepper, hard-boiled egg, chipotle ranch',
+    description: 'avocado, red onion, red pepper, hard-boiled egg, chipotle ranch',
     price: 7.5,
     imageUrl: 'image.jpg',
     isAvailable: true,
@@ -86,8 +86,7 @@ export const mockMenuItems: MenuItem[] = [
   {
     id: 72,
     name: 'The Mad Wrapper',
-    description:
-      'turkey, bacon, avocado, arugula, pepper jack, spanish aioli, pita wrap',
+    description: 'turkey, bacon, avocado, arugula, pepper jack, spanish aioli, pita wrap',
     price: 12,
     imageUrl: 'image.jpg',
     isAvailable: false,
@@ -151,156 +150,148 @@ export const mockRestaurantList: Restaurant[] = [
   },
 ];
 
-export const mockGeocodeResult: GoogleGeocoderResponse = {
-  results: [
-    {
-      address_components: [
-        {
-          long_name: '2301',
-          short_name: '2301',
-          types: ['street_number'],
-        },
-        {
-          long_name: 'South Lake Shore Drive',
-          short_name: 'S Lake Shore Dr',
-          types: ['route'],
-        },
-        {
-          long_name: 'Near South Side',
-          short_name: 'Near South Side',
-          types: ['neighborhood', 'political'],
-        },
-        {
-          long_name: 'Chicago',
-          short_name: 'Chicago',
-          types: ['locality', 'political'],
-        },
-        {
-          long_name: 'Cook County',
-          short_name: 'Cook County',
-          types: ['administrative_area_level_2', 'political'],
-        },
-        {
-          long_name: 'Illinois',
-          short_name: 'IL',
-          types: ['administrative_area_level_1', 'political'],
-        },
-        {
-          long_name: 'United States',
-          short_name: 'US',
-          types: ['country', 'political'],
-        },
-        {
-          long_name: '60616',
-          short_name: '60616',
-          types: ['postal_code'],
-        },
-      ],
-      formatted_address: '2301 S Lake Shore Dr, Chicago, IL 60616, USA',
-      geometry: {
-        location: {
-          lat: 41.8526229,
-          lng: -87.61195769999999,
-        },
-        location_type: 'ROOFTOP',
-        viewport: {
-          northeast: {
-            lat: 41.8539718802915,
-            lng: -87.61060871970849,
-          },
-          southwest: {
-            lat: 41.8512739197085,
-            lng: -87.6133066802915,
-          },
-        },
+export const mockGooglePlaceResults: GooglePlaceResult[] = [
+  {
+    address_components: [
+      {
+        long_name: '2207',
+        short_name: '2207',
+        types: ['street_number'],
       },
-      partial_match: true,
-      place_id: 'ChIJ-9rosoMrDogR6WQjy2p2nLA',
-      plus_code: {
-        compound_code: 'V93Q+26 Chicago, IL, USA',
-        global_code: '86HJV93Q+26',
+      {
+        long_name: 'North Clybourn Avenue',
+        short_name: 'N Clybourn Ave',
+        types: ['route'],
       },
-      types: ['street_address'],
+      {
+        long_name: 'Lincoln Park',
+        short_name: 'Lincoln Park',
+        types: ['neighborhood', 'political'],
+      },
+      {
+        long_name: 'Chicago',
+        short_name: 'Chicago',
+        types: ['locality', 'political'],
+      },
+      {
+        long_name: 'Cook County',
+        short_name: 'Cook County',
+        types: ['administrative_area_level_2', 'political'],
+      },
+      {
+        long_name: 'Illinois',
+        short_name: 'IL',
+        types: ['administrative_area_level_1', 'political'],
+      },
+      {
+        long_name: 'United States',
+        short_name: 'US',
+        types: ['country', 'political'],
+      },
+      {
+        long_name: '60614',
+        short_name: '60614',
+        types: ['postal_code'],
+      },
+      {
+        long_name: '3011',
+        short_name: '3011',
+        types: ['postal_code_suffix'],
+      },
+    ],
+    adr_address:
+      '<span class="street-address">2207 N Clybourn Ave</span>, <span class="locality">Chicago</span>, <span class="region">IL</span> <span class="postal-code">60614-3011</span>, <span class="country-name">USA</span>',
+    formatted_address: '2207 N Clybourn Ave, Chicago, IL 60614, USA',
+    geometry: {
+      location: new LatLng({ lat: 41.92194509999999, lng: -87.66435779999999 }),
+      viewport: new LatLngBounds({ lat: 41.92194509999999, lng: -87.66435779999999 }),
     },
-    {
-      address_components: [
-        {
-          long_name: '#3A',
-          short_name: '#3A',
-          types: ['subpremise'],
-        },
-        {
-          long_name: 'McCormick Place',
-          short_name: 'McCormick Place',
-          types: ['premise'],
-        },
-        {
-          long_name: '2301',
-          short_name: '2301',
-          types: ['street_number'],
-        },
-        {
-          long_name: 'South Doctor Martin Luther King Junior Drive',
-          short_name: 'S Martin Luther King Dr',
-          types: ['route'],
-        },
-        {
-          long_name: 'Near South Side',
-          short_name: 'Near South Side',
-          types: ['neighborhood', 'political'],
-        },
-        {
-          long_name: 'Chicago',
-          short_name: 'Chicago',
-          types: ['locality', 'political'],
-        },
-        {
-          long_name: 'Cook County',
-          short_name: 'Cook County',
-          types: ['administrative_area_level_2', 'political'],
-        },
-        {
-          long_name: 'Illinois',
-          short_name: 'IL',
-          types: ['administrative_area_level_1', 'political'],
-        },
-        {
-          long_name: 'United States',
-          short_name: 'US',
-          types: ['country', 'political'],
-        },
-        {
-          long_name: '60616',
-          short_name: '60616',
-          types: ['postal_code'],
-        },
-      ],
-      formatted_address: '2301 S Martin Luther King Dr, Chicago, IL 60616, USA',
-      geometry: {
-        location: {
-          lat: 41.8507079,
-          lng: -87.61614779999999,
-        },
-        location_type: 'ROOFTOP',
-        viewport: {
-          northeast: {
-            lat: 41.85205688029149,
-            lng: -87.6147988197085,
-          },
-          southwest: {
-            lat: 41.84935891970849,
-            lng: -87.6174967802915,
-          },
-        },
+    icon: '',
+    icon_background_color: '#7B9EB0',
+    icon_mask_base_uri: '',
+    name: '2207 N Clybourn Ave',
+    place_id: 'ChIJfzPcP-TSD4gRQPoDSyAqpSU',
+    types: ['premise'],
+    url: '',
+    utc_offset: -360,
+    vicinity: 'Chicago',
+    html_attributions: [],
+    utc_offset_minutes: -360,
+  },
+  {
+    address_components: [
+      {
+        long_name: '#3A',
+        short_name: '#3A',
+        types: ['subpremise'],
       },
-      partial_match: true,
-      place_id: 'ChIJH_WNp4ArDogR_-HtNmACtt4',
-      plus_code: {
-        compound_code: 'V92M+7G Chicago, IL, USA',
-        global_code: '86HJV92M+7G',
+      {
+        long_name: 'McCormick Place',
+        short_name: 'McCormick Place',
+        types: ['premise'],
       },
-      types: ['street_address'],
+      {
+        long_name: '2301',
+        short_name: '2301',
+        types: ['street_number'],
+      },
+      {
+        long_name: 'South Doctor Martin Luther King Junior Drive',
+        short_name: 'S Martin Luther King Dr',
+        types: ['route'],
+      },
+      {
+        long_name: 'Near South Side',
+        short_name: 'Near South Side',
+        types: ['neighborhood', 'political'],
+      },
+      {
+        long_name: 'Chicago',
+        short_name: 'Chicago',
+        types: ['locality', 'political'],
+      },
+      {
+        long_name: 'Cook County',
+        short_name: 'Cook County',
+        types: ['administrative_area_level_2', 'political'],
+      },
+      {
+        long_name: 'Illinois',
+        short_name: 'IL',
+        types: ['administrative_area_level_1', 'political'],
+      },
+      {
+        long_name: 'United States',
+        short_name: 'US',
+        types: ['country', 'political'],
+      },
+      {
+        long_name: '60616',
+        short_name: '60616',
+        types: ['postal_code'],
+      },
+    ],
+    adr_address:
+      '<span class="street-address">2301 S Martin Luther King Dr</span>, <span class="locality">Chicago</span>, <span class="region">IL</span> <span class="postal-code">60616</span>, <span class="country-name">USA</span>',
+    formatted_address: '2301 S Martin Luther King Dr, Chicago, IL 60616, USA',
+    geometry: {
+      location: new LatLng({ lat: 41.8507079, lng: -87.6161478 }),
+      viewport: new LatLngBounds({ lat: 41.8507079, lng: -87.6161478 }),
     },
-  ],
-  status: 'OK',
-};
+    icon: '',
+    icon_background_color: '#7B9EB0',
+    icon_mask_base_uri: '',
+    name: '2301 S Martin Luther King Dr',
+    place_id: 'ChIJH_WNp4ArDogR_-HtNmACtt4',
+    plus_code: {
+      compound_code: 'V92M+7G Chicago, IL, USA',
+      global_code: '86HJV92M+7G',
+    },
+    types: ['street_address'],
+    url: '',
+    utc_offset: -360,
+    vicinity: 'Chicago',
+    html_attributions: [],
+    utc_offset_minutes: -360,
+  },
+];

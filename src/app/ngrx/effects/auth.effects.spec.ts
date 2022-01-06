@@ -31,12 +31,12 @@ import {
 describe('AuthEffects', () => {
   let authEffects: AuthEffects;
   let actions$ = new Observable<Action>();
-  let authServiceSpy: jasmine.SpyObj<AuthService>;
-  let localStorageServiceSpy: jasmine.SpyObj<LocalStorageService>;
+  let authService: jasmine.SpyObj<AuthService>;
+  let localStorageService: jasmine.SpyObj<LocalStorageService>;
 
   beforeEach(async () => {
-    const authSpy = jasmine.createSpyObj('AuthService', ['login', 'register']);
-    const tokenSpy = jasmine.createSpyObj('LocalStorageService', [
+    const authServiceSpy = jasmine.createSpyObj('AuthService', ['login', 'register']);
+    const localStorageServiceSpy = jasmine.createSpyObj('LocalStorageService', [
       'saveToken',
       'saveUser',
       'clear',
@@ -48,49 +48,49 @@ describe('AuthEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: AuthService,
-          useValue: authSpy,
+          useValue: authServiceSpy,
         },
         {
           provide: LocalStorageService,
-          useValue: tokenSpy,
+          useValue: localStorageServiceSpy,
         },
       ],
     });
 
     authEffects = TestBed.inject(AuthEffects);
-    authServiceSpy = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
-    localStorageServiceSpy = TestBed.inject(
-      LocalStorageService
+    authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>;
+    localStorageService = TestBed.inject(
+      LocalStorageService,
     ) as jasmine.SpyObj<LocalStorageService>;
   });
 
   describe('on loginUser$', () => {
     describe('should fire successfully', () => {
       it('and dispatch a success action', () => {
-        authServiceSpy.login.and.returnValue(of(mockLoginResponse));
+        authService.login.and.returnValue(of(mockLoginResponse));
         actions$ = of(loginUser({ loginRequest: mockLoginRequest }));
 
         authEffects.loginUser$.subscribe((action) => {
           expect(action).toEqual(
-            loginUserSuccess({ loginResponse: mockLoginResponse })
+            loginUserSuccess({ loginResponse: mockLoginResponse }),
           );
-          expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
-            mockLoginRequest
+          expect(authService.login).toHaveBeenCalledOnceWith(
+            mockLoginRequest,
           );
         });
       });
 
       it('and call LocalStorageService to update token and user info', () => {
-        authServiceSpy.login.and.returnValue(of(mockLoginResponse));
+        authService.login.and.returnValue(of(mockLoginResponse));
         actions$ = of(loginUserSuccess({ loginResponse: mockLoginResponse }));
 
         authEffects.loginUserSuccess$.subscribe();
 
-        expect(localStorageServiceSpy.saveToken).toHaveBeenCalledOnceWith(
-          mockLoginResponse.token
+        expect(localStorageService.saveToken).toHaveBeenCalledOnceWith(
+          mockLoginResponse.token,
         );
-        expect(localStorageServiceSpy.saveUser).toHaveBeenCalledOnceWith(
-          mockLoginResponse.userInfo
+        expect(localStorageService.saveUser).toHaveBeenCalledOnceWith(
+          mockLoginResponse.userInfo,
         );
       });
     });
@@ -101,15 +101,15 @@ describe('AuthEffects', () => {
           error: 'Error message from backend',
           status: 403,
         });
-        authServiceSpy.login.and.returnValue(throwError(errorResp));
+        authService.login.and.returnValue(throwError(errorResp));
         actions$ = of(loginUser({ loginRequest: mockLoginRequest }));
 
         authEffects.loginUser$.subscribe((action) => {
           expect(action).toEqual(
-            loginUserFailure({ error: LOGIN_ERROR_MSG_403 })
+            loginUserFailure({ error: LOGIN_ERROR_MSG_403 }),
           );
-          expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
-            mockLoginRequest
+          expect(authService.login).toHaveBeenCalledOnceWith(
+            mockLoginRequest,
           );
         });
       });
@@ -119,13 +119,13 @@ describe('AuthEffects', () => {
           error: 'Error message from backend',
           status: 500,
         });
-        authServiceSpy.login.and.returnValue(throwError(errorResp));
+        authService.login.and.returnValue(throwError(errorResp));
         actions$ = of(loginUser({ loginRequest: mockLoginRequest }));
 
         authEffects.loginUser$.subscribe((action) => {
           expect(action).toEqual(loginUserFailure({ error: ERROR_MSG_SERVER }));
-          expect(authServiceSpy.login).toHaveBeenCalledOnceWith(
-            mockLoginRequest
+          expect(authService.login).toHaveBeenCalledOnceWith(
+            mockLoginRequest,
           );
         });
       });
@@ -135,32 +135,32 @@ describe('AuthEffects', () => {
   describe('on registerUser$', () => {
     describe('should fire successfully', () => {
       it('and dispatch a success action', () => {
-        authServiceSpy.register.and.returnValue(of(mockLoginResponse));
+        authService.register.and.returnValue(of(mockLoginResponse));
         actions$ = of(registerUser({ registerRequest: mockRegisterRequest }));
 
         authEffects.registerUser$.subscribe((action) => {
           expect(action).toEqual(
-            registerUserSuccess({ registerResponse: mockLoginResponse })
+            registerUserSuccess({ registerResponse: mockLoginResponse }),
           );
-          expect(authServiceSpy.register).toHaveBeenCalledWith(
-            mockRegisterRequest
+          expect(authService.register).toHaveBeenCalledWith(
+            mockRegisterRequest,
           );
         });
       });
 
       it('and call LocalStorageService to update token and user info', () => {
-        authServiceSpy.register.and.returnValue(of(mockLoginResponse));
+        authService.register.and.returnValue(of(mockLoginResponse));
         actions$ = of(
-          registerUserSuccess({ registerResponse: mockLoginResponse })
+          registerUserSuccess({ registerResponse: mockLoginResponse }),
         );
 
         authEffects.registerUserSuccess$.subscribe();
 
-        expect(localStorageServiceSpy.saveUser).toHaveBeenCalledOnceWith(
-          mockLoginResponse.userInfo
+        expect(localStorageService.saveUser).toHaveBeenCalledOnceWith(
+          mockLoginResponse.userInfo,
         );
-        expect(localStorageServiceSpy.saveToken).toHaveBeenCalledOnceWith(
-          mockLoginResponse.token
+        expect(localStorageService.saveToken).toHaveBeenCalledOnceWith(
+          mockLoginResponse.token,
         );
       });
     });
@@ -171,17 +171,17 @@ describe('AuthEffects', () => {
           error: 'Error message from backend',
           status: 409,
         });
-        authServiceSpy.register.and.returnValue(throwError(errResponse));
+        authService.register.and.returnValue(throwError(errResponse));
         actions$ = of(registerUser({ registerRequest: mockRegisterRequest }));
 
         authEffects.registerUser$.subscribe((action) => {
           expect(action).toEqual(
             registerUserFailure({
               error: REGISTER_ERROR_MSG_409,
-            })
+            }),
           );
-          expect(authServiceSpy.register).toHaveBeenCalledOnceWith(
-            mockRegisterRequest
+          expect(authService.register).toHaveBeenCalledOnceWith(
+            mockRegisterRequest,
           );
         });
       });
@@ -191,17 +191,17 @@ describe('AuthEffects', () => {
           error: 'Error message from backend',
           status: 500,
         });
-        authServiceSpy.register.and.returnValue(throwError(errResponse));
+        authService.register.and.returnValue(throwError(errResponse));
         actions$ = of(registerUser({ registerRequest: mockRegisterRequest }));
 
         authEffects.registerUser$.subscribe((action) => {
           expect(action).toEqual(
             registerUserFailure({
               error: ERROR_MSG_SERVER,
-            })
+            }),
           );
-          expect(authServiceSpy.register).toHaveBeenCalledOnceWith(
-            mockRegisterRequest
+          expect(authService.register).toHaveBeenCalledOnceWith(
+            mockRegisterRequest,
           );
         });
       });
@@ -214,7 +214,7 @@ describe('AuthEffects', () => {
 
       authEffects.logoutUser$.subscribe();
 
-      expect(localStorageServiceSpy.clear).toHaveBeenCalled();
+      expect(localStorageService.clear).toHaveBeenCalled();
     });
   });
 });

@@ -14,6 +14,9 @@ module.exports = function (config) {
       require('karma-spec-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
+    files: [
+      'src/app/test/external-api/unit-test-google-maps-api.js'
+    ],
     client: {
       jasmine: {
         random: false,

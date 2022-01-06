@@ -37,6 +37,7 @@ import { AuthEffects } from './ngrx/effects/auth.effects';
 import { RegisterModalComponent } from './components/modal/register-modal/register-modal.component';
 import { NameAsyncValidatorDirective } from './shared/custom-validators/name-async-validator/name-async-validator.directive';
 import { SameValueValidatorDirective } from './shared/custom-validators/same-value-validator/same-value-validator.directive';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { SameValueValidatorDirective } from './shared/custom-validators/same-val
     RegisterModalComponent,
     NameAsyncValidatorDirective,
     SameValueValidatorDirective,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ import { SameValueValidatorDirective } from './shared/custom-validators/same-val
     NoopAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleApiKey,
+      libraries: ['places'],
     }),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AuthEffects]),

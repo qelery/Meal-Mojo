@@ -1,13 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LocalStorageService } from './local-storage.service';
-import { mockUser } from '../../test/mock-data';
+import { mockAddress, mockUser } from '../../test/mock-data';
 import { User } from '../../shared/model';
 
 describe('LocalStorageService', () => {
   let localStorageService: LocalStorageService;
   const TOKEN_KEY = 'auth-token';
   const USER_KEY = 'auth-user';
+  const ADDRESS_KEY = 'address';
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -37,6 +38,7 @@ describe('LocalStorageService', () => {
 
     expect(window.localStorage.removeItem).toHaveBeenCalledWith(TOKEN_KEY);
     expect(window.localStorage.removeItem).toHaveBeenCalledWith(USER_KEY);
+    expect(window.localStorage.removeItem).toHaveBeenCalledWith(ADDRESS_KEY);
   });
 
   it('should emit null user after clearing values from local storage', () => {
@@ -65,6 +67,15 @@ describe('LocalStorageService', () => {
     expect(window.localStorage.setItem).toHaveBeenCalledWith(
       USER_KEY,
       JSON.stringify(mockUser)
+    );
+  });
+
+  it('should save address to local storage', () => {
+    localStorageService.saveAddress(mockAddress);
+
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(
+      ADDRESS_KEY,
+      JSON.stringify(mockAddress)
     );
   });
 

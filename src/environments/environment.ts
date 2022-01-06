@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   restApiUrl: 'http://localhost:9092',
-  googleMapsApiUrl: 'https://maps.googleapis.com/maps/api/',
-  googleApiKey: 'TEST',
+  googleMapsApiUrl: 'https://maps.googleapis.com/maps/api',
+  googleApiKey: 'AIzaSyDYMxsk20wSdmfp7m2uIgL8bc5ENrg29Vw',
 };
 
 
