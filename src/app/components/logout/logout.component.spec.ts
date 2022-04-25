@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LogoutComponent } from './logout.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import * as AuthActions from '../../ngrx/actions/auth.action';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { AuthStoreActions } from '@store/auth-store';
 
 describe('LogoutComponent', () => {
   let component: LogoutComponent;
@@ -36,7 +36,7 @@ describe('LogoutComponent', () => {
   it('should dispatch action to logout user on init', () => {
     spyOn(mockStore, 'dispatch');
     component.ngOnInit();
-    expect(mockStore.dispatch).toHaveBeenCalledWith(AuthActions.logoutUser());
+    expect(mockStore.dispatch).toHaveBeenCalledWith(AuthStoreActions.logout());
   });
 
   it('should redirect to the home page', () => {

@@ -4,7 +4,7 @@ import { fakeAsync, tick } from '@angular/core/testing';
 
 const ASYNC_VALIDATOR_DELAY_MS = 500;
 
-describe('NameAsyncValidator Directive', () => {
+describe('NameAsyncValidatorDirective', () => {
   it('should require at least one letter', fakeAsync(() => {
     const validInputs = ['a', 'A', 'z', 'Z', 'À', 'ÿ'];
 

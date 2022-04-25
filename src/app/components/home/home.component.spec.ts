@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HomeComponent } from './home.component';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { BannerComponent } from '../banner/banner.component';
-import { MapsAPILoader } from '@agm/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AddressBarComponent } from '../address-bar/address-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { provideMockStore } from '@ngrx/store/testing';
+import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -14,23 +14,15 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AddressBarComponent,
-        AutocompleteComponent,
-        BannerComponent,
-        HomeComponent,
+      declarations: [AddressBarComponent, BannerComponent, HomeComponent],
+      imports: [
+        FontAwesomeTestingModule,
+        FormsModule,
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        RouterTestingModule,
       ],
-      imports: [FormsModule, HttpClientTestingModule, ReactiveFormsModule],
-      providers: [
-        {
-          provide: MapsAPILoader,
-          useValue: {
-            load() {
-              return new Promise(() => null);
-            },
-          },
-        },
-      ],
+      providers: [provideMockStore({ initialState: {} })],
     }).compileComponents();
   });
 

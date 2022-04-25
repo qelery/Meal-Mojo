@@ -1,18 +1,17 @@
 import {
-  Address, GooglePlaceResult,
+  Address,
+  GooglePlaceResult,
+  LoginRequest,
+  LoginResponse,
   MenuItem,
   OperatingHours,
   Order,
   OrderLine,
+  RegisterRequest,
   Restaurant,
   Role,
   User,
-} from '../shared/model';
-import {
-  LoginRequest,
-  LoginResponse,
-  RegisterRequest,
-} from '../ngrx/reducers/auth.reducer';
+} from '@shared/model';
 import LatLng = google.maps.LatLng;
 import LatLngBounds = google.maps.LatLngBounds;
 
@@ -42,7 +41,7 @@ export const mockLoginRequest: LoginRequest = {
 
 export const mockLoginResponse: LoginResponse = {
   token: '123abc',
-  userInfo: mockUser,
+  user: mockUser,
 };
 
 export const mockRegisterRequest: RegisterRequest = {

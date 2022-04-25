@@ -28,19 +28,17 @@ describe('RestaurantService', () => {
   });
 
   it('should use the http service to get nearby restaurants', () => {
-    restaurantService
-      .getRestaurantsNearby(mockAddress)
-      .subscribe((res: Restaurant[]) => {
-        expect(res).toEqual(mockRestaurantList);
-      });
+    restaurantService.getRestaurantsNearby(mockAddress).subscribe((res: Restaurant[]) => {
+      expect(res).toEqual(mockRestaurantList);
+    });
 
     const req = httpMock.expectOne((httpReq) =>
-      httpReq.url.includes(`${environment.restApiUrl}/restaurants/nearby`)
+      httpReq.url.includes(`${environment.restApiUrl}/api/restaurants/nearby`)
     );
     expect(req.request.method).toBe('GET');
 
     const params = req.request.params;
-    expect(+params.get('distance')).toEqual(15);
+    expect(+params.get('maxDistanceMiles')).toEqual(15);
     expect(+params.get('latitude')).toEqual(mockAddress.latitude);
     expect(+params.get('longitude')).toEqual(mockAddress.longitude);
 
@@ -55,9 +53,7 @@ describe('RestaurantService', () => {
       expect(res).toEqual(expectedRestaurant);
     });
 
-    const req = httpMock.expectOne(
-      `${environment.restApiUrl}/restaurant/${id}`
-    );
+    const req = httpMock.expectOne(`${environment.restApiUrl}/api/restaurant/${id}`);
     expect(req.request.method).toBe('GET');
 
     req.flush(expectedRestaurant);

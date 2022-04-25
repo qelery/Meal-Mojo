@@ -1,15 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
-import {
-  selectLoginError,
-  selectLoginIsLoading,
-} from '../../../ngrx/selectors/auth.selector';
-import * as AuthActions from '../../../ngrx/actions/auth.action';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
-import { User } from '../../../shared/model';
-import { LoginRequest } from '../../../ngrx/reducers/auth.reducer';
+import { LoginRequest, User } from '@shared/model';
+import { AuthStoreActions, AuthStoreSelectors } from '@store/auth-store';
 
 @Component({
   selector: 'app-login-modal',
@@ -20,18 +14,16 @@ export class LoginModalComponent implements OnInit {
   faTimes = faTimes;
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
+  // TODO: Change this?
   loginRequestModel: LoginRequest = { username: '', password: '' };
   @Output() closeModalEmitter = new EventEmitter<void>();
   @Output() switchModalEmitter = new EventEmitter<void>();
 
-  constructor(
-    private readonly store: Store,
-    private readonly localStorageService: LocalStorageService
-  ) {}
+  constructor(private readonly store: Store) {}
 
   ngOnInit(): void {
-    this.error$ = this.store.select<string>(selectLoginError);
-    this.isLoading$ = this.store.select<boolean>(selectLoginIsLoading);
+    this.error$ = this.store.select<string>(AuthStoreSelectors.selectLoginError);
+    this.isLoading$ = this.store.select<boolean>(AuthStoreSelectors.selectLoginIsLoading);
   }
 
   hideModal(): void {
@@ -44,9 +36,10 @@ export class LoginModalComponent implements OnInit {
 
   onSubmit(): void {
     const loginRequest = { ...this.loginRequestModel };
-    this.store.dispatch(AuthActions.loginUser({ loginRequest }));
+    this.store.dispatch(AuthStoreActions.login({ loginRequest }));
 
-    this.localStorageService.userSubject.subscribe((user: User) => {
+    // eslint-disable-next-line ngrx/no-store-subscription
+    this.store.select(AuthStoreSelectors.selectUser).subscribe((user: User) => {
       if (user) {
         this.hideModal();
       }

@@ -18,7 +18,7 @@ export const infoTiles: InfoTile[] = [
     heading: `Become A Restaurant Partner`,
     text: `We'll get you online and noticed. Thousands of hungry customers may be in your area. With our 5-star support, 95% of Meal Mojo merchants rank us as a strong business partner.`,
     imageUrl: '/assets/image/business-owner.jpg',
-  }
+  },
 ];
 
 export interface InfoTile {
@@ -26,4 +26,3 @@ export interface InfoTile {
   text: string;
   imageUrl: string;
 }
-

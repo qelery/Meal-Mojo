@@ -1,42 +1,41 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from "./components/home/home.component";
-import {LogoutComponent} from "./components/logout/logout.component";
-import {RestaurantsComponent} from "./components/restaurants/restaurants.component";
-import {RestaurantStoreFrontComponent} from "./components/restaurant-store-front/restaurant-store-front.component";
-import {CheckoutComponent} from "./components/checkout/checkout.component";
-import {OrdersComponent} from "./components/orders/orders.component";
+import { HomeComponent } from './components/home/home.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { RestaurantStoreFrontComponent } from './components/restaurants/restaurant-store-front/restaurant-store-front.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: LogoutComponent,
   },
   {
     path: 'restaurants',
-    component: RestaurantsComponent
+    component: RestaurantsComponent,
   },
   {
     path: 'restaurants/:id',
-    component: RestaurantStoreFrontComponent
+    component: RestaurantStoreFrontComponent,
   },
   {
     path: 'checkout',
-    component: CheckoutComponent
+    component: CheckoutComponent,
   },
   {
     path: 'orders',
-    component: OrdersComponent
-  }
+    component: OrdersComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { }
+export class AppRoutingModule {}

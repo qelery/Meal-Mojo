@@ -10,9 +10,9 @@ import {
   mockLoginRequest,
   mockLoginResponse,
   mockRegisterRequest,
-} from '../../test/mock-data';
+} from '@test/mock-data';
 import { AuthHttpInterceptor } from '../auth-http-interceptor/auth-http-interceptor.service';
-import { LoginResponse } from '../../ngrx/reducers/auth.reducer';
+import { LoginResponse } from '@shared/model';
 
 describe('AuthServiceService', () => {
   let authService: AuthService;
@@ -44,15 +44,11 @@ describe('AuthServiceService', () => {
   });
 
   it('should use the http service to register user', () => {
-    authService
-      .register(mockRegisterRequest)
-      .subscribe((resp: LoginResponse) => {
-        expect(resp).toEqual(mockLoginResponse);
-      });
+    authService.register(mockRegisterRequest).subscribe((resp: LoginResponse) => {
+      expect(resp).toEqual(mockLoginResponse);
+    });
 
-    const req = httpMock.expectOne(
-      `${environment.restApiUrl}/api/users/register`
-    );
+    const req = httpMock.expectOne(`${environment.restApiUrl}/api/users/register`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockRegisterRequest);
 

@@ -1,8 +1,8 @@
 <nav id="nav" class="navbar">
   <div class="container navbar">
-    <a href="/src" class="logo"></a>
+    <a [routerLink]="['/']" class="logo"></a>
     <ul  class="nav-left">
-      <li *ngIf="!isUserLoggedIn" class="active">
+      <li *ngIf="(isUserLoggedIn | async) === false" class="active">
         <a [routerLink]="['/']">
           Home
         </a>
@@ -12,18 +12,18 @@
           Restaurants
         </a>
       </li>
-      <li *ngIf="isUserLoggedIn" class="active">
+      <li *ngIf="isUserLoggedIn | async" class="active">
         <a [routerLink]="['/checkout']">
           Checkout
         </a>
       </li>
-      <li *ngIf="isUserLoggedIn" class="active">
+      <li *ngIf="isUserLoggedIn | async" class="active">
         <a [routerLink]="['/orders']">
           Orders
         </a>
       </li>
     </ul>
-    <ul *ngIf="!isUserLoggedIn" class="nav-right">
+    <ul *ngIf="(isUserLoggedIn | async) === false" class="nav-right">
       <li id="register"  class="active">
         <a (click)="showRegister()" data-cy="navbar-register">
           Register
@@ -35,7 +35,7 @@
         </a>
       </li>
     </ul>
-    <ul *ngIf="isUserLoggedIn" class="nav-right small">
+    <ul *ngIf="isUserLoggedIn | async" class="nav-right small">
       <li>
         <a  [routerLink]="['/logout']" data-cy="navbar-logout">
           Log Out
@@ -57,18 +57,18 @@
           Restaurants
         </a>
       </li>
-      <li *ngIf="isUserLoggedIn" class="active">
+      <li *ngIf="isUserLoggedIn | async" class="active">
         <a [routerLink]="['/checkout']">
           Checkout
         </a>
       </li>
-      <li *ngIf="isUserLoggedIn" class="active">
+      <li *ngIf="isUserLoggedIn | async" class="active">
         <a [routerLink]="['/orders']">
           Orders
         </a>
       </li>
       <li>
-        <ul *ngIf="!isUserLoggedIn" class="nav-right small">
+        <ul *ngIf="(isUserLoggedIn | async) === false" class="nav-right small">
           <li>
             <a (click)="showRegister()">
               Register
@@ -80,7 +80,7 @@
             </a>
           </li>
         </ul>
-        <ul *ngIf="isUserLoggedIn" class="nav-right small">
+        <ul *ngIf="isUserLoggedIn | async" class="nav-right small">
           <li>
             <a  [routerLink]="['/logout']">
               Log Out

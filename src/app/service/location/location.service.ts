@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@env';
-import { Address, GoogleGeocoderAddressComponent, GooglePlaceResult } from '../../shared/model';
+import {
+  Address,
+  GoogleGeocoderAddressComponent,
+  GooglePlaceResult,
+} from '../../shared/model';
+import { adjustClientRect } from '@angular/cdk/drag-drop/client-rect';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocationService {
   constructor() {
-    if (!environment.googleApiKey) {
-      throw new Error(
-        'You must provide your own Google API Key for the Meal Mojo app to work.' +
-          'Please visit: https://developers.google.com/maps/documentation/geolocation/get-api-key to get an API key'
-      );
-    }
+    // if (!environment.googleApiKey) {
+    //   throw new Error(
+    //     'You must provide your own Google API Key for the Meal Mojo app to work.' +
+    //       'Please visit: https://developers.google.com/maps/documentation/geolocation/get-api-key to get an API key'
+    //   );
+    // }
   }
 
-  convertGooglePlaceResultToAddress(result: GooglePlaceResult): Address {
+  public convertGooglePlaceToAddress(result: GooglePlaceResult): Address {
     const components = result.address_components;
-    const address = this.parseGooglePlaceAddressComponents(components);
+    const address = this.parseGooglePlaceComponents(components);
     address.latitude = result.geometry?.location?.lat();
     address.longitude = result.geometry?.location?.lng();
     return this.hasRequiredFields(address) ? address : null;
   }
 
-  private parseGooglePlaceAddressComponents(
+  private parseGooglePlaceComponents(
     components: GoogleGeocoderAddressComponent[]
   ): Address {
     const address = this.getAddressWithNullProps();
@@ -92,5 +97,20 @@ export class LocationService {
       latitude: null,
       longitude: null,
     };
+  }
+
+  public getFormattedAddressString(addressObj: Address): string {
+    if (!this.hasRequiredFields(addressObj)) {
+      return 'Invalid address.';
+    }
+    return [
+      addressObj.street1,
+      addressObj.street2,
+      addressObj.street3,
+      addressObj.city,
+      addressObj.state,
+    ]
+      .filter((nonNull: string) => nonNull)
+      .join(', ');
   }
 }

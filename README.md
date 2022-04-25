@@ -1,15 +1,21 @@
 # Meal Mojo Angular Frontend
 
-A demo food ordering website built in Angular.<br>
-A live demo of the website is hosted on [AWS here](http://angularmealmojo.s3-website.us-east-2.amazonaws.com/) 
+A demo food ordering website built in Angular 13.<br>
+
+## Backend Repository
+
+The backend for this app was built in Spring Boot. Check out the [backend repository here](https://github.com/qelery/Meal-Mojo-Backend-API).
 
 ## Requirements
-* You must have a Google API key for this app to work
-* Place your google API key in the /src/environments file
-* Download and clone the backend repo for this project here
-* Add the link to the URL in the /src/environments file
+* Node version ^12.20.2 || ^14.15.5 || ^16.10.0 
+* Angular CLI 13+
+* A [Google Maps API](https://developers.google.com/maps) key
 
 ## Usage
+* Clone and download the backend repository
+* Start the backend server
+* Place your Google API Key in the /src/index.html file
+* Update the REST API url in the /src/environment.ts files
 * Clone and download this repository
 * Run `ng serve` in the terminal
 * Navigate to `http://localhost:4200/` in the browser

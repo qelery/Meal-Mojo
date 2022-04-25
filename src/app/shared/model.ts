@@ -23,6 +23,24 @@ export interface Address {
   country: string;
 }
 
+export interface LoginRequest {
+  username: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  user: User;
+  token: string;
+}
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+  role: Role;
+  firstName: string;
+  lastName: string;
+}
+
 export interface Restaurant {
   id: number;
   name: string;
@@ -38,12 +56,18 @@ export interface Restaurant {
   operatingHoursList: OperatingHours[];
   menuItems: MenuItem[];
   orders: Order[];
+  cuisines: Cuisine[];
 }
 
 export interface OperatingHours {
   openTime: string;
   closeTime: string;
   dayOfWeek: DayOfWeek;
+}
+
+export interface Cuisine {
+  category: string;
+  priority: number;
 }
 
 export interface MenuItem {
@@ -87,3 +111,4 @@ export type DayOfWeek =
 
 export type GooglePlaceResult = google.maps.places.PlaceResult;
 export type GoogleGeocoderAddressComponent = google.maps.GeocoderAddressComponent;
+export type GoogleAutocomplete = google.maps.places.Autocomplete;

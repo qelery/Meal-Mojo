@@ -11,17 +11,10 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   updateUserInfo(updatedUser: User): Observable<User> {
-    return this.http.patch<User>(
-      `${environment.restApiUrl}/api/users`,
-      updatedUser
-    );
+    return this.http.patch<User>(`${environment.restApiUrl}/api/users`, updatedUser);
   }
 
   updateUserAddress(address: Address): Observable<User> {
-    return this.http.patch<User>(
-      `${environment.restApiUrl}/api/users/address`,
-      address
-    );
+    return this.http.patch<User>(`${environment.restApiUrl}/api/users/address`, address);
   }
-
 }

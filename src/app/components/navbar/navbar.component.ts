@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { LocalStorageService } from '../../service/local-storage/local-storage.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AuthStoreSelectors } from '@store/auth-store';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   registerModalIsVisible = false;
   loginModalIsVisible = false;
-  isUserLoggedIn: boolean;
-  currentAddress: any;
+  isUserLoggedIn = this.store.select(AuthStoreSelectors.selectUserIsLoggedIn);
 
-  constructor(private localStorageService: LocalStorageService) {}
-
-  ngOnInit(): void {
-    this.localStorageService.userSubject.subscribe((user) => {
-      this.isUserLoggedIn = !!user;
-    });
-  }
+  constructor(private readonly store: Store) {}
 
   showRegister() {
     this.registerModalIsVisible = true;

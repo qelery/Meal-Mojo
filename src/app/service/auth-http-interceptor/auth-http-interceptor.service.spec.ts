@@ -6,16 +6,14 @@ import {
   TestRequest,
 } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { TokenService } from '../token/token.service';
 
 describe('AuthHttpInterceptor', () => {
-  let mockLocalStorageService: jasmine.SpyObj<LocalStorageService>;
+  let mockTokenService: jasmine.SpyObj<TokenService>;
   let mockHttpController: HttpTestingController;
 
   beforeEach(() => {
-    const localStorageServiceSpy = jasmine.createSpyObj('LocalStorageService', [
-      'getToken',
-    ]);
+    const tokenServiceSpy = jasmine.createSpyObj('TokenService', ['getToken']);
 
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -26,12 +24,12 @@ describe('AuthHttpInterceptor', () => {
           multi: true,
         },
         {
-          provide: LocalStorageService,
-          useValue: localStorageServiceSpy,
+          provide: TokenService,
+          useValue: tokenServiceSpy,
         },
       ],
     });
-    mockLocalStorageService = TestBed.inject(LocalStorageService) as jasmine.SpyObj<LocalStorageService>;
+    mockTokenService = TestBed.inject(TokenService) as jasmine.SpyObj<TokenService>;
     mockHttpController = TestBed.inject(HttpTestingController);
   });
 
@@ -48,7 +46,7 @@ describe('AuthHttpInterceptor', () => {
   it('should add Authorization header to request if token exists in local storage', inject(
     [HttpClient],
     (http: HttpClient) => {
-      mockLocalStorageService.getToken.and.returnValue('123abc');
+      mockTokenService.getToken.and.returnValue('123abc');
       http.get('/api/1').subscribe();
 
       const httpRequest: TestRequest = mockHttpController.expectOne('/api/1');
@@ -59,7 +57,7 @@ describe('AuthHttpInterceptor', () => {
   it('should not add Authorization header to request if token does not exist in local storage', inject(
     [HttpClient],
     (http: HttpClient) => {
-      mockLocalStorageService.getToken.and.returnValue(undefined);
+      mockTokenService.getToken.and.returnValue(undefined);
       http.get('/api/1').subscribe();
 
       const httpRequest: TestRequest = mockHttpController.expectOne('/api/1');

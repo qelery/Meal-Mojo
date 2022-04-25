@@ -1,12 +1,20 @@
-import {Component, OnInit, Output, EventEmitter, Input, OnDestroy, OnChanges} from '@angular/core';
-import {OrderService} from "../../service/order/order.service";
-import {Router} from "@angular/router";
-import {Observable} from "rxjs";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnChanges,
+} from '@angular/core';
+import { OrderService } from '../../service/order/order.service';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit, OnChanges, OnDestroy {
   @Output() submitOrder = new EventEmitter<any>();
@@ -19,7 +27,7 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
   tipPercentage = 0;
   restaurantCoordinates: any;
   private eventsSubscription: any;
-  constructor(private orderService: OrderService, private router: Router) { }
+  constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartItems = [];
@@ -47,7 +55,7 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    console.log("WOW");
+    console.log('WOW');
   }
 
   ngOnDestroy(): void {
@@ -55,7 +63,6 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
       this.eventsSubscription.unsubscribe();
     }
   }
-
 
   removeFromCart(menuItemId: number) {
     const restaurantId = this.cartItems[0].menuItem.restaurantId;
@@ -71,14 +78,12 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   discoverRestaurantNameAndCoordinates() {
-      const restaurantId = this.cartItems[0].menuItem.restaurantId;
-      this.orderService.getRestaurantData(restaurantId)
-        .subscribe((data: any) => {
-          this.restaurantCoordinates = [data.address.latitude, data.address.longitude];
-          this.restaurantName = data.businessName;
-          this.emitCoordinates.next(this.restaurantCoordinates);
-        });
-
+    const restaurantId = this.cartItems[0].menuItem.restaurantId;
+    this.orderService.getRestaurantData(restaurantId).subscribe((data: any) => {
+      this.restaurantCoordinates = [data.address.latitude, data.address.longitude];
+      this.restaurantName = data.businessName;
+      this.emitCoordinates.next(this.restaurantCoordinates);
+    });
   }
 
   private orderItemsByQuantity() {
@@ -91,9 +96,11 @@ export class CartComponent implements OnInit, OnChanges, OnDestroy {
       this.totalPrice = 0;
     }
     this.totalPrice = this.cartItems.reduce(
-      (total: any, orderLineItem: any) => (total + orderLineItem.quantity * orderLineItem.priceEach),
-      0);
-    this.totalPrice = this.totalPrice + ((this.tipPercentage/100) * this.totalPrice);
+      (total: any, orderLineItem: any) =>
+        total + orderLineItem.quantity * orderLineItem.priceEach,
+      0
+    );
+    this.totalPrice = this.totalPrice + (this.tipPercentage / 100) * this.totalPrice;
     console.log(this.totalPrice);
   }
 }

@@ -59,6 +59,12 @@ describe('Login Modal', () => {
       cy.wait('@postLogin');
 
       cy.get('[data-cy="login-error"]').contains('Server Error. Please try again later.');
+      /* ==== Generated with Cypress Studio ==== */
+      cy.get('[transform="translate(176 256)"] > g > path').click();
+      cy.get('[data-cy="address-search"]').clear();
+      cy.get('[data-cy="address-search"]').type('18320 ');
+      cy.get('[transform="translate(256 256)"] > g > path').click();
+      /* ==== End Cypress Studio ==== */
     });
   });
 

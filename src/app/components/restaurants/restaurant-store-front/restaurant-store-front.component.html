@@ -1,0 +1,29 @@
+<app-banner-small [tagline]="generalAddress" [heroImageUrl]="this.restaurant.heroImageUrl"
+                  [headline]="this.restaurant.name"></app-banner-small>
+
+
+<div class="menu-items-container">
+
+  <div class="info-container">
+    <div class="info-wrapper">
+      <div class="info-top">
+        <ng-container *ngFor="let cuisine of restaurant.cuisines; index as i">
+          <ng-container *ngIf="i === 0">
+              <span>{{cuisine.category.charAt(0) + cuisine.category.toLowerCase().slice(1)}}</span>
+            </ng-container>
+            <ng-container *ngIf="i !== 0">
+              <span>&nbsp;•&nbsp;{{cuisine.category.charAt(0) + cuisine.category.toLowerCase().slice(1)}}</span>
+          </ng-container>
+        </ng-container>
+      </div>
+      <p class="bottom-info">{{this.currentDayOfWeek}} Hours: Open {{this.openTime}} | Close {{this.closeTime}}</p>
+    </div>
+  </div>
+
+  <div class="menu-items-wrapper" style="">
+    <app-menu-item-info-card [restaurantId]="this.restaurantId" [menuItem]="menuItem"
+                             *ngFor="let menuItem of this.restaurant.menuItems"></app-menu-item-info-card>
+  </div>
+</div>
+<app-cart></app-cart>
+

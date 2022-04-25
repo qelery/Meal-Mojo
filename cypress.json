@@ -3,6 +3,7 @@
   "viewportHeight": 800,
   "video": false,
   "baseUrl": "http://localhost:4201",
+  "experimentalStudio": true,
   "env": {
     "API_URL": "http://localhost:4201"
   }

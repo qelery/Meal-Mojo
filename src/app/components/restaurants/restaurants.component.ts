@@ -1,56 +1,45 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
-import {OrderService} from "../../service/order/order.service";
-import { MapsAPILoader } from '@agm/core';
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import {
+  RestaurantStoreActions,
+  RestaurantStoreSelectors,
+} from '@store/restaurant-store';
+import { AddressStoreSelectors } from '@store/address-store';
+import { Router } from '@angular/router';
+import { Restaurant } from '@shared/model';
+import { Observable } from 'rxjs';
+import { LocationService } from '../../service/location/location.service';
 
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.component.html',
-  styleUrls: ['./restaurants.component.css']
+  styleUrls: ['./restaurants.component.css'],
 })
 export class RestaurantsComponent implements OnInit {
-  nearbyRestaurants: any[] | null;
-  currentAddress: string | null ;
+  currentAddress: string;
   heroImageUrl: string;
-  private geoCoder;
-  constructor(public orderService: OrderService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {
-    this.heroImageUrl = "assets/image/store-front-hero-image.jpg";
-  }
+  nearbyRestaurants: Observable<Restaurant[]>;
 
-  @ViewChild('search')
-  public searchElementRef: ElementRef;
+  constructor(
+    private locationService: LocationService,
+    private readonly store: Store,
+    private readonly router: Router
+  ) {
+    this.heroImageUrl = 'assets/image/store-front-hero-image.jpg';
+  }
 
   ngOnInit(): void {
-    this.orderService.getRestaurantsNearUser().subscribe((response: any) => {
-      this.nearbyRestaurants = response;
-      for (let x of this.nearbyRestaurants) {
-        console.log(x);
+    this.store.select(AddressStoreSelectors.selectAddress).subscribe((address) => {
+      if (address) {
+        this.currentAddress = this.locationService.getFormattedAddressString(address);
+        this.store.dispatch(RestaurantStoreActions.getNearbyRestaurants({ address }));
+      } else {
+        this.router.navigate(['/']);
       }
-    }, (err: any) => console.log(err));
-    this.currentAddress = localStorage.getItem('currentAddress');
-    this.orderService.getRestaurantsNearUser();
-
-    //load Places Autocomplete
-    this.mapsAPILoader.load().then(() => {
-      // this.geoCoder = new google.maps.Geocoder;
-      //
-      // const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
-      // autocomplete.addListener("place_changed", () => {
-      //   this.ngZone.run(() => {
-      //     //get the place result
-      //     const place = autocomplete.getPlace();
-      //
-      //     //verify result
-      //     if (place.geometry === undefined || place.geometry === null) {
-      //       return;
-      //     }
-      //
-      //     //set latitude, longitude and zoom
-      //     // this.lat = place.geometry.location.lat();
-      //     // this.lng = place.geometry.location.lng();
-      //     // this.zoom = 12;
-      //   });
-      // });
     });
-  }
 
+    this.nearbyRestaurants = this.store.select<Restaurant[]>(
+      RestaurantStoreSelectors.selectNearbyRestaurants
+    );
+  }
 }

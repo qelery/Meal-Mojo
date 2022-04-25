@@ -1,31 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RegisterModalComponent } from './register-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppState, initialAppState } from '../../../ngrx/state/app.state';
-import {
-  initialAuthState,
-  initialUserLoginState,
-} from '../../../ngrx/reducers/auth.reducer';
-import { REGISTER_ERROR_MSG_409 } from '../../../ngrx/effects/auth.effects';
-import { mockRegisterRequest } from '../../../test/mock-data';
-import * as AuthActions from '../../../ngrx/actions/auth.action';
+import { mockRegisterRequest } from '@test/mock-data';
+import { Subscription } from 'rxjs';
+import { REGISTER_ERROR_MSG_409 } from '@store/auth-store/effects/auth.effects';
+import { RootStoreState } from '@store';
+import { AuthStoreActions, AuthStoreSelectors, AuthStoreState } from '@store/auth-store';
 
 describe('RegisterModalComponent', () => {
   let component: RegisterModalComponent;
   let fixture: ComponentFixture<RegisterModalComponent>;
   let mockStore: MockStore;
 
+  // TODO: Change the way this imports? REGISTER_ERROR_MSG_409
   const expectedError = REGISTER_ERROR_MSG_409;
   const expectedIsLoading = false;
-  const mockState: AppState = {
-    ...initialAppState,
+  const mockState: RootStoreState.AppState = {
+    ...RootStoreState.initialAppState,
     authState: {
-      ...initialAuthState,
+      ...AuthStoreState.initialAuthState,
       userRegistrationState: {
-        ...initialUserLoginState,
+        ...AuthStoreState.initialUserLoginState,
         isLoading: expectedIsLoading,
         error: expectedError,
       },
@@ -93,7 +90,25 @@ describe('RegisterModalComponent', () => {
     component.onSubmit();
 
     expect(mockStore.dispatch).toHaveBeenCalledWith(
-      AuthActions.registerUser({ registerRequest: mockRegisterRequest })
+      AuthStoreActions.register({ registerRequest: mockRegisterRequest })
     );
+  });
+
+  it('should emit event to close modal when user completes registration', () => {
+    spyOn(component.closeModalEmitter, 'emit');
+    mockStore.overrideSelector(AuthStoreSelectors.selectUserIsLoggedIn, true);
+
+    component.onSubmit();
+
+    expect(component.closeModalEmitter.emit).toHaveBeenCalled();
+  });
+
+  it('should unsubscribe from all subscription on destroy', () => {
+    component.isLoggedInSubscription = new Subscription();
+    spyOn(component.isLoggedInSubscription, 'unsubscribe');
+
+    component.ngOnDestroy();
+
+    expect(component.isLoggedInSubscription.unsubscribe).toHaveBeenCalled();
   });
 });

@@ -1,30 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginModalComponent } from './login-modal.component';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { AppState, initialAppState } from '../../../ngrx/state/app.state';
-import {
-  initialAuthState,
-  initialUserLoginState,
-} from '../../../ngrx/reducers/auth.reducer';
 import { FormsModule } from '@angular/forms';
-import { LOGIN_ERROR_MSG_403 } from '../../../ngrx/effects/auth.effects';
 import { FontAwesomeTestingModule } from '@fortawesome/angular-fontawesome/testing';
-import * as AuthActions from '../../../ngrx/actions/auth.action';
-import { mockLoginRequest } from '../../../test/mock-data';
+import { mockLoginRequest } from '@test/mock-data';
+import { LOGIN_ERROR_MSG_403 } from '@store/auth-store/effects/auth.effects';
+import { RootStoreState } from '@store';
+import { AuthStoreActions, AuthStoreState } from '@store/auth-store';
 
 describe('LoginModal', () => {
   let component: LoginModalComponent;
   let fixture: ComponentFixture<LoginModalComponent>;
   let mockStore: MockStore;
 
+  // TODO: Change how this imports? LOGIN_ERROR_MSG_403
   const expectedError = LOGIN_ERROR_MSG_403;
   const expectedIsLoading = false;
-  const mockState: AppState = {
-    ...initialAppState,
+  const mockState: RootStoreState.AppState = {
+    ...RootStoreState.initialAppState,
     authState: {
-      ...initialAuthState,
+      ...AuthStoreState.initialAuthState,
       userLoginState: {
-        ...initialUserLoginState,
+        ...AuthStoreState.initialUserLoginState,
         isLoading: expectedIsLoading,
         error: expectedError,
       },
@@ -84,7 +81,7 @@ describe('LoginModal', () => {
     component.loginRequestModel = mockLoginRequest;
     component.onSubmit();
     expect(mockStore.dispatch).toHaveBeenCalledWith(
-      AuthActions.loginUser({ loginRequest: mockLoginRequest })
+      AuthStoreActions.login({ loginRequest: mockLoginRequest })
     );
   });
 });

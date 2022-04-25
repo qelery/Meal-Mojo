@@ -3,7 +3,7 @@ import { sameValueValidator } from './same-value-validator.directive';
 
 const VALUE_MISMATCH_ERROR = { sameValue: true };
 
-describe('SameValueValidator', () => {
+describe('SameValueValidatorDirective', () => {
   describe('when validator receives control names as two separate arguments', () => {
     let controlA;
     let controlB;

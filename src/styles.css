@@ -33,6 +33,22 @@ ul {
   overflow: auto;
 }
 
+.flex-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
 
 @media screen and (max-width: 1025px) {
 

@@ -1,18 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
-import {
-  selectRegisterError,
-  selectRegisterIsLoading,
-} from '../../../ngrx/selectors/auth.selector';
-import { Observable } from 'rxjs';
-import { LocalStorageService } from '../../../service/local-storage/local-storage.service';
+import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, Validators } from '@angular/forms';
-import { nameValidator } from '../../../shared/custom-validators/name-async-validator/name-async-validator.directive';
-import { RegisterRequest } from '../../../ngrx/reducers/auth.reducer';
-import { Role, User } from '../../../shared/model';
-import * as AuthActions from '../../../ngrx/actions/auth.action';
-import { sameValueValidator } from '../../../shared/custom-validators/same-value-validator/same-value-validator.directive';
+import { nameValidator } from '@shared/custom-validators/name-async-validator/name-async-validator.directive';
+import { RegisterRequest, Role } from '@shared/model';
+import { sameValueValidator } from '@shared/custom-validators/same-value-validator/same-value-validator.directive';
+import { AuthStoreActions, AuthStoreSelectors } from '@store/auth-store';
 
 const REGEX_NUMBER_OR_UPPERCASE_OR_SPECIAL_CHARACTER =
   '^(?=.*[A-Z0-9*A-Z0-9*$@!#%&()^~{}\\-_+=]).*$';
@@ -28,10 +22,11 @@ const MIN_PASS_LEN = 6;
   templateUrl: './register-modal.component.html',
   styleUrls: ['./register-modal.component.css'],
 })
-export class RegisterModalComponent implements OnInit {
+export class RegisterModalComponent implements OnInit, OnDestroy {
   faTimes = faTimes;
   error$: Observable<string>;
   isLoading$: Observable<boolean>;
+  isLoggedInSubscription: Subscription;
   registrationForm = this.fb.group(
     {
       firstName: ['', Validators.required, nameValidator()],
@@ -59,15 +54,13 @@ export class RegisterModalComponent implements OnInit {
   @Output() closeModalEmitter = new EventEmitter<void>();
   @Output() switchModalEmitter = new EventEmitter<void>();
 
-  constructor(
-    private readonly store: Store,
-    private readonly fb: FormBuilder,
-    private readonly localStorageService: LocalStorageService
-  ) {}
+  constructor(private readonly store: Store, private readonly fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.error$ = this.store.select<string>(selectRegisterError);
-    this.isLoading$ = this.store.select<boolean>(selectRegisterIsLoading);
+    this.error$ = this.store.select<string>(AuthStoreSelectors.selectRegisterError);
+    this.isLoading$ = this.store.select<boolean>(
+      AuthStoreSelectors.selectRegisterIsLoading
+    );
   }
 
   showPageTwo(): void {
@@ -84,6 +77,7 @@ export class RegisterModalComponent implements OnInit {
   }
 
   onSubmit(): void {
+    // TODO: Change AUthStoreState part
     const registerRequest: RegisterRequest = {
       firstName: this.registrationForm.get('firstName').value,
       lastName: this.registrationForm.get('lastName').value,
@@ -92,12 +86,19 @@ export class RegisterModalComponent implements OnInit {
       role: Role.CUSTOMER,
     };
 
-    this.store.dispatch(AuthActions.registerUser({ registerRequest }));
+    this.store.dispatch(AuthStoreActions.register({ registerRequest }));
 
-    this.localStorageService.userSubject.subscribe((user: User) => {
-      if (user) {
-        this.hideModal();
-      }
-    });
+    this.isLoggedInSubscription = this.store
+      .select<boolean>(AuthStoreSelectors.selectUserIsLoggedIn)
+      // eslint-disable-next-line ngrx/no-store-subscription
+      .subscribe((isLoggedIn) => {
+        if (isLoggedIn) {
+          this.hideModal();
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.isLoggedInSubscription?.unsubscribe();
   }
 }

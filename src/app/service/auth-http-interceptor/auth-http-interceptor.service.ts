@@ -7,17 +7,14 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { TokenService } from '../token/token.service';
 
 @Injectable()
 export class AuthHttpInterceptor implements HttpInterceptor {
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private tokenService: TokenService) {}
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const token = this.localStorageService.getToken();
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const token = this.tokenService.getToken();
     req = req.clone({
       setHeaders: {
         'Content-Type': 'application/json',
