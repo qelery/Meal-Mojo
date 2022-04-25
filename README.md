@@ -1,10 +1,7 @@
 # Meal Mojo Angular Frontend
 
-A demo food ordering website built in Angular 13.<br>
-
-## Backend Repository
-
-The backend for this app was built in Spring Boot. Check out the [backend repository here](https://github.com/qelery/Meal-Mojo-Backend-API).
+A demo food ordering website built in Angular 13.<br> 
+The <b>backend</b> for this app was built in Spring Boot. Check out the [backend repository here](https://github.com/qelery/Meal-Mojo-Backend-API).
 
 ## Requirements
 * Node version ^12.20.2 || ^14.15.5 || ^16.10.0 
