@@ -3,6 +3,8 @@
 A demo food ordering website built in <b>Angular 13</b>.<br> 
 The <b>backend</b> API for this app was built in Spring Boot. Check out the [backend repository here](https://github.com/qelery/Meal-Mojo-Backend-API).
 
+Users are able to create an account, search for restaurants in their area, place orders, complete checkout, and view past orders. Uses NgRx to manage state, Jasmine for unit testing, and Cypress for e2e testing.
+
 ## Requirements
 * Node version ^12.20.2 || ^14.15.5 || ^16.10.0 
 * Angular CLI 13+
